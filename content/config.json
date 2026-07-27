@@ -12,6 +12,7 @@
     { "label": "news", "url": "/news/" },
     { "label": "resources", "url": "/resources/", "children": [
       { "label": "resource shelf", "url": "/resources/" },
+      { "label": "mitochondrial health ratings", "url": "/mitohealth/" },
       { "label": "companies to follow", "url": "/companies/" },
       { "label": "clinical trials", "url": "/trials/" },
       { "label": "the gene", "url": "/gene/" },

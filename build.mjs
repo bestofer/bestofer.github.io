@@ -84,6 +84,7 @@ const genetics = JSON.parse(fs.readFileSync(path.join(CONTENT,"genetics.json"),"
 const diseases = JSON.parse(fs.readFileSync(path.join(CONTENT,"diseases.json"),"utf8"));
 const companies = JSON.parse(fs.readFileSync(path.join(CONTENT,"companies.json"),"utf8"));
 const trials = JSON.parse(fs.readFileSync(path.join(CONTENT,"trials.json"),"utf8"));
+const mitohealth = JSON.parse(fs.readFileSync(path.join(CONTENT,"mitohealth.json"),"utf8"));
 
 function loadCollection(dir, type){
   const d = path.join(CONTENT, dir);
@@ -501,6 +502,7 @@ function resourcesPage(){
         <p class="section-sub">The whole villain arc in one loop: a single channel gating, then VDAC1 oligomerizing into a big pore, leaking mitochondrial DNA, and tripping the cGAS–STING inflammation alarm.</p>
         <div class="mediaframe"><img src="/assets/images/vdac1-anim.svg" alt="Animation of VDAC1 oligomerizing and releasing mtDNA"></div>
         <div class="media-links">
+          <a href="/mitohealth/">→ mitochondrial health ratings</a>
           <a href="/companies/">→ companies to follow</a>
           <a href="/trials/">→ clinical trials</a>
           <a href="/gene/">→ VDAC1 gene, sequence &amp; expression</a>
@@ -852,6 +854,80 @@ function trialsPage(){
   return layout({ title:`Clinical trials — ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov — filter by mechanism and indication.", canonical:"/trials/", content, active:"/resources/", image:"vdac1-barrel.svg" });
 }
 
+function mitoHealthPage(){
+  const M = mitohealth;
+  const evRank = { "Strong":5, "Moderate":4, "Preliminary":3, "Mixed":2, "Weak":1 };
+  const cats = M.categories;
+  const evLevels = M.ratingScale.evidence;
+  const mechs = [...new Set(M.items.flatMap(i=>i.tags||[]))].sort();
+  const cls = (kind,val)=> `${kind}-${slugify(val)}`;
+  const dial = (label,val,kind)=> `<span class="dial ${cls(kind,val)}"><b>${label}</b>${esc(val)}</span>`;
+  const card = i=>`<article class="mh-card dir-${i.direction}" data-cat="${escAttr(i.category)}" data-ev="${escAttr(i.evidence)}" data-dir="${i.direction}" data-mech="${(i.tags||[]).map(slugify).join(" ")}" data-name="${escAttr(i.name.toLowerCase())}" data-evrank="${evRank[i.evidence]||0}">
+    <div class="mh-top"><span class="mh-cat">${esc(i.category)}</span>${i.direction==="harm"?`<span class="mh-harm">harms mito</span>`:i.direction==="mixed"?`<span class="mh-mixed">double-edged</span>`:""}</div>
+    <h3>${esc(i.name)}</h3>
+    <div class="mh-mech">${esc(i.mech)}</div>
+    <div class="dials">${dial("Evidence",i.evidence,"ev")}${dial("Benefit",i.benefit,"ben")}${dial("Safety",i.safety,"saf")}</div>
+    <p>${esc(i.summary)}</p>
+    <div class="mh-links">${(i.links||[]).map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}</div>
+  </article>`;
+  const chip = (grp,val)=>`<button class="fbtn" data-group="${grp}" data-val="${escAttr(val)}">${esc(val)}</button>`;
+  const content = `<div class="hero mh-hero"><div class="wrap"><div>
+      <p class="eyebrow">the database · evidence-graded</p>
+      <h1>Mitochondrial health ratings</h1>
+      <p class="lead">${esc(M.intro)}</p>
+    </div><div class="hero-art"><img src="/assets/images/mito.svg" alt="Mitochondrion"></div></div></div>
+    <main><div class="wrap">
+      <details class="mh-method"><summary>How to read these ratings (and the honest caveats)</summary>
+        <p>${esc(M.methodology)}</p>
+        <div class="mh-legend">
+          <div><span class="lgd">Evidence</span> <span class="dial ev-strong"><b>=</b>Strong</span><span class="dial ev-moderate"><b>=</b>Moderate</span><span class="dial ev-preliminary"><b>=</b>Preliminary</span><span class="dial ev-weak"><b>=</b>Weak</span><span class="dial ev-mixed"><b>=</b>Mixed</span></div>
+          <div><span class="lgd">Benefit</span> <span class="dial ben-high"><b>=</b>High</span><span class="dial ben-moderate"><b>=</b>Moderate</span><span class="dial ben-low"><b>=</b>Low</span><span class="dial ben-harmful"><b>=</b>Harmful</span></div>
+          <div><span class="lgd">Safety</span> <span class="dial saf-high"><b>=</b>High</span><span class="dial saf-moderate"><b>=</b>Moderate</span><span class="dial saf-caution"><b>=</b>Caution</span><span class="dial saf-low"><b>=</b>Low</span></div>
+        </div>
+      </details>
+      <div class="filters mh-filters" id="mhf">
+        <div class="fgroup fgrow"><input type="search" id="mhsearch" placeholder="search interventions… (e.g. sauna, NAD, omega-3)"></div>
+        <div class="fgroup"><span class="flabel">category</span>${cats.map(c=>chip("cat",c)).join("")}</div>
+        <div class="fgroup"><span class="flabel">evidence</span>${evLevels.map(e=>chip("ev",e)).join("")}</div>
+        <div class="fgroup"><span class="flabel">direction</span>${chip("dir","help")}${chip("dir","mixed")}${chip("dir","harm")}</div>
+        <div class="fgroup"><span class="flabel">mechanism</span><select id="mhmech"><option value="">any</option>${mechs.map(m=>`<option value="${slugify(m)}">${esc(m)}</option>`).join("")}</select></div>
+        <div class="fgroup"><span class="flabel">sort</span><button class="fbtn sortbtn on" data-sort="ev">strongest evidence</button><button class="fbtn sortbtn" data-sort="az">A–Z</button></div>
+        <div class="fgroup"><button class="fbtn clear" id="mhclear">✕ clear</button><span id="mhcount" class="fcount"></span></div>
+      </div>
+      <div class="mh-grid" id="mhgrid">${M.items.map(card).join("")}</div>
+      <p id="mhempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
+      <p class="mh-foot">This is a synthesis for orientation, not medical advice. Evidence for many mitochondrial-specific effects is indirect; ratings reflect the best available human data plus mechanism. Found a strong study I'm missing? <a href="mailto:${cfg.email}">tell me</a>.</p>
+    </div></main>
+    <script>(function(){var grid=document.getElementById('mhgrid');var cards=[].slice.call(grid.children);
+      var st={cat:null,ev:null,dir:null,mech:'',q:'',sort:'ev'};
+      function apply(){var n=0;cards.forEach(function(c){var ok=true;
+        if(st.cat&&c.dataset.cat!==st.cat)ok=false;
+        if(st.ev&&c.dataset.ev!==st.ev)ok=false;
+        if(st.dir&&c.dataset.dir!==st.dir)ok=false;
+        if(st.mech&&(' '+c.dataset.mech+' ').indexOf(' '+st.mech+' ')<0)ok=false;
+        if(st.q&&c.dataset.name.indexOf(st.q)<0)ok=false;
+        c.style.display=ok?'':'none';if(ok)n++;});
+        document.getElementById('mhcount').textContent=n+' / '+cards.length;
+        document.getElementById('mhempty').style.display=n?'none':'';
+        var vis=cards.filter(function(c){return c.style.display!=='none';});
+        vis.sort(function(a,b){return st.sort==='az'?a.dataset.name.localeCompare(b.dataset.name):(b.dataset.evrank-a.dataset.evrank)||a.dataset.name.localeCompare(b.dataset.name);});
+        vis.forEach(function(c){grid.appendChild(c);});}
+      document.querySelectorAll('#mhf .fbtn[data-group]').forEach(function(b){b.addEventListener('click',function(){
+        var g=b.dataset.group,v=b.dataset.val;
+        if(st[g]===v){st[g]=null;b.classList.remove('on');}
+        else{st[g]=v;document.querySelectorAll('#mhf .fbtn[data-group="'+g+'"]').forEach(function(x){x.classList.toggle('on',x===b);});}
+        apply();});});
+      document.querySelectorAll('#mhf .sortbtn').forEach(function(b){b.addEventListener('click',function(){st.sort=b.dataset.sort;document.querySelectorAll('#mhf .sortbtn').forEach(function(x){x.classList.toggle('on',x===b);});apply();});});
+      document.getElementById('mhmech').addEventListener('change',function(e){st.mech=e.target.value;apply();});
+      document.getElementById('mhsearch').addEventListener('input',function(e){st.q=e.target.value.toLowerCase().trim();apply();});
+      document.getElementById('mhclear').addEventListener('click',function(){st={cat:null,ev:null,dir:null,mech:'',q:'',sort:'ev'};
+        document.querySelectorAll('#mhf .fbtn.on').forEach(function(x){if(!x.classList.contains('sortbtn'))x.classList.remove('on');});
+        document.querySelectorAll('#mhf .sortbtn').forEach(function(x){x.classList.toggle('on',x.dataset.sort==='ev');});
+        document.getElementById('mhmech').value='';document.getElementById('mhsearch').value='';apply();});
+      apply();})();</script>`;
+  return layout({ title:`Mitochondrial health ratings — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits that affect mitochondrial health — rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/resources/", image:"mito.svg" });
+}
+
 /* ---------------- feeds ---------------- */
 function sitemap(){
   const latest = entries.reduce((a,e)=>e.date>a?e.date:a, "2024-01-01");
@@ -861,6 +937,7 @@ function sitemap(){
     { loc:"/posts/", lastmod:latest, pri:"0.7", cf:"weekly" },
     { loc:"/diseases/", lastmod:latest, pri:"0.8", cf:"monthly" },
     { loc:"/gene/", lastmod:genetics.fetched, pri:"0.8", cf:"monthly" },
+    { loc:"/mitohealth/", lastmod:latest, pri:"0.8", cf:"weekly" },
     { loc:"/companies/", lastmod:latest, pri:"0.8", cf:"weekly" },
     { loc:"/trials/", lastmod:latest, pri:"0.8", cf:"weekly" },
     { loc:"/resources/", lastmod:latest, pri:"0.7", cf:"weekly" },
@@ -926,6 +1003,7 @@ writePage("/news/", newsListing());
 writePage("/posts/", postsListing());
 writePage("/diseases/", diseasesPage());
 writePage("/gene/", genePage());
+writePage("/mitohealth/", mitoHealthPage());
 writePage("/companies/", companiesPage());
 writePage("/trials/", trialsPage());
 writePage("/resources/", resourcesPage());
@@ -939,6 +1017,6 @@ writeFile("robots.txt", robots);
 writeFile(".nojekyll", "");   // tell GitHub Pages not to run Jekyll
 writeFile("404.html", notFoundPage());
 
-const pages = 10 + entries.length + tagMap.size;
+const pages = 11 + entries.length + tagMap.size;
 console.log(`✓ built ${pages} pages → dist/`);
 console.log(`  news: ${news.length} · posts: ${posts.length} · tags: ${tagMap.size}`);
