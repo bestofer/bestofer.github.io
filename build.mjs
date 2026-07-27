@@ -162,7 +162,9 @@ function header(active){
   }).join("");
   return `<header class="site-header"><div class="wrap">
     <a class="brand" href="/">${cfg.brandHtml}</a>
-    <nav class="main">${links}</nav>
+    <nav class="main">${links}
+      <button class="nav-search" id="ss-open" aria-label="Search the site" title="Search (press /)">🔍 <span class="kbd">/</span></button>
+    </nav>
   </div></header>`;
 }
 function footer(){
@@ -181,6 +183,58 @@ try{var el=document.getElementById('vdac-3d');el.innerHTML='';var v=$3Dmol.creat
 $3Dmol.download('pdb:2JK4',v,{},function(){v.setStyle({},{cartoon:{colorscheme:'spectrum'}});v.addStyle({resi:'1-25'},{cartoon:{color:'0xf5a524'}});v.zoomTo();v.spin('y',0.4);v.render();if(s)s.textContent='drag to rotate · scroll to zoom';});
 }catch(e){fail('offline');}})();</script>`;
 }
+function buildSearchIndex(){
+  const rec = [];
+  for(const e of entries) rec.push({ t:e.title, u:e.url, k:e.type==="news"?"news":"post",
+    kw:(e.title+" "+e.summary+" "+e.tags.join(" ")).toLowerCase() });
+  for(const t of tagMap.values()) rec.push({ t:"#"+t.name, u:`/tags/${t.slug}/`, k:"tag", kw:t.name.toLowerCase() });
+  rec.push({ t:"Mitochondrial health ratings", u:"/mitohealth/", k:"database",
+    kw:("mitochondrial health ratings foods drugs supplements lifestyle "+mitohealth.items.map(i=>i.name).join(" ")+" "+mitohealth.categories.join(" ")).toLowerCase() });
+  rec.push({ t:"Companies to follow", u:"/companies/", k:"database",
+    kw:("companies watchlist "+companies.companies.map(c=>c.name+" "+c.moa.join(" ")+" "+c.indications.join(" ")).join(" ")).toLowerCase() });
+  rec.push({ t:"Clinical trials", u:"/trials/", k:"database",
+    kw:("clinical trials clinicaltrials "+trials.trials.map(t=>t.drug+" "+t.sponsor+" "+t.nct+" "+t.indication).join(" ")).toLowerCase() });
+  rec.push({ t:"VDAC1 gene, sequence & expression", u:"/gene/", k:"science", kw:"vdac1 gene sequence expression gtex uniprot tissue chromosome" });
+  rec.push({ t:"Disease body map", u:"/diseases/", k:"science", kw:("disease body map organs "+diseases.regions.map(d=>d.disease+" "+d.label).join(" ")).toLowerCase() });
+  rec.push({ t:"Resource shelf", u:"/resources/", k:"science", kw:"resources reviews databases papers labs uniprot pdb alphafold" });
+  rec.push({ t:"About — Offer Shina", u:"/about/", k:"page", kw:"about offer shina psen1 carrier x-tosis co-founder" });
+  return rec;
+}
+const SEARCH_INDEX = buildSearchIndex();
+
+function siteScript(){
+  return `<div class="ssearch" id="site-search" hidden>
+  <div class="ssearch-box" role="dialog" aria-label="Site search">
+    <input id="ss-input" type="search" autocomplete="off" placeholder="Search interventions, companies, trials, posts, tags…">
+    <div class="ss-results" id="ss-results"></div>
+    <div class="ss-hint"><span class="kbd">↑↓</span> move · <span class="kbd">↵</span> open · <span class="kbd">esc</span> close</div>
+  </div></div>
+<script>window.__SEARCH__=${JSON.stringify(SEARCH_INDEX)};
+(function(){var IDX=window.__SEARCH__,box=document.getElementById('site-search'),inp=document.getElementById('ss-input'),
+res=document.getElementById('ss-results'),open=document.getElementById('ss-open'),sel=0,cur=[];
+var LBL={news:'news',post:'post',tag:'tag',database:'database',science:'science',page:'page'};
+function show(){box.hidden=false;inp.value='';res.innerHTML='';sel=0;setTimeout(function(){inp.focus();},20);}
+function hide(){box.hidden=true;}
+function run(q){q=q.toLowerCase().trim();if(!q){cur=[];res.innerHTML='<div class="ss-empty">Type to search across the whole site…</div>';return;}
+cur=IDX.filter(function(r){return r.kw.indexOf(q)>=0||r.t.toLowerCase().indexOf(q)>=0;})
+.sort(function(a,b){var at=a.t.toLowerCase().indexOf(q),bt=b.t.toLowerCase().indexOf(q);var ar=at<0?9:at,br=bt<0?9:bt;return ar-br;}).slice(0,12);
+sel=0;draw();}
+function draw(){if(!cur.length){res.innerHTML='<div class="ss-empty">No matches.</div>';return;}
+res.innerHTML=cur.map(function(r,i){return '<a class="ss-item'+(i===sel?' on':'')+'" href="'+r.u+'"><span class="ss-k">'+(LBL[r.k]||r.k)+'</span>'+r.t+'</a>';}).join('');}
+if(open)open.addEventListener('click',show);
+document.addEventListener('keydown',function(e){
+ if((e.key==='/'||((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'))&&box.hidden){var tag=(e.target.tagName||'').toLowerCase();if(tag==='input'||tag==='textarea'||tag==='select')return;e.preventDefault();show();return;}
+ if(box.hidden)return;
+ if(e.key==='Escape')hide();
+ else if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,cur.length-1);draw();}
+ else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);draw();}
+ else if(e.key==='Enter'&&cur[sel]){window.location.href=cur[sel].u;}});
+inp&&inp.addEventListener('input',function(e){run(e.target.value);});
+box.addEventListener('click',function(e){if(e.target===box)hide();});
+})();
+(function(){var t=document.querySelector('.filter-toggle');if(t)t.addEventListener('click',function(){var s=document.getElementById('side-filters');if(s)s.classList.toggle('open');t.classList.toggle('open');});})();</script>`;
+}
+
 function layout({title, desc, canonical, content, active, hasViewer=false, jsonld=null, image, ogType="website", published=null}){
   const ogImg = `${cfg.baseUrl}/assets/images/${image||"mito.svg"}`;
   const ld = (Array.isArray(jsonld) ? jsonld : (jsonld?[jsonld]:[]))
@@ -221,6 +275,7 @@ ${ld}
 ${header(active)}
 ${content}
 ${footer()}
+${siteScript()}
 ${hasViewer?viewerScript():""}
 </body>
 </html>`;
@@ -362,23 +417,26 @@ function newsListing(){
     <main><div class="wrap">
       <section>${featured}</section>
       <hr class="rule">
-      <section>
-        <h2><span class="num">·</span>Filter the whole archive</h2>
-        <p class="section-sub">Every post and news piece — split by domain (VDAC1 vs mitochondria), category, year and tag.</p>
-        <div class="filters">
-          <div class="fgroup"><span class="flabel">type</span>${types.map(t=>btn("type",t,t)).join("")}</div>
-          <div class="fgroup"><span class="flabel">domain</span>${domains.map(d=>btn("domain",d,d)).join("")}</div>
-          <div class="fgroup"><span class="flabel">category</span>${cats.map(c=>btn("cat",c,c)).join("")}</div>
-          <div class="fgroup"><span class="flabel">year</span>${years.map(y=>btn("year",y,y)).join("")}</div>
+      <h2><span class="num">·</span>The full archive</h2>
+      <p class="section-sub">Every post and news piece — split by domain (VDAC1 vs mitochondria), category, year and tag.</p>
+      <button class="filter-toggle" aria-label="Toggle filters">⚙ Filters</button>
+      <div class="sidebar-wrap">
+        <aside class="sidebar" id="side-filters"><div class="filters">
+          <div class="fgroup"><span class="flabel">type</span><div class="fchips">${types.map(t=>btn("type",t,t)).join("")}</div></div>
+          <div class="fgroup"><span class="flabel">domain</span><div class="fchips">${domains.map(d=>btn("domain",d,d)).join("")}</div></div>
+          <div class="fgroup"><span class="flabel">category</span><div class="fchips">${cats.map(c=>btn("cat",c,c)).join("")}</div></div>
+          <div class="fgroup"><span class="flabel">year</span><div class="fchips">${years.map(y=>btn("year",y,y)).join("")}</div></div>
           <div class="fgroup"><span class="flabel">tag</span>
             <select id="ftag"><option value="">all tags</option>${tags.map(t=>`<option value="${t.slug}">${esc(t.name)} (${t.entries.length})</option>`).join("")}</select></div>
-          <div class="fgroup"><span class="flabel">sort</span>
-            <button class="fbtn sortbtn on" data-sort="new">newest</button><button class="fbtn sortbtn" data-sort="old">oldest</button></div>
-          <div class="fgroup"><button class="fbtn clear" id="fclear">✕ clear</button><span id="fcount" class="fcount"></span></div>
+          <div class="fgroup"><span class="flabel">sort</span><div class="fchips">
+            <button class="fbtn sortbtn on" data-sort="new">newest</button><button class="fbtn sortbtn" data-sort="old">oldest</button></div></div>
+          <div class="fgroup"><button class="fbtn clear" id="fclear">✕ clear</button> <span id="fcount" class="fcount"></span></div>
+        </div></aside>
+        <div class="content">
+          <div class="exp-grid" id="expgrid">${items}</div>
+          <p id="fempty" class="section-sub" style="display:none;">Nothing matches those filters — loosen one.</p>
         </div>
-        <div class="exp-grid" id="expgrid">${items}</div>
-        <p id="fempty" class="section-sub" style="display:none;">Nothing matches those filters — loosen one.</p>
-      </section>
+      </div>
     </div></main>
     <script>(function(){
       var grid=document.getElementById('expgrid');var cards=[].slice.call(grid.children);
@@ -778,14 +836,19 @@ function companiesPage(){
     </div><div class="hero-art"><img src="/assets/images/mito.svg" alt="Mitochondrion"></div></div></div>
     <main><div class="wrap">
       <div class="disclaimer">${esc(companies.disclaimer)}</div>
-      <div class="filters" id="cofilters">
-        <div class="fgroup"><span class="flabel">stage</span>${stages.map(s=>btn("stage",s,s)).join("")}</div>
-        <div class="fgroup"><span class="flabel">mechanism</span>${moas.map(m=>`<button class="fbtn" data-group="moa" data-val="${slugify(m)}">${esc(m)}</button>`).join("")}</div>
-        <div class="fgroup"><span class="flabel">indication</span>${inds.map(i=>`<button class="fbtn" data-group="ind" data-val="${slugify(i)}">${esc(i)}</button>`).join("")}</div>
-        <div class="fgroup"><button class="fbtn clear" id="coclear">✕ clear</button><span id="cocount" class="fcount"></span></div>
+      <button class="filter-toggle" aria-label="Toggle filters">⚙ Filters</button>
+      <div class="sidebar-wrap">
+        <aside class="sidebar" id="side-filters"><div class="filters" id="cofilters">
+          <div class="fgroup"><span class="flabel">stage</span><div class="fchips">${stages.map(s=>btn("stage",s,s)).join("")}</div></div>
+          <div class="fgroup"><span class="flabel">mechanism</span><div class="fchips">${moas.map(m=>`<button class="fbtn" data-group="moa" data-val="${slugify(m)}">${esc(m)}</button>`).join("")}</div></div>
+          <div class="fgroup"><span class="flabel">indication</span><div class="fchips">${inds.map(i=>`<button class="fbtn" data-group="ind" data-val="${slugify(i)}">${esc(i)}</button>`).join("")}</div></div>
+          <div class="fgroup"><button class="fbtn clear" id="coclear">✕ clear</button> <span id="cocount" class="fcount"></span></div>
+        </div></aside>
+        <div class="content">
+          <div class="co-grid" id="cogrid">${C.map(card).join("")}</div>
+          <p id="coempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
+        </div>
       </div>
-      <div class="co-grid" id="cogrid">${C.map(card).join("")}</div>
-      <p id="coempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
     </div></main>
     <script>(function(){var grid=document.getElementById('cogrid');var cards=[].slice.call(grid.children);
       var state={stage:null,moa:null,ind:null};var multi={moa:1,ind:1};
@@ -804,7 +867,7 @@ function companiesPage(){
       document.getElementById('coclear').addEventListener('click',function(){state={stage:null,moa:null,ind:null};
         document.querySelectorAll('#cofilters .fbtn.on').forEach(function(x){x.classList.remove('on');});apply();});
       apply();})();</script>`;
-  return layout({ title:`Companies to follow — ${cfg.siteName}`, desc:"A filterable watchlist of mitochondrial-medicine companies — by stage, mechanism of action and indication.", canonical:"/companies/", content, active:"/resources/", image:"mito.svg" });
+  return layout({ title:`Companies to follow — ${cfg.siteName}`, desc:"A filterable watchlist of mitochondrial-medicine companies — by stage, mechanism of action and indication.", canonical:"/companies/", content, active:"/companies/", image:"mito.svg" });
 }
 
 function trialsPage(){
@@ -826,13 +889,18 @@ function trialsPage(){
     </div><div class="hero-art"><img src="/assets/images/vdac1-barrel.svg" alt="VDAC1"></div></div></div>
     <main><div class="wrap">
       <div class="disclaimer">${esc(trials.disclaimer)}</div>
-      <div class="filters" id="trfilters">
-        <div class="fgroup"><span class="flabel">mechanism</span>${moas.map(m=>`<button class="fbtn" data-group="moa" data-val="${slugify(m)}">${esc(m)}</button>`).join("")}</div>
-        <div class="fgroup"><span class="flabel">indication</span>${inds.map(i=>`<button class="fbtn" data-group="ind" data-val="${slugify(i)}">${esc(i)}</button>`).join("")}</div>
-        <div class="fgroup"><button class="fbtn clear" id="trclear">✕ clear</button><span id="trcount" class="fcount"></span></div>
+      <button class="filter-toggle" aria-label="Toggle filters">⚙ Filters</button>
+      <div class="sidebar-wrap">
+        <aside class="sidebar" id="side-filters"><div class="filters" id="trfilters">
+          <div class="fgroup"><span class="flabel">mechanism</span><div class="fchips">${moas.map(m=>`<button class="fbtn" data-group="moa" data-val="${slugify(m)}">${esc(m)}</button>`).join("")}</div></div>
+          <div class="fgroup"><span class="flabel">indication</span><div class="fchips">${inds.map(i=>`<button class="fbtn" data-group="ind" data-val="${slugify(i)}">${esc(i)}</button>`).join("")}</div></div>
+          <div class="fgroup"><button class="fbtn clear" id="trclear">✕ clear</button> <span id="trcount" class="fcount"></span></div>
+        </div></aside>
+        <div class="content">
+          <div class="co-grid" id="trgrid">${T.map(card).join("")}</div>
+          <p id="trempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
+        </div>
       </div>
-      <div class="co-grid" id="trgrid">${T.map(card).join("")}</div>
-      <p id="trempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
     </div></main>
     <script>(function(){var grid=document.getElementById('trgrid');var cards=[].slice.call(grid.children);
       var state={moa:null,ind:null};var multi={moa:1};
@@ -851,7 +919,7 @@ function trialsPage(){
       document.getElementById('trclear').addEventListener('click',function(){state={moa:null,ind:null};
         document.querySelectorAll('#trfilters .fbtn.on').forEach(function(x){x.classList.remove('on');});apply();});
       apply();})();</script>`;
-  return layout({ title:`Clinical trials — ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov — filter by mechanism and indication.", canonical:"/trials/", content, active:"/resources/", image:"vdac1-barrel.svg" });
+  return layout({ title:`Clinical trials — ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov — filter by mechanism and indication.", canonical:"/trials/", content, active:"/trials/", image:"vdac1-barrel.svg" });
 }
 
 function mitoHealthPage(){
@@ -885,7 +953,9 @@ function mitoHealthPage(){
           <div><span class="lgd">Safety</span> <span class="dial saf-high"><b>=</b>High</span><span class="dial saf-moderate"><b>=</b>Moderate</span><span class="dial saf-caution"><b>=</b>Caution</span><span class="dial saf-low"><b>=</b>Low</span></div>
         </div>
       </details>
-      <div class="filters mh-filters" id="mhf">
+      <button class="filter-toggle" aria-label="Toggle filters">⚙ Filters</button>
+      <div class="sidebar-wrap">
+        <aside class="sidebar" id="side-filters"><div class="filters mh-filters" id="mhf">
         <div class="fgroup fgrow"><input type="search" id="mhsearch" placeholder="search interventions… (e.g. sauna, NAD, omega-3)"></div>
         <div class="fgroup"><span class="flabel">category</span>${cats.map(c=>chip("cat",c)).join("")}</div>
         <div class="fgroup"><span class="flabel">evidence</span>${evLevels.map(e=>chip("ev",e)).join("")}</div>
@@ -893,9 +963,12 @@ function mitoHealthPage(){
         <div class="fgroup"><span class="flabel">mechanism</span><select id="mhmech"><option value="">any</option>${mechs.map(m=>`<option value="${slugify(m)}">${esc(m)}</option>`).join("")}</select></div>
         <div class="fgroup"><span class="flabel">sort</span><button class="fbtn sortbtn on" data-sort="ev">strongest evidence</button><button class="fbtn sortbtn" data-sort="az">A–Z</button></div>
         <div class="fgroup"><button class="fbtn clear" id="mhclear">✕ clear</button><span id="mhcount" class="fcount"></span></div>
+      </div></aside>
+        <div class="content">
+          <div class="mh-grid" id="mhgrid">${M.items.map(card).join("")}</div>
+          <p id="mhempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
+        </div>
       </div>
-      <div class="mh-grid" id="mhgrid">${M.items.map(card).join("")}</div>
-      <p id="mhempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
       <p class="mh-foot">This is a synthesis for orientation, not medical advice. Evidence for many mitochondrial-specific effects is indirect; ratings reflect the best available human data plus mechanism. Found a strong study I'm missing? <a href="mailto:${cfg.email}">tell me</a>.</p>
     </div></main>
     <script>(function(){var grid=document.getElementById('mhgrid');var cards=[].slice.call(grid.children);
@@ -925,7 +998,7 @@ function mitoHealthPage(){
         document.querySelectorAll('#mhf .sortbtn').forEach(function(x){x.classList.toggle('on',x.dataset.sort==='ev');});
         document.getElementById('mhmech').value='';document.getElementById('mhsearch').value='';apply();});
       apply();})();</script>`;
-  return layout({ title:`Mitochondrial health ratings — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits that affect mitochondrial health — rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/resources/", image:"mito.svg" });
+  return layout({ title:`Mitochondrial health ratings — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits that affect mitochondrial health — rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/mitohealth/", image:"mito.svg" });
 }
 
 /* ---------------- feeds ---------------- */

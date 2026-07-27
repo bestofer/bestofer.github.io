@@ -10,13 +10,15 @@
   "nav": [
     { "label": "home", "url": "/" },
     { "label": "news", "url": "/news/" },
-    { "label": "resources", "url": "/resources/", "children": [
-      { "label": "resource shelf", "url": "/resources/" },
+    { "label": "the database", "url": "/mitohealth/", "children": [
       { "label": "mitochondrial health ratings", "url": "/mitohealth/" },
       { "label": "companies to follow", "url": "/companies/" },
-      { "label": "clinical trials", "url": "/trials/" },
-      { "label": "the gene", "url": "/gene/" },
-      { "label": "disease body map", "url": "/diseases/" }
+      { "label": "clinical trials", "url": "/trials/" }
+    ] },
+    { "label": "the science", "url": "/gene/", "children": [
+      { "label": "VDAC1 gene & expression", "url": "/gene/" },
+      { "label": "disease body map", "url": "/diseases/" },
+      { "label": "resource shelf", "url": "/resources/" }
     ] },
     { "label": "about", "url": "/about/" }
   ],
