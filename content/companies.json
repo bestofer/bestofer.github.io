@@ -1,0 +1,274 @@
+{
+  "intro": "Who's actually building mitochondrial medicine — a hand-kept watchlist of 30+ companies. Filter by stage, mechanism, or indication. Details change fast; treat this as a starting point and verify on each company's own site.",
+  "disclaimer": "Compiled from public information and my own reading. Stages, mechanisms and indications shift constantly — always confirm on the company's site and ClinicalTrials.gov. This is not investment advice.",
+  "companies": [
+    {
+      "name": "x-tosis",
+      "url": "https://x-tosis.com",
+      "highlight": true,
+      "rating": 5,
+      "ratingNote": "founder's completely unbiased five-star rating 😄",
+      "coi": "Full disclosure: I co-founded this one. It's on the list because it belongs on any VDAC1 watchlist — not as a recommendation. Grain of salt fully provided.",
+      "blurb": "First-in-class VDAC1-modulating mitochondrial therapeutics for neurodegeneration — aiming upstream, at the biology of neuronal death itself, rather than downstream symptoms. \"Saving brain cells.\" Based in Gainesville, Florida.",
+      "stage": "Preclinical",
+      "moa": ["VDAC1 / mitochondrial-targeted"],
+      "indications": ["Neurodegeneration", "Alzheimer's", "Parkinson's", "ALS"]
+    },
+    {
+      "name": "Stealth BioTherapeutics",
+      "url": "https://www.stealthbt.com",
+      "blurb": "The most clinically advanced name in the field. Peptide elamipretide (SS-31) targets cardiolipin on the inner mitochondrial membrane to shore up energy — furthest along in dry AMD and primary mitochondrial myopathy.",
+      "stage": "Phase 3",
+      "moa": ["Membrane / cardiolipin"],
+      "indications": ["Primary mitochondrial disease", "Ophthalmology", "Cardiomyopathy"]
+    },
+    {
+      "name": "Abliva",
+      "url": "https://abliva.com",
+      "blurb": "Swedish, spun out of NeuroVive. Lead drug KL1333 is an NAD+ modulator meant to restore cellular energy in genetically defined mitochondrial disease (the FALCON program in MELAS-type patients).",
+      "stage": "Phase 3",
+      "moa": ["NAD+ / redox"],
+      "indications": ["Primary mitochondrial disease"]
+    },
+    {
+      "name": "Khondrion",
+      "url": "https://khondrion.com",
+      "blurb": "Dutch clinical-stage biotech founded by a mitochondrial-medicine physician. Sonlicromanol (KH176) is an oral redox modulator tested in mitochondrial disease (MELAS) and now post-COVID.",
+      "stage": "Phase 2",
+      "moa": ["NAD+ / redox", "Antioxidant / oxidative stress"],
+      "indications": ["Primary mitochondrial disease", "Post-viral / fatigue"]
+    },
+    {
+      "name": "PTC Therapeutics",
+      "url": "https://www.ptcbio.com",
+      "blurb": "A larger rare-disease company with a real mitochondrial footprint — vatiquinone targets oxidative stress (15-lipoxygenase) in Friedreich's ataxia and inherited mitochondrial disease.",
+      "stage": "Phase 3",
+      "moa": ["Antioxidant / oxidative stress"],
+      "indications": ["Friedreich's ataxia", "Primary mitochondrial disease"]
+    },
+    {
+      "name": "Mission Therapeutics",
+      "url": "https://www.missiontherapeutics.com",
+      "blurb": "The one I watch most for VDAC-adjacent reasons: they inhibit the deubiquitinase USP30 to unleash mitophagy — clearing damaged mitochondria — with programs in kidney disease and Parkinson's.",
+      "stage": "Phase 1",
+      "moa": ["Mitophagy (USP30)"],
+      "indications": ["Kidney", "Parkinson's"]
+    },
+    {
+      "name": "Larimar Therapeutics",
+      "url": "https://larimartx.com",
+      "blurb": "Protein-replacement play: nomlabofusp delivers frataxin — the protein missing in Friedreich's ataxia — into mitochondria to restore iron–sulfur cluster biology.",
+      "stage": "Phase 2",
+      "moa": ["Protein replacement"],
+      "indications": ["Friedreich's ataxia"]
+    },
+    {
+      "name": "Minovia Therapeutics",
+      "url": "https://minoviatx.com",
+      "blurb": "Israeli pioneer of mitochondrial augmentation therapy (MAT) — enriching a patient's own stem cells with healthy mitochondria — in Pearson syndrome and other primary mitochondrial diseases.",
+      "stage": "Phase 2",
+      "moa": ["Mitochondrial transplant / cell therapy"],
+      "indications": ["Primary mitochondrial disease", "Rare pediatric"]
+    },
+    {
+      "name": "cellvie",
+      "url": "https://cellvie.bio",
+      "blurb": "Betting on mitochondrial transplantation — delivering isolated, functional mitochondria as a therapeutic — starting with ischemia–reperfusion injury and transplant medicine.",
+      "stage": "Preclinical",
+      "moa": ["Mitochondrial transplant / cell therapy"],
+      "indications": ["Ischemia / organ injury"]
+    },
+    {
+      "name": "Luca Science",
+      "url": "https://luca-science.com",
+      "blurb": "Japanese biotech developing stabilized functional mitochondria and mitochondria-derived therapeutics for acute organ injury and energy-starved tissues.",
+      "stage": "Preclinical",
+      "moa": ["Mitochondrial transplant / cell therapy"],
+      "indications": ["Ischemia / organ injury", "Cardiomyopathy"]
+    },
+    {
+      "name": "Astellas (ex-Mitobridge)",
+      "url": "https://www.astellas.com",
+      "blurb": "Big pharma in the space via its 2017 acquisition of Mitobridge — PPARδ agonism to drive mitochondrial biogenesis, explored in primary mitochondrial myopathy and acute kidney injury.",
+      "stage": "Phase 1",
+      "moa": ["Mitochondrial biogenesis (PPAR)"],
+      "indications": ["Primary mitochondrial disease", "Kidney"]
+    },
+    {
+      "name": "Pretzel Therapeutics",
+      "url": "https://www.pretzeltx.com",
+      "blurb": "Well-funded newcomer going after mitochondrial DNA replication and quality control — tuning how cells make and maintain their mitochondrial genome. One to watch.",
+      "stage": "Preclinical",
+      "moa": ["mtDNA / quality control"],
+      "indications": ["Primary mitochondrial disease"]
+    },
+    {
+      "name": "MitoRx Therapeutics",
+      "url": "https://mitorx.com",
+      "blurb": "UK biotech designing small molecules that protect mitochondria from oxidative damage, with programs pointed at Parkinson's, Friedreich's ataxia and muscular dystrophy.",
+      "stage": "Preclinical",
+      "moa": ["Antioxidant / oxidative stress"],
+      "indications": ["Neurodegeneration", "Friedreich's ataxia"]
+    },
+    {
+      "name": "Mitochon Pharmaceuticals",
+      "url": "https://www.mitochonpharma.com",
+      "blurb": "Developing controlled mitochondrial uncouplers (MP101/MP201) — gently 'leaking' the membrane to cut oxidative stress — for ALS, MS and traumatic brain injury.",
+      "stage": "Phase 1",
+      "moa": ["Mitochondrial uncoupler"],
+      "indications": ["Neurodegeneration", "ALS / MS"]
+    },
+    {
+      "name": "Biogen (Skyclarys)",
+      "url": "https://www.biogen.com",
+      "blurb": "Omaveloxolone (Skyclarys) — an Nrf2 activator that reboots antioxidant and mitochondrial gene programs — is the first FDA-approved drug for Friedreich's ataxia (via the Reata acquisition).",
+      "stage": "Marketed",
+      "moa": ["Nrf2 / oxidative stress"],
+      "indications": ["Friedreich's ataxia"]
+    },
+    {
+      "name": "Reneo / OnKure",
+      "url": "https://www.reneopharma.com",
+      "blurb": "Mavodelpar (REN001) is a PPARδ agonist meant to boost mitochondrial biogenesis and fatty-acid oxidation in primary mitochondrial myopathies.",
+      "stage": "Phase 2",
+      "moa": ["Mitochondrial biogenesis (PPAR)"],
+      "indications": ["Primary mitochondrial disease"]
+    },
+    {
+      "name": "Design Therapeutics",
+      "url": "https://www.designtx.com",
+      "blurb": "Gene-targeted chimeras (GeneTACs) aimed at the repeat expansion that silences frataxin — trying to fix Friedreich's ataxia at the DNA level.",
+      "stage": "Phase 1",
+      "moa": ["Gene-targeted small molecule"],
+      "indications": ["Friedreich's ataxia"]
+    },
+    {
+      "name": "Lexeo Therapeutics",
+      "url": "https://www.lexeotx.com",
+      "blurb": "AAV gene therapy delivering frataxin to the heart, targeting the cardiomyopathy that's the leading cause of death in Friedreich's ataxia.",
+      "stage": "Phase 1",
+      "moa": ["Gene therapy"],
+      "indications": ["Friedreich's ataxia", "Cardiomyopathy"]
+    },
+    {
+      "name": "Taysha Gene Therapies",
+      "url": "https://tayshagtx.com",
+      "blurb": "AAV gene therapies for severe monogenic CNS disease — including Rett syndrome and other conditions where mitochondrial and metabolic failure drive neuronal loss.",
+      "stage": "Phase 1",
+      "moa": ["Gene therapy"],
+      "indications": ["Neurodegeneration", "Rare pediatric"]
+    },
+    {
+      "name": "Anavex Life Sciences",
+      "url": "https://www.anavex.com",
+      "blurb": "Blarcamesine activates the sigma-1 receptor at the ER–mitochondria interface (the MAM), aiming to restore cellular homeostasis in Alzheimer's, Parkinson's and Rett syndrome.",
+      "stage": "Phase 3",
+      "moa": ["Sigma-1 / MAM"],
+      "indications": ["Alzheimer's", "Parkinson's", "Neurodegeneration"]
+    },
+    {
+      "name": "Clene",
+      "url": "https://www.clene.com",
+      "blurb": "CNM-Au8 is a suspension of gold nanocrystals that catalytically supports the NAD+/NADH balance to keep neurons energized — in late-stage trials for ALS and multiple sclerosis.",
+      "stage": "Phase 3",
+      "moa": ["Nanocatalytic energetics", "NAD+ / redox"],
+      "indications": ["ALS / MS", "Neurodegeneration"]
+    },
+    {
+      "name": "Biojiva (ex-Retrotope)",
+      "url": "https://biojiva.com",
+      "blurb": "Deuterium-stabilized fatty acids that resist lipid peroxidation — protecting mitochondrial membranes — in Friedreich's ataxia, ALS and infantile neuroaxonal dystrophy.",
+      "stage": "Phase 3",
+      "moa": ["Lipid peroxidation (deuterated PUFA)"],
+      "indications": ["Friedreich's ataxia", "ALS / MS"]
+    },
+    {
+      "name": "Denali Therapeutics",
+      "url": "https://www.denalitherapeutics.com",
+      "blurb": "Broad neurodegeneration player whose programs touch mitochondrial and lysosomal quality control (e.g. LRRK2) in Parkinson's and ALS.",
+      "stage": "Phase 2",
+      "moa": ["Mitochondrial quality control"],
+      "indications": ["Parkinson's", "Neurodegeneration"]
+    },
+    {
+      "name": "Epirium Bio",
+      "url": "https://www.epirium.com",
+      "blurb": "Small molecules that stimulate mitochondrial biogenesis to rebuild muscle and nerve energy capacity, aimed at neuromuscular disease.",
+      "stage": "Preclinical",
+      "moa": ["Mitochondrial biogenesis (PPAR)"],
+      "indications": ["Muscle / neuromuscular"]
+    },
+    {
+      "name": "Solid Biosciences",
+      "url": "https://www.solidbio.com",
+      "blurb": "Best known for Duchenne gene therapy, now expanding into gene therapies for inherited cardiac conditions — including mitochondrial cardiomyopathies.",
+      "stage": "Phase 1",
+      "moa": ["Gene therapy"],
+      "indications": ["Cardiomyopathy", "Muscle / neuromuscular"]
+    },
+    {
+      "name": "Amazentis (Timeline / Mitopure)",
+      "url": "https://www.amazentis.com",
+      "blurb": "Commercialized urolithin A (Mitopure) — a gut-metabolite that induces mitophagy to renew mitochondria in ageing muscle. The rare mitophagy story that's actually on shelves.",
+      "stage": "Consumer / clinical",
+      "moa": ["Mitophagy (urolithin A)"],
+      "indications": ["Muscle / neuromuscular", "Aging / longevity"]
+    },
+    {
+      "name": "Elysium Health",
+      "url": "https://www.elysiumhealth.com",
+      "blurb": "Consumer NAD+ precursors (nicotinamide riboside) marketed for cellular energy and healthy ageing — the well-known end of the NAD+ boom.",
+      "stage": "Consumer / clinical",
+      "moa": ["NAD+ / redox"],
+      "indications": ["Aging / longevity", "Metabolic"]
+    },
+    {
+      "name": "Metro International Biotech",
+      "url": "https://www.metrobiotech.com",
+      "blurb": "David Sinclair-founded, developing next-gen NAD+ boosters (MIB-626) as actual drugs — in clinical testing for metabolic and age-related decline.",
+      "stage": "Phase 2",
+      "moa": ["NAD+ / redox"],
+      "indications": ["Metabolic", "Aging / longevity"]
+    },
+    {
+      "name": "Life Biosciences",
+      "url": "https://www.lifebiosciences.com",
+      "blurb": "Partial epigenetic reprogramming to restore youthful cell function — with mitochondrial and metabolic rejuvenation central to the thesis; lead program in optic neuropathy.",
+      "stage": "Preclinical",
+      "moa": ["Partial reprogramming / aging"],
+      "indications": ["Aging / longevity", "Ophthalmology"]
+    },
+    {
+      "name": "BioAge Labs",
+      "url": "https://bioagelabs.com",
+      "blurb": "Mines human ageing data for targets in muscle and metabolic decline — where mitochondrial function is a recurring theme — and runs clinical metabolic programs.",
+      "stage": "Phase 2",
+      "moa": ["Metabolic / aging"],
+      "indications": ["Metabolic", "Aging / longevity"]
+    },
+    {
+      "name": "Cambrian Bio",
+      "url": "https://www.cambrianbio.com",
+      "blurb": "A 'rejuvenation' holding company with a pipeline of ageing-biology programs, several centered on mitochondrial and metabolic health.",
+      "stage": "Phase 1",
+      "moa": ["Metabolic / aging"],
+      "indications": ["Aging / longevity"]
+    },
+    {
+      "name": "Gordian Biotechnology",
+      "url": "https://gordian.bio",
+      "blurb": "Runs in-vivo pooled screens (many perturbations in one animal) to find drivers of age-related decline — mitochondrial dysfunction squarely in scope.",
+      "stage": "Platform",
+      "moa": ["Discovery platform"],
+      "indications": ["Aging / longevity"]
+    },
+    {
+      "name": "Continuum Biosciences",
+      "url": "https://www.continuumbio.com",
+      "blurb": "Developing 'mitochondrial enhancers' — mild uncoupling and redox tuning — to raise baseline mitochondrial resilience in ageing and neurodegeneration.",
+      "stage": "Preclinical",
+      "moa": ["Mitochondrial uncoupler"],
+      "indications": ["Aging / longevity", "Neurodegeneration"]
+    }
+  ]
+}

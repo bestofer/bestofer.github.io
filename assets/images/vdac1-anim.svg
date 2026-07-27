@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-label="Animation: VDAC1 oligomerizes and releases mitochondrial DNA">
+  <defs>
+    <linearGradient id="mem" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffbf8f"/><stop offset="1" stop-color="#e5623a"/>
+    </linearGradient>
+    <radialGradient id="hole" cx="50%" cy="45%" r="60%">
+      <stop offset="0" stop-color="#04201f"/><stop offset="1" stop-color="#0a5a54"/>
+    </radialGradient>
+    <style>
+      .barrel{ fill:#12b3a6; stroke:#063b38; stroke-width:2; }
+      .pore{ fill:#04201f; }
+      /* single-channel gating (left): pore breathes */
+      .gate{ animation:gate 2.4s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+      @keyframes gate{ 0%,100%{ transform:scale(.55);} 50%{ transform:scale(1);} }
+      /* three barrels drift together, then a big pore fades in */
+      .b1{ animation:d1 6s ease-in-out infinite; } .b2{ animation:d2 6s ease-in-out infinite; } .b3{ animation:d3 6s ease-in-out infinite; }
+      @keyframes d1{ 0%,20%{ transform:translateX(-26px);} 45%,100%{ transform:translateX(0);} }
+      @keyframes d2{ 0%,20%{ transform:translateX(0);} 45%,100%{ transform:translateX(0);} }
+      @keyframes d3{ 0%,20%{ transform:translateX(26px);} 45%,100%{ transform:translateX(0);} }
+      .bigpore{ opacity:0; animation:open 6s ease-in-out infinite; }
+      @keyframes open{ 0%,40%{ opacity:0;} 55%,95%{ opacity:1;} 100%{ opacity:0;} }
+      /* mtDNA escaping */
+      .dna{ opacity:0; animation:leak 6s linear infinite; }
+      .dna.a{ animation-delay:0s;} .dna.b{ animation-delay:1.1s;} .dna.c{ animation-delay:2.0s;}
+      @keyframes leak{
+        0%,52%{ transform:translate(0,0); opacity:0; }
+        60%{ opacity:1; }
+        100%{ transform:translate(0,-120px); opacity:0; }
+      }
+      .spark{ opacity:0; animation:spark 6s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+      @keyframes spark{ 0%,62%{ opacity:0; transform:scale(.6);} 74%{ opacity:1; transform:scale(1.15);} 100%{ opacity:0; transform:scale(1);} }
+      @media (prefers-reduced-motion: reduce){ *{ animation:none !important; } .bigpore,.dna,.spark{ opacity:1; } }
+    </style>
+  </defs>
+
+  <!-- outer membrane band -->
+  <rect x="0" y="168" width="520" height="34" fill="url(#mem)"/>
+  <rect x="0" y="164" width="520" height="6" fill="#ffd9a8" opacity="0.6"/>
+
+  <!-- LEFT: single channel gating -->
+  <g transform="translate(70,185)">
+    <ellipse class="barrel" cx="0" cy="0" rx="26" ry="17"/>
+    <ellipse class="pore gate" cx="0" cy="0" rx="14" ry="9"/>
+    <text x="0" y="45" text-anchor="middle" font-family="'Space Mono',monospace" font-size="11" fill="#17171e">one channel · gating</text>
+  </g>
+
+  <!-- RIGHT: oligomerization + mtDNA release -->
+  <g transform="translate(260,185)">
+    <!-- three barrels that come together -->
+    <ellipse class="barrel b1" cx="0" cy="0" rx="20" ry="14"/>
+    <ellipse class="barrel b2" cx="0" cy="0" rx="20" ry="14"/>
+    <ellipse class="barrel b3" cx="0" cy="0" rx="20" ry="14"/>
+    <!-- the large oligomeric pore that opens -->
+    <ellipse class="bigpore" cx="0" cy="0" rx="30" ry="18" fill="url(#hole)" stroke="#2fd6c4" stroke-width="3"/>
+
+    <!-- escaping mtDNA (little twisted loops) -->
+    <g class="dna a"><ellipse cx="0" cy="-6" rx="7" ry="4" fill="none" stroke="#e5397f" stroke-width="3"/></g>
+    <g class="dna b"><ellipse cx="10" cy="-6" rx="6" ry="3.5" fill="none" stroke="#e5397f" stroke-width="3"/></g>
+    <g class="dna c"><ellipse cx="-9" cy="-6" rx="6" ry="3.5" fill="none" stroke="#e5397f" stroke-width="3"/></g>
+
+    <text x="0" y="45" text-anchor="middle" font-family="'Space Mono',monospace" font-size="11" fill="#17171e">oligomerize · leak mtDNA</text>
+  </g>
+
+  <!-- cGAS-STING inflammation spark up top -->
+  <g class="spark" transform="translate(260,44)">
+    <path d="M-10 8 L2 -10 L-2 0 L10 -8 L-2 12 L2 2 Z" fill="#f5a524" stroke="#17171e" stroke-width="1.5"/>
+    <text x="0" y="26" text-anchor="middle" font-family="'Space Mono',monospace" font-size="10" fill="#17171e">cGAS–STING → inflammation</text>
+  </g>
+</svg>

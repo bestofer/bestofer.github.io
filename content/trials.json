@@ -1,0 +1,86 @@
+{
+  "intro": "Selected clinical trials of mitochondrial-medicine drugs — each links straight to its ClinicalTrials.gov record. Filter by mechanism or indication. Sourced from ClinicalTrials.gov; statuses change, so click through for the live picture.",
+  "disclaimer": "Not medical advice and not a complete list. Trial statuses and details change — the ClinicalTrials.gov record is the source of truth. Talk to a clinician about trials relevant to you.",
+  "trials": [
+    {
+      "nct": "NCT06373731",
+      "title": "ReNEW: Elamipretide in dry age-related macular degeneration",
+      "drug": "Elamipretide (SS-31)",
+      "sponsor": "Stealth BioTherapeutics",
+      "phase": "Phase 3",
+      "status": "Active, not recruiting",
+      "moa": ["Membrane / cardiolipin"],
+      "indication": "Ophthalmology / AMD"
+    },
+    {
+      "nct": "NCT03323749",
+      "title": "Elamipretide in primary mitochondrial myopathy (MMPOWER-3)",
+      "drug": "Elamipretide (SS-31)",
+      "sponsor": "Stealth BioTherapeutics",
+      "phase": "Phase 3",
+      "status": "Terminated",
+      "moa": ["Membrane / cardiolipin"],
+      "indication": "Primary mitochondrial disease"
+    },
+    {
+      "nct": "NCT03056209",
+      "title": "KL1333 single-ascending-dose study in mitochondrial disease",
+      "drug": "KL1333 (NAD+ modulator)",
+      "sponsor": "Abliva / Yungjin",
+      "phase": "Phase 1",
+      "status": "Completed",
+      "moa": ["NAD+ / redox"],
+      "indication": "Primary mitochondrial disease"
+    },
+    {
+      "nct": "NCT07298005",
+      "title": "SON4PEM: Sonlicromanol in post-COVID condition",
+      "drug": "Sonlicromanol (KH176)",
+      "sponsor": "Khondrion (investigator-led)",
+      "phase": "Phase 2",
+      "status": "Recruiting",
+      "moa": ["NAD+ / redox", "Antioxidant / oxidative stress"],
+      "indication": "Post-viral / fatigue"
+    },
+    {
+      "nct": "NCT05485987",
+      "title": "Vatiquinone in young children with Friedreich ataxia",
+      "drug": "Vatiquinone (EPI-743)",
+      "sponsor": "PTC Therapeutics",
+      "phase": "Phase 2",
+      "status": "Completed",
+      "moa": ["Antioxidant / oxidative stress"],
+      "indication": "Friedreich's ataxia"
+    },
+    {
+      "nct": "NCT03845712",
+      "title": "Pyrimidine nucleosides in TK2 deficiency",
+      "drug": "Doxecitine + doxribtimine (MT1621)",
+      "sponsor": "UCB (ex-Modis/Zogenix)",
+      "phase": "Phase 2",
+      "status": "Active, not recruiting",
+      "moa": ["Nucleoside substrate"],
+      "indication": "Rare pediatric mitochondrial disease"
+    },
+    {
+      "nct": "NCT06474104",
+      "title": "Minovia mitochondrial augmentation — biomarker collection",
+      "drug": "Mitochondrial augmentation therapy (MAT)",
+      "sponsor": "Minovia Therapeutics",
+      "phase": "Observational",
+      "status": "Recruiting",
+      "moa": ["Mitochondrial transplant / cell therapy"],
+      "indication": "Primary mitochondrial disease"
+    },
+    {
+      "nct": "NCT04151472",
+      "title": "Idebenone for prevention of episodic migraine",
+      "drug": "Idebenone (CoQ10 analog)",
+      "sponsor": "Zhejiang University",
+      "phase": "Phase 3",
+      "status": "Recruiting",
+      "moa": ["Antioxidant / oxidative stress"],
+      "indication": "Neurology / migraine"
+    }
+  ]
+}

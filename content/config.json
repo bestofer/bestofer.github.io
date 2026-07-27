@@ -1,0 +1,27 @@
+{
+  "siteName": "ilovemitochondria.com",
+  "brandHtml": "i<span class=\"heart\">&#9829;</span>mitochondria<span class=\"tld\">.com</span>",
+  "author": "Offer Shina",
+  "email": "ofershina@gmail.com",
+  "company": { "name": "x-tosis", "url": "https://x-tosis.com", "descriptor": "VDAC1-focused neurodegeneration biotech, Gainesville FL" },
+  "linkedin": "https://www.linkedin.com/in/offer-shina-a96706150/",
+  "baseUrl": "https://ilovemitochondria.com",
+  "description": "A personal blog by Offer Shina about mitochondria and VDAC1 — the science, the news, and why a PSEN1 carrier can't stop reading about it.",
+  "nav": [
+    { "label": "home", "url": "/" },
+    { "label": "news", "url": "/news/" },
+    { "label": "resources", "url": "/resources/", "children": [
+      { "label": "resource shelf", "url": "/resources/" },
+      { "label": "companies to follow", "url": "/companies/" },
+      { "label": "clinical trials", "url": "/trials/" },
+      { "label": "the gene", "url": "/gene/" },
+      { "label": "disease body map", "url": "/diseases/" }
+    ] },
+    { "label": "about", "url": "/about/" }
+  ],
+  "hero": {
+    "eyebrow": "a mitochondria + VDAC1 notebook · since 2024",
+    "titleHtml": "The <span class=\"u\">powerhouse</span> of the cell has a front door. I write about it.",
+    "lead": "Hi — I'm Offer. This is my personal, slightly obsessive blog about mitochondria and, especially, <strong>VDAC1</strong>: the little pore that runs the traffic on the mitochondrial surface and keeps turning up in disease. Real papers, plain language, zero corporate polish."
+  }
+}

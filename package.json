@@ -1,0 +1,12 @@
+{
+  "name": "ilovemitochondria",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ilovemitochondria.com — a data-driven static blog about mitochondria and VDAC1",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node build.mjs && node --experimental-serve dist 2>/dev/null || python -m http.server 8080 --directory dist"
+  },
+  "author": "Offer Shina <ofershina@gmail.com>"
+}

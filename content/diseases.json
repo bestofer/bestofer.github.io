@@ -1,0 +1,89 @@
+{
+  "intro": "One channel, damage almost everywhere. VDAC1 sits where energy, calcium and cell-death decisions meet — so when it misfires, different organs pay the price. Tap a glowing spot for the disease link and the paper I'd start with.",
+  "panelHint": "Tap or hover a glowing spot",
+  "panelTitle": "Pick an organ",
+  "panelBlurb": "Each hotspot ties VDAC1 to a specific disease, with the one paper worth your time.",
+  "listTitle": "Every link, spelled out",
+  "listSub": "Prefer a list? Same map — organ, the VDAC1 connection, and the paper to read.",
+  "regions": [
+    {
+      "id": "brain", "label": "Brain", "x": 150, "y": 52, "r": 26,
+      "disease": "Neurodegeneration & Alzheimer's",
+      "blurb": "Neurons burn the most energy, so they feel VDAC1 failure first. The channel links to amyloid and tau, and to the PSEN1 calcium pathways behind familial Alzheimer's.",
+      "paperLabel": "VDAC1 in Alzheimer's — PubMed",
+      "paperUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=VDAC1+Alzheimer+mitochondria",
+      "internal": "/posts/why-this-blog/",
+      "tags": ["VDAC1", "neurodegeneration"]
+    },
+    {
+      "id": "eye", "label": "Eye", "x": 178, "y": 66, "r": 14,
+      "disease": "Uveal melanoma",
+      "blurb": "In the commonest adult eye cancer, VDAC1 turned up as a genome-stability gene — switch it off and tumour cells die, but their DNA unravels.",
+      "paperLabel": "Gao & Wei, Exp Eye Res 2026",
+      "paperUrl": "https://doi.org/10.1016/j.exer.2026.111087",
+      "internal": "/news/vdac1-uveal-melanoma/",
+      "tags": ["VDAC1", "cancer"]
+    },
+    {
+      "id": "heart", "label": "Heart", "x": 132, "y": 208, "r": 22,
+      "disease": "Cardiac injury",
+      "blurb": "VDAC1 anchors the ER–mitochondria contact points that meter calcium into heart cells. Those contacts break down after a heart attack.",
+      "paperLabel": "Du et al., J Ethnopharmacol 2026",
+      "paperUrl": "https://doi.org/10.1016/j.jep.2026.121936",
+      "tags": ["VDAC1", "calcium"]
+    },
+    {
+      "id": "lungs", "label": "Lungs", "x": 176, "y": 205, "r": 22,
+      "disease": "Pulmonary fibrosis",
+      "blurb": "Fibroblasts that can't recycle damaged mitochondria drive lung scarring. Restart mitophagy (PINK1/Parkin) and the scarring eases.",
+      "paperLabel": "Zhang et al., J Ethnopharmacol 2026",
+      "paperUrl": "https://doi.org/10.1016/j.jep.2026.122095",
+      "internal": "/news/salvia-lung-fibrosis/",
+      "tags": ["mitophagy", "fibrosis"]
+    },
+    {
+      "id": "immune", "label": "Immune / spleen", "x": 120, "y": 250, "r": 18,
+      "disease": "Sepsis, inflammation & lupus",
+      "blurb": "VDAC1 oligomers leak mtDNA that trips the cGAS–STING alarm. VBIT-12 calmed T-cell inflammation; the VBIT-4 lupus paper kicked off the whole field.",
+      "paperLabel": "Ren et al., Cell Signal 2026",
+      "paperUrl": "https://doi.org/10.1016/j.cellsig.2026.112642",
+      "internal": "/news/vdac1-tcell-inflammation/",
+      "tags": ["VDAC1", "inflammation", "mtDNA"]
+    },
+    {
+      "id": "liver", "label": "Liver", "x": 178, "y": 250, "r": 18,
+      "disease": "Fatty liver & metabolic disease",
+      "blurb": "The same mtDNA-leak-then-inflammation loop shows up in fatty liver disease — and VBIT-4 has been tried against it in models.",
+      "paperLabel": "VBIT-4 in metabolic disease — PubMed",
+      "paperUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=VBIT-4+VDAC1+metabolic+liver",
+      "tags": ["VDAC1", "mtDNA"]
+    },
+    {
+      "id": "kidney", "label": "Kidneys", "x": 176, "y": 292, "r": 16,
+      "disease": "Acute & chronic kidney disease",
+      "blurb": "Human genetics points to mitochondrial genes as causes of kidney failure, and blocking VDAC1 oligomerization has protected kidneys in models.",
+      "paperLabel": "Wang et al., Ren Fail 2026",
+      "paperUrl": "https://doi.org/10.1080/0886022X.2026.2698274",
+      "internal": "/news/kidney-mitochondria-genes/",
+      "tags": ["mitochondria", "kidney"]
+    },
+    {
+      "id": "bladder", "label": "Bladder", "x": 150, "y": 336, "r": 15,
+      "disease": "Bladder cancer & chemo-resistance",
+      "blurb": "Tumour cells tag VDAC1 for mitophagy to survive cisplatin. Close that escape hatch and the chemo works again.",
+      "paperLabel": "Zhang et al., Drug Resist Updat 2026",
+      "paperUrl": "https://doi.org/10.1016/j.drup.2026.101435",
+      "internal": "/news/bladder-cancer-mitophagy/",
+      "tags": ["VDAC1", "mitophagy", "cancer"]
+    },
+    {
+      "id": "joints", "label": "Joints", "x": 120, "y": 500, "r": 16,
+      "disease": "Osteoarthritis",
+      "blurb": "Cartilage cells with failing mitochondria leak mtDNA and inflame the joint. A mitochondria-targeting nanozyme restarts mitophagy and quiets it.",
+      "paperLabel": "Li et al., Bioact Mater 2026",
+      "paperUrl": "https://doi.org/10.1016/j.bioactmat.2026.07.010",
+      "internal": "/news/osteoarthritis-nanozyme/",
+      "tags": ["mitophagy", "nanomedicine"]
+    }
+  ]
+}

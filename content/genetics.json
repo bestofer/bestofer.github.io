@@ -1,0 +1,42 @@
+{
+  "gene": {
+    "symbol": "VDAC1",
+    "name": "voltage-dependent anion channel 1",
+    "chromosome": "5",
+    "locus": "5q31.1",
+    "coordinates": "chr5:133,971,915–134,005,133 (GRCh38/hg38, minus strand)",
+    "entrezId": "7416",
+    "ensemblId": "ENSG00000213585",
+    "uniprotId": "P21796",
+    "type": "protein-coding",
+    "proteinLength": 283,
+    "structurePdb": "2JK4"
+  },
+  "sequence": "MAVPPTYADLGKSARDVFTKGYGFGLIKLDLKTKSENGLEFTSSGSANTETTKVTGSLETKYRWTEYGLTFTEKWNTDNTLGTEITVEDQLARGLKLTFDSSFSPNTGKKNAKIKTGYKREHINLGCDMDFDIAGPSIRGALVLGYEGWLAGYQMNFETAKSRVTQSNFAVGYKTDEFQLHTNVNDGTEFGGSIYQKVNKKLETAVNLAWTAGNSNTRFGIAAKYQIDPDACFSAKVNNSSLIGLGYTQTLKPGIKLTLSALLDGKNVNAGGHKLGLGLEFQA",
+  "expressionNote": "VDAC1 is a housekeeping gene expressed in essentially every tissue — but it is dialled up highest in the most energy-hungry ones (skeletal muscle, heart, brain), which is exactly why those tissues are so exposed when VDAC1 misbehaves.",
+  "expression": [
+    { "tissue": "Skeletal muscle", "tpm": 390.9 },
+    { "tissue": "Heart (left ventricle)", "tpm": 199.3 },
+    { "tissue": "Brain (cerebellum)", "tpm": 135.3 },
+    { "tissue": "Skin", "tpm": 122.2 },
+    { "tissue": "Brain (cortex)", "tpm": 121.5 },
+    { "tissue": "Adrenal gland", "tpm": 115.9 },
+    { "tissue": "Stomach", "tpm": 111.7 },
+    { "tissue": "Lung", "tpm": 99.9 },
+    { "tissue": "Kidney (cortex)", "tpm": 97.0 },
+    { "tissue": "Thyroid", "tpm": 90.1 },
+    { "tissue": "Nerve (tibial)", "tpm": 80.6 },
+    { "tissue": "Liver", "tpm": 78.1 },
+    { "tissue": "Spleen", "tpm": 65.3 },
+    { "tissue": "Testis", "tpm": 53.6 },
+    { "tissue": "Pancreas", "tpm": 41.3 },
+    { "tissue": "Whole blood", "tpm": 21.9 }
+  ],
+  "sources": [
+    { "label": "GTEx v8 — median gene expression (TPM) across 54 tissues", "url": "https://gtexportal.org/home/gene/VDAC1" },
+    { "label": "UniProt P21796 — canonical protein sequence (283 aa)", "url": "https://www.uniprot.org/uniprotkb/P21796/entry" },
+    { "label": "Ensembl ENSG00000213585", "url": "https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000213585" },
+    { "label": "NCBI Gene 7416", "url": "https://www.ncbi.nlm.nih.gov/gene/7416" }
+  ],
+  "fetched": "2026-07-27"
+}

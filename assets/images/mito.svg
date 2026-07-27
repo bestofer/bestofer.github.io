@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Cross-section of a mitochondrion">
+  <defs>
+    <linearGradient id="matrix" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd9a8"/>
+      <stop offset="1" stop-color="#f6a24b"/>
+    </linearGradient>
+    <linearGradient id="outer" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff9a6b"/>
+      <stop offset="1" stop-color="#e5623a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="34%" cy="28%" r="75%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- outer membrane -->
+  <rect x="24" y="58" width="432" height="184" rx="92" fill="url(#outer)"/>
+  <!-- intermembrane space -->
+  <rect x="40" y="74" width="400" height="152" rx="76" fill="#ffbf8f"/>
+  <!-- matrix (inner) -->
+  <rect x="56" y="90" width="368" height="120" rx="60" fill="url(#matrix)"/>
+
+  <!-- cristae: folded inner membrane fingers -->
+  <g fill="none" stroke="#e5623a" stroke-width="13" stroke-linecap="round" opacity="0.85">
+    <path d="M110 92 C 96 130, 150 150, 118 208"/>
+    <path d="M170 90 C 158 132, 212 150, 176 210"/>
+    <path d="M232 90 C 220 132, 274 150, 238 210"/>
+    <path d="M294 90 C 282 132, 336 150, 300 210"/>
+    <path d="M356 92 C 346 130, 392 150, 362 206"/>
+  </g>
+
+  <!-- little VDAC1 pores dotted along the outer membrane -->
+  <g fill="#0e9488" stroke="#063b38" stroke-width="2">
+    <circle cx="150" cy="61" r="7"/>
+    <circle cx="230" cy="59" r="7"/>
+    <circle cx="310" cy="61" r="7"/>
+    <circle cx="392" cy="96" r="7"/>
+    <circle cx="150" cy="239" r="7"/>
+    <circle cx="300" cy="239" r="7"/>
+  </g>
+
+  <!-- top-light highlight for a 3D feel -->
+  <rect x="24" y="58" width="432" height="184" rx="92" fill="url(#glow)"/>
+</svg>
