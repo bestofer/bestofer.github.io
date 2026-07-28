@@ -491,6 +491,16 @@ function homePage(){
   const feature = news.find(e=>e.format==="feature") || news[0];
   const briefs = news.filter(e=>e!==feature).slice(0,2);
   const primer = posts.find(p=>p.kind==="explainer") || posts[0];
+  const teasers = [
+    { t:"Mitochondrial health ratings", u:"/mitohealth/", m:`${mitohealth.items.length} interventions`, i:"★", d:"Foods, drugs, supplements & lifestyle pillars — each graded for evidence, benefit and safety." },
+    { t:"News & new papers", u:"/news/", m:`${news.length} write-ups`, i:"✱", d:"Recent mitochondria & VDAC1 research in plain words, always linked to the source." },
+    { t:"Companies to follow", u:"/companies/", m:`${companies.companies.length} companies`, i:"◈", d:"A filterable watchlist of who's actually building mitochondrial medicine." },
+    { t:"Clinical trials", u:"/trials/", m:`${trials.trials.length} trials`, i:"⚕", d:"Mito-drug trials linked straight to their ClinicalTrials.gov records." },
+    { t:"VDAC1 gene & expression", u:"/gene/", m:"sequence + GTEx", i:"⌗", d:"The gene, its 283-amino-acid protein, and where in the body it's switched on." },
+    { t:"Disease body map", u:"/diseases/", m:`${diseases.regions.length} organs`, i:"◉", d:"Where VDAC1 goes wrong across the body — each organ linked to a key paper." },
+    { t:"Resource shelf", u:"/resources/", m:"curated links", i:"❑", d:"The reviews, databases and labs I keep coming back to." },
+    { t:"About", u:"/about/", m:"who & why", i:"✎", d:"PSEN1 carrier, x-tosis co-founder, full-time mitochondria nerd." }
+  ];
   const content = `<div class="hero"><div class="wrap">
       <div>
         <p class="eyebrow">${cfg.hero.eyebrow}</p>
@@ -506,7 +516,20 @@ function homePage(){
     </div></div>
     <main><div class="wrap">
       <section>
-        <h2><span class="num">01</span>Fresh off the notebook</h2>
+        <h2><span class="num">01</span>Find your way around</h2>
+        <p class="section-sub">Everything here in one glance — pick a door. New? The <a href="${primer.url}">5-minute VDAC1 primer</a> is the gentlest start.</p>
+        <div class="sitemap-grid">
+          ${teasers.map(x=>`<a class="teaser" href="${x.u}">
+            <span class="teaser-ico">${x.i}</span>
+            <span class="teaser-meta">${esc(x.m)}</span>
+            <h3>${esc(x.t)}</h3>
+            <p>${esc(x.d)}</p>
+            <span class="teaser-go">explore →</span>
+          </a>`).join("")}
+        </div>
+      </section>
+      <section>
+        <h2><span class="num">02</span>Fresh off the notebook</h2>
         <p class="section-sub">The latest bits. Full archive lives in <a href="/news/">news</a>.</p>
         ${newsListItem(feature)}
         ${briefs.map(b=>`<div class="n-brief${b.accent==="pink"?" pink":""}">
@@ -516,17 +539,9 @@ function homePage(){
         </div>`).join("")}
       </section>
       <section id="vdac1-3d">
-        <h2><span class="num">02</span>VDAC1 in 3D</h2>
+        <h2><span class="num">03</span>VDAC1 in 3D</h2>
         <p class="section-sub">The actual crystal structure of human VDAC1 (PDB <b>2JK4</b>) — grab it and spin. Nineteen β-strands rolled into a barrel, N-terminal helix tucked inside. <em>(Needs internet to load the atoms.)</em></p>
         ${VIEWER_MARKUP}
-      </section>
-      <section>
-        <h2><span class="num">03</span>New here? Three doors in.</h2>
-        <ul class="res-list">
-          <li class="res-item"><a href="${primer.url}">The 5-minute VDAC1 primer</a><div class="desc">What the channel does, minus the jargon.</div></li>
-          <li class="res-item"><a href="/resources/">The resource shelf</a><div class="desc">Papers, databases, labs — the stuff I keep reopening.</div></li>
-          <li class="res-item"><a href="/about/">Who's writing this</a><div class="desc">PSEN1 carrier, co-founder at ${cfg.company.name}, full-time mito nerd.</div></li>
-        </ul>
       </section>
     </div></main>`;
   const homeLd = [

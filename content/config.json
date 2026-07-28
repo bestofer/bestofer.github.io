@@ -9,9 +9,9 @@
   "description": "A personal blog by Offer Shina about mitochondria and VDAC1 — the science, the news, and why a PSEN1 carrier can't stop reading about it.",
   "nav": [
     { "label": "home", "url": "/" },
+    { "label": "mito health", "url": "/mitohealth/" },
     { "label": "news", "url": "/news/" },
-    { "label": "the database", "url": "/mitohealth/", "children": [
-      { "label": "mitochondrial health ratings", "url": "/mitohealth/" },
+    { "label": "the pipeline", "url": "/companies/", "children": [
       { "label": "companies to follow", "url": "/companies/" },
       { "label": "clinical trials", "url": "/trials/" }
     ] },
