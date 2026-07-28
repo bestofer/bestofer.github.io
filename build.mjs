@@ -235,7 +235,7 @@ box.addEventListener('click',function(e){if(e.target===box)hide();});
 (function(){var t=document.querySelector('.filter-toggle');if(t)t.addEventListener('click',function(){var s=document.getElementById('side-filters');if(s)s.classList.toggle('open');t.classList.toggle('open');});})();</script>`;
 }
 
-function layout({title, desc, canonical, content, active, hasViewer=false, jsonld=null, image, ogType="website", published=null}){
+function layout({title, desc, canonical, content, active, hasViewer=false, jsonld=null, image, ogType="website", published=null, bodyClass=""}){
   const ogImg = `${cfg.baseUrl}/assets/images/${image||"mito.svg"}`;
   const ld = (Array.isArray(jsonld) ? jsonld : (jsonld?[jsonld]:[]))
     .map(o=>`<script type="application/ld+json">${JSON.stringify(o)}</script>`).join("\n");
@@ -271,7 +271,7 @@ ${published?`<meta property="article:published_time" content="${published}">\n<m
 <link rel="stylesheet" href="/assets/css/style.css">
 ${ld}
 </head>
-<body>
+<body${bodyClass?` class="${bodyClass}"`:""}>
 ${header(active)}
 ${content}
 ${footer()}
@@ -467,7 +467,7 @@ function newsListing(){
         document.getElementById('ftag').value='';apply();});
       apply();
     })();</script>`;
-  return layout({ title:`News & research — ${cfg.siteName}`, desc:"Recent mitochondria and VDAC1 research summarized in plain language and linked to the source — filterable by domain, category, year and tag.", canonical:"/news/", content, active:"/news/", image:"vdac1-barrel.svg" });
+  return layout({ title:`News & research — ${cfg.siteName}`, desc:"Recent mitochondria and VDAC1 research summarized in plain language and linked to the source — filterable by domain, category, year and tag.", canonical:"/news/", content, active:"/news/", bodyClass:"wide", image:"vdac1-barrel.svg" });
 }
 
 function postsListing(){
@@ -882,7 +882,7 @@ function companiesPage(){
       document.getElementById('coclear').addEventListener('click',function(){state={stage:null,moa:null,ind:null};
         document.querySelectorAll('#cofilters .fbtn.on').forEach(function(x){x.classList.remove('on');});apply();});
       apply();})();</script>`;
-  return layout({ title:`Companies to follow — ${cfg.siteName}`, desc:"A filterable watchlist of mitochondrial-medicine companies — by stage, mechanism of action and indication.", canonical:"/companies/", content, active:"/companies/", image:"mito.svg" });
+  return layout({ title:`Companies to follow — ${cfg.siteName}`, desc:"A filterable watchlist of mitochondrial-medicine companies — by stage, mechanism of action and indication.", canonical:"/companies/", content, active:"/companies/", bodyClass:"wide", image:"mito.svg" });
 }
 
 function trialsPage(){
@@ -934,7 +934,7 @@ function trialsPage(){
       document.getElementById('trclear').addEventListener('click',function(){state={moa:null,ind:null};
         document.querySelectorAll('#trfilters .fbtn.on').forEach(function(x){x.classList.remove('on');});apply();});
       apply();})();</script>`;
-  return layout({ title:`Clinical trials — ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov — filter by mechanism and indication.", canonical:"/trials/", content, active:"/trials/", image:"vdac1-barrel.svg" });
+  return layout({ title:`Clinical trials — ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov — filter by mechanism and indication.", canonical:"/trials/", content, active:"/trials/", bodyClass:"wide", image:"vdac1-barrel.svg" });
 }
 
 function mitoHealthPage(){
@@ -1013,7 +1013,7 @@ function mitoHealthPage(){
         document.querySelectorAll('#mhf .sortbtn').forEach(function(x){x.classList.toggle('on',x.dataset.sort==='ev');});
         document.getElementById('mhmech').value='';document.getElementById('mhsearch').value='';apply();});
       apply();})();</script>`;
-  return layout({ title:`Mitochondrial health ratings — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits that affect mitochondrial health — rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/mitohealth/", image:"mito.svg" });
+  return layout({ title:`Mitochondrial health ratings — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits that affect mitochondrial health — rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/mitohealth/", bodyClass:"wide", image:"mito.svg" });
 }
 
 /* ---------------- feeds ---------------- */
