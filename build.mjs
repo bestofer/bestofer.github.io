@@ -163,7 +163,8 @@ function header(active){
   }).join("");
   return `<header class="site-header"><div class="wrap">
     <a class="brand" href="/">${cfg.brandHtml}</a>
-    <nav class="main">${links}
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-main"><span></span><span></span><span></span></button>
+    <nav class="main" id="nav-main">${links}
       <button class="nav-search" id="ss-open" aria-label="Search the site" title="Search (press /)">🔍 <span class="kbd">/</span></button>
     </nav>
   </div></header>`;
@@ -233,7 +234,9 @@ document.addEventListener('keydown',function(e){
 inp&&inp.addEventListener('input',function(e){run(e.target.value);});
 box.addEventListener('click',function(e){if(e.target===box)hide();});
 })();
-(function(){var t=document.querySelector('.filter-toggle');if(t)t.addEventListener('click',function(){var s=document.getElementById('side-filters');if(s)s.classList.toggle('open');t.classList.toggle('open');});})();</script>`;
+(function(){var t=document.querySelector('.filter-toggle');if(t)t.addEventListener('click',function(){var s=document.getElementById('side-filters');if(s)s.classList.toggle('open');t.classList.toggle('open');});})();
+(function(){var b=document.getElementById('nav-toggle'),n=document.getElementById('nav-main');if(!b||!n)return;
+b.addEventListener('click',function(){var open=n.classList.toggle('open');b.setAttribute('aria-expanded',open?'true':'false');});})();</script>`;
 }
 
 function layout({title, desc, canonical, content, active, hasViewer=false, jsonld=null, image, ogType="website", published=null, bodyClass=""}){
