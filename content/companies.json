@@ -7,12 +7,11 @@
       "url": "https://x-tosis.com",
       "highlight": true,
       "rating": 5,
-      "ratingNote": "founder's completely unbiased five-star rating 😄",
       "coi": "Full disclosure: I co-founded this one. It's on the list because it belongs on any VDAC1 watchlist, not as a recommendation. Grain of salt fully provided.",
       "blurb": "First-in-class VDAC1-modulating mitochondrial therapeutics for neurodegeneration, aiming upstream, at the biology of neuronal death itself, rather than downstream symptoms. \"Saving brain cells.\" Based in Gainesville, Florida.",
       "stage": "Preclinical",
       "moa": [
-        "VDAC1 / mitochondrial-targeted"
+        "VDAC1 modulation"
       ],
       "indications": [
         "Neurodegeneration",
@@ -27,7 +26,7 @@
       "blurb": "The most clinically advanced name in the field. Peptide elamipretide (SS-31) targets cardiolipin on the inner mitochondrial membrane to shore up energy, furthest along in dry AMD and primary mitochondrial myopathy.",
       "stage": "Phase 3",
       "moa": [
-        "Membrane / cardiolipin"
+        "Cardiolipin stabilization"
       ],
       "indications": [
         "Primary mitochondrial disease",
@@ -41,7 +40,7 @@
       "blurb": "Swedish, spun out of NeuroVive. Lead drug KL1333 is an NAD+ modulator meant to restore cellular energy in genetically defined mitochondrial disease (the FALCON program in MELAS-type patients).",
       "stage": "Phase 3",
       "moa": [
-        "NAD+ / redox"
+        "NAD+ metabolism"
       ],
       "indications": [
         "Primary mitochondrial disease"
@@ -53,8 +52,7 @@
       "blurb": "Dutch clinical-stage biotech founded by a mitochondrial-medicine physician. Sonlicromanol (KH176) is an oral redox modulator tested in mitochondrial disease (MELAS) and now post-COVID.",
       "stage": "Phase 2",
       "moa": [
-        "NAD+ / redox",
-        "Antioxidant / oxidative stress"
+        "Redox modulation"
       ],
       "indications": [
         "Primary mitochondrial disease",
@@ -67,7 +65,7 @@
       "blurb": "A larger rare-disease company with a real mitochondrial footprint, vatiquinone targets oxidative stress (15-lipoxygenase) in Friedreich's ataxia and inherited mitochondrial disease.",
       "stage": "Phase 3",
       "moa": [
-        "Antioxidant / oxidative stress"
+        "Oxidative stress reduction"
       ],
       "indications": [
         "Friedreich's ataxia",
@@ -80,7 +78,7 @@
       "blurb": "The one I watch most for VDAC-adjacent reasons: they inhibit the deubiquitinase USP30 to unleash mitophagy, clearing damaged mitochondria, with programs in kidney disease and Parkinson's.",
       "stage": "Phase 1",
       "moa": [
-        "Mitophagy (USP30)"
+        "USP30 inhibition"
       ],
       "indications": [
         "Kidney",
@@ -93,7 +91,7 @@
       "blurb": "Protein-replacement play: nomlabofusp delivers frataxin, the protein missing in Friedreich's ataxia, into mitochondria to restore iron–sulfur cluster biology.",
       "stage": "Phase 2",
       "moa": [
-        "Protein replacement"
+        "Frataxin replacement"
       ],
       "indications": [
         "Friedreich's ataxia"
@@ -105,7 +103,7 @@
       "blurb": "Israeli pioneer of mitochondrial augmentation therapy (MAT), enriching a patient's own stem cells with healthy mitochondria, in Pearson syndrome and other primary mitochondrial diseases.",
       "stage": "Phase 2",
       "moa": [
-        "Mitochondrial transplant / cell therapy"
+        "Mitochondrial augmentation therapy"
       ],
       "indications": [
         "Primary mitochondrial disease",
@@ -118,7 +116,7 @@
       "blurb": "Betting on mitochondrial transplantation, delivering isolated, functional mitochondria as a therapeutic, starting with ischemia–reperfusion injury and transplant medicine.",
       "stage": "Preclinical",
       "moa": [
-        "Mitochondrial transplant / cell therapy"
+        "Mitochondrial transplantation"
       ],
       "indications": [
         "Ischemia / organ injury"
@@ -130,7 +128,7 @@
       "blurb": "Japanese biotech developing stabilized functional mitochondria and mitochondria-derived therapeutics for acute organ injury and energy-starved tissues.",
       "stage": "Preclinical",
       "moa": [
-        "Mitochondrial transplant / cell therapy"
+        "Mitochondrial transplantation"
       ],
       "indications": [
         "Ischemia / organ injury",
@@ -143,7 +141,7 @@
       "blurb": "Big pharma in the space via its 2017 acquisition of Mitobridge, PPARδ agonism to drive mitochondrial biogenesis, explored in primary mitochondrial myopathy and acute kidney injury.",
       "stage": "Phase 1",
       "moa": [
-        "Mitochondrial biogenesis (PPAR)"
+        "PPARδ agonism"
       ],
       "indications": [
         "Primary mitochondrial disease",
@@ -156,7 +154,7 @@
       "blurb": "Well-funded newcomer going after mitochondrial DNA replication and quality control, tuning how cells make and maintain their mitochondrial genome. One to watch.",
       "stage": "Preclinical",
       "moa": [
-        "mtDNA / quality control"
+        "mtDNA replication"
       ],
       "indications": [
         "Primary mitochondrial disease"
@@ -168,7 +166,7 @@
       "blurb": "UK biotech designing small molecules that protect mitochondria from oxidative damage, with programs pointed at Parkinson's, Friedreich's ataxia and muscular dystrophy.",
       "stage": "Preclinical",
       "moa": [
-        "Antioxidant / oxidative stress"
+        "Oxidative stress reduction"
       ],
       "indications": [
         "Neurodegeneration",
@@ -181,7 +179,7 @@
       "blurb": "Developing controlled mitochondrial uncouplers (MP101/MP201), gently 'leaking' the membrane to cut oxidative stress, for ALS, MS and traumatic brain injury.",
       "stage": "Phase 1",
       "moa": [
-        "Mitochondrial uncoupler"
+        "Mitochondrial uncoupling"
       ],
       "indications": [
         "Neurodegeneration",
@@ -194,7 +192,7 @@
       "blurb": "Omaveloxolone (Skyclarys), an Nrf2 activator that reboots antioxidant and mitochondrial gene programs, is the first FDA-approved drug for Friedreich's ataxia (via the Reata acquisition).",
       "stage": "Marketed",
       "moa": [
-        "Nrf2 / oxidative stress"
+        "Nrf2 activation"
       ],
       "indications": [
         "Friedreich's ataxia"
@@ -206,7 +204,7 @@
       "blurb": "Mavodelpar (REN001) is a PPARδ agonist meant to boost mitochondrial biogenesis and fatty-acid oxidation in primary mitochondrial myopathies.",
       "stage": "Phase 2",
       "moa": [
-        "Mitochondrial biogenesis (PPAR)"
+        "PPARδ agonism"
       ],
       "indications": [
         "Primary mitochondrial disease"
@@ -256,7 +254,7 @@
       "blurb": "Blarcamesine activates the sigma-1 receptor at the ER–mitochondria interface (the MAM), aiming to restore cellular homeostasis in Alzheimer's, Parkinson's and Rett syndrome.",
       "stage": "Phase 3",
       "moa": [
-        "Sigma-1 / MAM"
+        "Sigma-1 receptor agonism"
       ],
       "indications": [
         "Alzheimer's",
@@ -270,8 +268,7 @@
       "blurb": "CNM-Au8 is a suspension of gold nanocrystals that catalytically supports the NAD+/NADH balance to keep neurons energized, in late-stage trials for ALS and multiple sclerosis.",
       "stage": "Phase 3",
       "moa": [
-        "Nanocatalytic energetics",
-        "NAD+ / redox"
+        "Nanocatalytic energetics"
       ],
       "indications": [
         "ALS / MS",
@@ -284,7 +281,7 @@
       "blurb": "Deuterium-stabilized fatty acids that resist lipid peroxidation, protecting mitochondrial membranes, in Friedreich's ataxia, ALS and infantile neuroaxonal dystrophy.",
       "stage": "Phase 3",
       "moa": [
-        "Lipid peroxidation (deuterated PUFA)"
+        "Lipid peroxidation inhibition"
       ],
       "indications": [
         "Friedreich's ataxia",
@@ -310,7 +307,7 @@
       "blurb": "Small molecules that stimulate mitochondrial biogenesis to rebuild muscle and nerve energy capacity, aimed at neuromuscular disease.",
       "stage": "Preclinical",
       "moa": [
-        "Mitochondrial biogenesis (PPAR)"
+        "PPARδ agonism"
       ],
       "indications": [
         "Muscle / neuromuscular"
@@ -335,7 +332,7 @@
       "blurb": "Swiss biotech (EPFL spinout) that discovered and holds the IP on urolithin A, a gut-metabolite that induces mitophagy; ran the human clinical trials (published in Nature Metabolism and JAMA Network Open) establishing its muscle and mitochondrial effects before licensing it as Mitopure.",
       "stage": "Phase 2 / Marketed",
       "moa": [
-        "Mitophagy (urolithin A)"
+        "Mitophagy induction"
       ],
       "indications": [
         "Muscle / neuromuscular",
@@ -348,7 +345,7 @@
       "blurb": "David Sinclair-founded, developing next-gen NAD+ boosters (MIB-626) as actual drugs, in clinical testing for metabolic and age-related decline.",
       "stage": "Phase 2",
       "moa": [
-        "NAD+ / redox"
+        "NAD+ metabolism"
       ],
       "indications": [
         "Metabolic",
@@ -361,7 +358,7 @@
       "blurb": "Partial epigenetic reprogramming to restore youthful cell function, with mitochondrial and metabolic rejuvenation central to the thesis; lead program in optic neuropathy.",
       "stage": "Preclinical",
       "moa": [
-        "Partial reprogramming / aging"
+        "Partial reprogramming"
       ],
       "indications": [
         "Aging / longevity",
@@ -374,7 +371,7 @@
       "blurb": "Mines human ageing data for targets in muscle and metabolic decline, where mitochondrial function is a recurring theme, and runs clinical metabolic programs.",
       "stage": "Phase 2",
       "moa": [
-        "Metabolic / aging"
+        "Apelin receptor agonism"
       ],
       "indications": [
         "Metabolic",
@@ -387,7 +384,7 @@
       "blurb": "A 'rejuvenation' holding company with a pipeline of ageing-biology programs, several centered on mitochondrial and metabolic health.",
       "stage": "Phase 1",
       "moa": [
-        "Metabolic / aging"
+        "Aging biology"
       ],
       "indications": [
         "Aging / longevity"
@@ -411,7 +408,7 @@
       "blurb": "Developing 'mitochondrial enhancers', mild uncoupling and redox tuning, to raise baseline mitochondrial resilience in ageing and neurodegeneration.",
       "stage": "Preclinical",
       "moa": [
-        "Mitochondrial uncoupler"
+        "Mitochondrial uncoupling"
       ],
       "indications": [
         "Aging / longevity",
@@ -424,7 +421,7 @@
       "blurb": "Early-stage UK biotech developing small-molecule inhibitors of the mitochondrial permeability transition pore, the structure whose prolonged opening drives neuronal death in ALS and Parkinson's.",
       "stage": "Preclinical",
       "moa": [
-        "Permeability transition pore (mPTP)"
+        "mPTP inhibition"
       ],
       "indications": [
         "Neurodegeneration",
@@ -438,7 +435,7 @@
       "blurb": "Early-stage biotech developing small-molecule activators of PINK1, the kinase that kicks off mitophagy, as a disease-modifying approach to Parkinson's rather than a symptom treatment.",
       "stage": "Preclinical",
       "moa": [
-        "Mitophagy (PINK1)"
+        "PINK1 activation"
       ],
       "indications": [
         "Parkinson's",
@@ -451,7 +448,7 @@
       "blurb": "Swiss biotech spun out of EPFL, developing small molecules that activate mitophagy directly, targeting neurodegeneration and other diseases where clearing damaged mitochondria could help.",
       "stage": "Preclinical",
       "moa": [
-        "Mitophagy"
+        "Mitophagy induction"
       ],
       "indications": [
         "Neurodegeneration",
@@ -464,7 +461,7 @@
       "blurb": "Biotech built around activating autophagy, including mitophagy, with small molecules; a broader cellular-quality-control platform with programs touching neurodegeneration.",
       "stage": "Preclinical",
       "moa": [
-        "Autophagy / mitophagy"
+        "Autophagy activation"
       ],
       "indications": [
         "Neurodegeneration"
@@ -476,7 +473,7 @@
       "blurb": "Uses an AI-driven mitochondrial-biology platform to find drugs that target cancer metabolism; lead candidate BPM31510 (a CoQ10-based therapy) has been tested in glioblastoma and pancreatic cancer.",
       "stage": "Phase 2",
       "moa": [
-        "Mitochondrial metabolism (CoQ10)"
+        "Mitochondrial metabolism"
       ],
       "indications": [
         "Cancer"
@@ -488,7 +485,7 @@
       "blurb": "Clinical-stage biotech developing an optimized formulation of dichloroacetate, a pyruvate dehydrogenase kinase inhibitor, for Leigh syndrome and other primary mitochondrial diseases.",
       "stage": "Phase 1",
       "moa": [
-        "Pyruvate dehydrogenase kinase inhibition"
+        "PDK inhibition"
       ],
       "indications": [
         "Primary mitochondrial disease",
@@ -514,7 +511,7 @@
       "blurb": "Clinical-stage biotech developing PrimeC, a combination therapy for ALS that includes an iron-chelation component thought to help protect motor-neuron mitochondrial function.",
       "stage": "Phase 2",
       "moa": [
-        "Iron chelation / mitochondrial protection"
+        "Iron chelation"
       ],
       "indications": [
         "ALS",
@@ -527,8 +524,7 @@
       "blurb": "Gene-therapy company with a late-stage program for Danon disease, caused by defective autophagy (including mitophagy) that leads to severe cardiomyopathy.",
       "stage": "Phase 2/3",
       "moa": [
-        "Gene therapy",
-        "Autophagy"
+        "Gene therapy"
       ],
       "indications": [
         "Cardiomyopathy",
@@ -541,7 +537,7 @@
       "blurb": "Early-stage UK biotech targeting cellular senescence, a state in which dysfunctional mitochondria are a defining hallmark, aiming to ease age-related tissue decline.",
       "stage": "Preclinical",
       "moa": [
-        "Senescence / aging"
+        "Cellular senescence"
       ],
       "indications": [
         "Aging / longevity"
@@ -565,7 +561,7 @@
       "blurb": "Longevity biotech working on partial cellular reprogramming, plasma-based therapeutics and autophagy induction, with mitochondrial rejuvenation as part of the underlying biology.",
       "stage": "Preclinical",
       "moa": [
-        "Partial reprogramming / autophagy"
+        "Partial reprogramming"
       ],
       "indications": [
         "Aging / longevity"

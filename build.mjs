@@ -830,9 +830,8 @@ function companiesPage(){
   const inds = [...new Set(C.flatMap(c=>c.indications))].sort();
   const btn = (grp,val,label)=>`<button class="fbtn" data-group="${grp}" data-val="${escAttr(val)}">${esc(label)}</button>`;
   const card = c=>`<article class="co-card${c.highlight?" co-highlight":""}" data-stage="${escAttr(c.stage)}" data-moa="${c.moa.map(slugify).join(" ")}" data-ind="${c.indications.map(slugify).join(" ")}">
-    ${c.highlight?`<span class="co-flag">my company, see disclaimer</span>`:""}
     <div class="co-head"><h3><a href="${c.url}" target="_blank" rel="noopener">${esc(c.name)} ↗</a></h3><span class="co-stage">${esc(c.stage)}</span></div>
-    ${c.rating?`<div class="co-rating">${"⭐".repeat(c.rating)}${c.ratingNote?` <span class="co-ratingnote">${esc(c.ratingNote)}</span>`:""}</div>`:""}
+    ${c.rating?`<div class="co-rating">${"⭐".repeat(c.rating)}</div>`:""}
     <p>${esc(c.blurb)}</p>
     ${c.coi?`<p class="co-coi">⚠ ${esc(c.coi)}</p>`:""}
     <div class="co-tax"><span class="co-lbl">MoA</span>${c.moa.map(m=>`<span class="chip2">${esc(m)}</span>`).join("")}</div>
@@ -935,28 +934,10 @@ function trialsPage(){
   return layout({ title:`Mitochondrial clinical trials, ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov, filter by mechanism and indication.", canonical:"/trials/", content, active:"/trials/", bodyClass:"wide", image:"vdac1-barrel.svg", jsonld:trLd });
 }
 
-/* per-category real photographs for the mito-health ratings grid, sourced from Wikimedia Commons */
-const MH_PHOTO = {
-  "Exercise": { file:"exercise.jpg", credit:"Morning Jog", author:"Wikimedia Commons", license:"CC0", src:"https://commons.wikimedia.org/wiki/File:Morning_Jog.jpg" },
-  "Foods & Drink": { file:"foods.jpg", credit:"Cut Vegetable", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Cut_Vegetable.jpg" },
-  "Supplements": { file:"supplements.jpg", credit:"Vitamin B12 capsule", author:"Wikimedia Commons", license:"CC0", src:"https://commons.wikimedia.org/wiki/File:Vitamin_B12_capsule.jpg" },
-  "Drugs": { file:"drugs.jpg", credit:"Pills and medicines", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Pills_and_medicines_01.jpg" },
-  "Fasting / TRE": { file:"fasting.jpg", credit:"Empty plate with fork", author:"Wikimedia Commons", license:"CC BY 4.0", src:"https://commons.wikimedia.org/wiki/File:Empty_plate_with_fork.jpg" },
-  "Ketogenic diet": { file:"keto.jpg", credit:"Avocado Hass, single and halved", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Avocado_Hass_-_single_and_halved.jpg" },
-  "Sleep": { file:"sleep.jpg", credit:"Empty bed with pillows", author:"Wikimedia Commons", license:"CC BY-SA 3.0", src:"https://commons.wikimedia.org/wiki/File:Door_open;_empty_bed_with_pillow_and_side_pillow_01.jpg" },
-  "Stress management": { file:"stress.jpg", credit:"Meditation Focus Point", author:"Wikimedia Commons", license:"CC0", src:"https://commons.wikimedia.org/wiki/File:Meditation_Focus_Point.jpg" },
-  "Sunlight & Circadian": { file:"circadian.jpg", credit:"Sunrise at Viru bog", author:"Wikimedia Commons", license:"CC BY-SA 3.0", src:"https://commons.wikimedia.org/wiki/File:Sunrise_at_viru_bog.jpg" },
-  "Light therapy": { file:"light.jpg", credit:"Light therapy lamp and sunlight", author:"Wikimedia Commons", license:"Public domain", src:"https://commons.wikimedia.org/wiki/File:Light_therapy_lamp_and_sunlight.jpg" },
-  "Heat (Sauna)": { file:"sauna.jpg", credit:"Sauna stove and bench", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Sauna_keris_ja_lava.jpg" },
-  "Cold exposure": { file:"cold.jpg", credit:"Taking a cold bath", author:"Wikimedia Commons", license:"CC BY-SA 2.0", src:"https://commons.wikimedia.org/wiki/File:Resting_on_thin_ice,_or_taking_a_cold_bath!_-_geograph.org.uk_-_5237892.jpg" },
-  "Social connection": { file:"social.jpg", credit:"Two friends chatting and laughing", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Two_friends_sitting_together,_chatting_and_laughing.jpg" },
-  "Cognitive training": { file:"cognitive.jpg", credit:"Chess game in Kenya", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Chess_game_in_kenya.jpg" },
-  "Environmental factors": { file:"environment.jpg", credit:"Black Forest National Park path", author:"Wikimedia Commons", license:"CC BY-SA 3.0", src:"https://commons.wikimedia.org/wiki/File:Lothar_Path_-_Black_Forest_National_Park_-_Root_plate_01.jpg" }
-};
-function mhPhoto(category){
-  const p = MH_PHOTO[category];
-  if(!p) return `<span class="mh-photo mh-photo-none" aria-hidden="true"></span>`;
-  return `<span class="mh-photo"><img src="/assets/images/mh/${p.file}" alt="" loading="lazy" width="640" height="426"></span>`;
+/* per-item real photographs for the mito-health ratings grid, sourced from Wikimedia Commons (see content/mitohealth.json) */
+function mhPhoto(item){
+  if(!item.image) return `<span class="mh-photo mh-photo-none" aria-hidden="true"></span>`;
+  return `<span class="mh-photo"><img src="/assets/images/mh-items/${item.image}" alt="" loading="lazy" width="480" height="320"></span>`;
 }
 
 function mitoHealthPage(){
@@ -971,7 +952,7 @@ function mitoHealthPage(){
     const cid = `mhc-${ix}`;
     return `<article class="mh-card dir-${i.direction}" data-cat="${escAttr(i.category)}" data-ev="${escAttr(i.evidence)}" data-dir="${i.direction}" data-mech="${(i.tags||[]).map(slugify).join(" ")}" data-name="${escAttr(i.name.toLowerCase())}" data-evrank="${evRank[i.evidence]||0}">
     <h3 class="mh-h3"><button class="mh-toggle" aria-expanded="false" aria-controls="${cid}">
-      ${mhPhoto(i.category)}
+      ${mhPhoto(i)}
       <span class="mh-body">
         <span class="mh-heading">
           <span class="mh-top"><span class="mh-cat">${esc(i.category)}</span>${i.direction==="harm"?`<span class="mh-harm">harms mito</span>`:i.direction==="mixed"?`<span class="mh-mixed">double-edged</span>`:""}</span>
@@ -1021,8 +1002,8 @@ function mitoHealthPage(){
         </div>
       </div>
       <p class="mh-foot">This is a synthesis for orientation, not medical advice. Evidence for many mitochondrial-specific effects is indirect; ratings reflect the best available human data plus mechanism. Found a strong study I'm missing? <a href="mailto:${cfg.email}">tell me</a>.</p>
-      <details class="mh-credits"><summary>Photo credits</summary>
-        <ul>${Object.entries(MH_PHOTO).map(([cat,p])=>`<li>${esc(cat)}: <a href="${p.src}" target="_blank" rel="noopener">${esc(p.credit)}</a>, ${esc(p.author)}, ${esc(p.license)}</li>`).join("")}</ul>
+      <details class="mh-credits"><summary>Photo credits (${M.items.length})</summary>
+        <ul>${M.items.map(i=>`<li>${esc(i.name)}: <a href="${i.imageSrc}" target="_blank" rel="noopener">${esc(i.imageCredit)}</a>, Wikimedia Commons, ${esc(i.imageLicense)}</li>`).join("")}</ul>
       </details>
     </div></main>
     <script>(function(){var grid=document.getElementById('mhgrid');var cards=[].slice.call(grid.children);
