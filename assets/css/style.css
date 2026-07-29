@@ -211,6 +211,31 @@ article.full blockquote{border-left:6px solid var(--coral);margin:22px 0;padding
 
 @media (max-width:560px){ .mh-grid{grid-template-columns:1fr;} }
 
+/* ===== hero CTA buttons ===== */
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 4px;}
+.btn-primary{font-family:var(--disp);font-weight:700;font-size:0.98rem;background:var(--teal);color:#fff;border:3px solid var(--line);box-shadow:var(--shadow-sm);padding:11px 20px;transition:transform .12s,box-shadow .12s;}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow);text-decoration:none;color:#fff;}
+.btn-ghost{font-family:var(--mono);font-weight:700;font-size:0.9rem;color:var(--ink);border:3px solid var(--line);padding:11px 18px;background:var(--paper);}
+.btn-ghost:hover{background:var(--ink);color:var(--paper);text-decoration:none;}
+
+/* ===== flagship (mito-health ratings) on home ===== */
+.flagship{margin-bottom:40px;}
+.flag-card{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;border:3px solid var(--line);box-shadow:7px 7px 0 var(--teal);background:linear-gradient(120deg,#eef7f5,#f3f0ff);padding:28px 30px;color:var(--ink);transition:transform .12s,box-shadow .12s;}
+.flag-card:hover{transform:translate(-2px,-2px);box-shadow:10px 10px 0 var(--teal);text-decoration:none;}
+.flag-tag{font-family:var(--mono);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--coral);}
+.flag-body h2{font-family:var(--disp);font-weight:700;font-size:1.9rem;letter-spacing:-0.6px;margin:8px 0 10px;display:block;}
+.flag-body p{color:#2b2b34;margin:0 0 14px;max-width:60ch;}
+.flag-cta{font-family:var(--mono);font-weight:700;font-size:0.95rem;color:var(--teal);}
+.flag-stat{text-align:center;border-left:3px solid var(--line);padding-left:24px;}
+.flag-stat b{font-family:var(--disp);font-weight:700;font-size:3.4rem;line-height:1;color:var(--teal);display:block;}
+.flag-stat span{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink-soft);}
+@media (max-width:640px){ .flag-card{grid-template-columns:1fr;} .flag-stat{border-left:0;border-top:3px solid var(--line);padding-left:0;padding-top:14px;} .flag-body h2{font-size:1.5rem;} }
+
+/* flagship nav item */
+.nav-search + *,.nav-feature{}
+nav.main a.nav-feature{background:var(--teal);color:#fff;padding:2px 8px;font-weight:700;}
+nav.main a.nav-feature:hover,nav.main a.nav-feature.active{background:var(--ink);color:#fff;}
+
 /* ===== home sitemap teasers ===== */
 .sitemap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
 .teaser{position:relative;display:flex;flex-direction:column;border:3px solid var(--line);background:var(--paper);box-shadow:var(--shadow-sm);padding:18px 20px;color:var(--ink);transition:transform .12s ease,box-shadow .12s ease;}

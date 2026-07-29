@@ -8,23 +8,23 @@
   "baseUrl": "https://ilovemitochondria.com",
   "description": "A personal blog by Offer Shina about mitochondria and VDAC1 — the science, the news, and why a PSEN1 carrier can't stop reading about it.",
   "nav": [
-    { "label": "home", "url": "/" },
-    { "label": "mito health", "url": "/mitohealth/" },
-    { "label": "news", "url": "/news/" },
-    { "label": "the pipeline", "url": "/companies/", "children": [
-      { "label": "companies to follow", "url": "/companies/" },
-      { "label": "clinical trials", "url": "/trials/" }
+    { "label": "Home", "url": "/" },
+    { "label": "Mito-Health Ratings", "url": "/mitohealth/", "feature": true },
+    { "label": "Research News", "url": "/news/" },
+    { "label": "VDAC1 Science", "url": "/gene/", "children": [
+      { "label": "The VDAC1 Gene & Expression", "url": "/gene/" },
+      { "label": "VDAC1 Disease Body Map", "url": "/diseases/" },
+      { "label": "VDAC1 & Mitochondria Resources", "url": "/resources/" }
     ] },
-    { "label": "the science", "url": "/gene/", "children": [
-      { "label": "VDAC1 gene & expression", "url": "/gene/" },
-      { "label": "disease body map", "url": "/diseases/" },
-      { "label": "resource shelf", "url": "/resources/" }
+    { "label": "Companies & Trials", "url": "/companies/", "children": [
+      { "label": "Mito-Medicine Companies", "url": "/companies/" },
+      { "label": "Clinical Trials", "url": "/trials/" }
     ] },
-    { "label": "about", "url": "/about/" }
+    { "label": "About", "url": "/about/" }
   ],
   "hero": {
-    "eyebrow": "a mitochondria + VDAC1 notebook · since 2024",
-    "titleHtml": "The <span class=\"u\">powerhouse</span> of the cell has a front door. I write about it.",
-    "lead": "Hi — I'm Offer. This is my personal, slightly obsessive blog about mitochondria and, especially, <strong>VDAC1</strong>: the little pore that runs the traffic on the mitochondrial surface and keeps turning up in disease. Real papers, plain language, zero corporate polish."
+    "eyebrow": "a personal mission — shared in the open",
+    "titleHtml": "What actually helps your <span class=\"u\">mitochondria</span>? I'm building the most useful answer I can.",
+    "lead": "I'm Offer. Understanding mitochondrial health isn't an academic hobby for me — it's a <strong>need</strong>. So I read the science obsessively and share what I learn here, graded honestly, to help others navigate it too. The goal is simple and a little audacious: build the <strong>largest, most helpful, evidence-rated guide to mitochondrial health</strong> anywhere — starting with the ratings below."
   }
 }

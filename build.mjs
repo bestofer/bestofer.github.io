@@ -158,7 +158,8 @@ function header(active){
       const menu = n.children.map(c=>`<a role="menuitem" href="${c.url}"${isOn(c.url)?' class="active"':""}>${c.label}</a>`).join("");
       return `<div class="hasmenu${anyOn?" active":""}"><a href="${n.url}" aria-haspopup="true">${n.label} <span class="caret">▾</span></a><div class="submenu" role="menu">${menu}</div></div>`;
     }
-    return `<a href="${n.url}"${isOn(n.url)?' class="active"':""}>${n.label}</a>`;
+    const cls = [isOn(n.url)?"active":"", n.feature?"nav-feature":""].filter(Boolean).join(" ");
+    return `<a href="${n.url}"${cls?` class="${cls}"`:""}>${n.label}</a>`;
   }).join("");
   return `<header class="site-header"><div class="wrap">
     <a class="brand" href="/">${cfg.brandHtml}</a>
@@ -492,31 +493,44 @@ function homePage(){
   const briefs = news.filter(e=>e!==feature).slice(0,2);
   const primer = posts.find(p=>p.kind==="explainer") || posts[0];
   const teasers = [
-    { t:"Mitochondrial health ratings", u:"/mitohealth/", m:`${mitohealth.items.length} interventions`, i:"★", d:"Foods, drugs, supplements & lifestyle pillars — each graded for evidence, benefit and safety." },
-    { t:"News & new papers", u:"/news/", m:`${news.length} write-ups`, i:"✱", d:"Recent mitochondria & VDAC1 research in plain words, always linked to the source." },
-    { t:"Companies to follow", u:"/companies/", m:`${companies.companies.length} companies`, i:"◈", d:"A filterable watchlist of who's actually building mitochondrial medicine." },
-    { t:"Clinical trials", u:"/trials/", m:`${trials.trials.length} trials`, i:"⚕", d:"Mito-drug trials linked straight to their ClinicalTrials.gov records." },
-    { t:"VDAC1 gene & expression", u:"/gene/", m:"sequence + GTEx", i:"⌗", d:"The gene, its 283-amino-acid protein, and where in the body it's switched on." },
-    { t:"Disease body map", u:"/diseases/", m:`${diseases.regions.length} organs`, i:"◉", d:"Where VDAC1 goes wrong across the body — each organ linked to a key paper." },
-    { t:"Resource shelf", u:"/resources/", m:"curated links", i:"❑", d:"The reviews, databases and labs I keep coming back to." },
-    { t:"About", u:"/about/", m:"who & why", i:"✎", d:"PSEN1 carrier, x-tosis co-founder, full-time mitochondria nerd." }
+    { t:"Research News", u:"/news/", m:`${news.length} write-ups`, i:"✱", d:"Recent mitochondria & VDAC1 research in plain words, always linked to the source." },
+    { t:"Mito-Medicine Companies", u:"/companies/", m:`${companies.companies.length} companies`, i:"◈", d:"A filterable watchlist of who's actually building mitochondrial medicine." },
+    { t:"Clinical Trials", u:"/trials/", m:`${trials.trials.length} trials`, i:"⚕", d:"Mito-drug trials linked straight to their ClinicalTrials.gov records." },
+    { t:"The VDAC1 Gene & Expression", u:"/gene/", m:"sequence + GTEx", i:"⌗", d:"The gene, its 283-amino-acid protein, and where in the body it's switched on." },
+    { t:"VDAC1 Disease Body Map", u:"/diseases/", m:`${diseases.regions.length} organs`, i:"◉", d:"Where VDAC1 goes wrong across the body — each organ linked to a key paper." },
+    { t:"VDAC1 & Mitochondria Resources", u:"/resources/", m:"curated links", i:"❑", d:"The reviews, databases and labs I keep coming back to." },
+    { t:"About — the mission", u:"/about/", m:"who & why", i:"✎", d:"PSEN1 carrier, x-tosis co-founder, full-time mitochondria nerd." }
   ];
   const content = `<div class="hero"><div class="wrap">
       <div>
         <p class="eyebrow">${cfg.hero.eyebrow}</p>
         <h1>${cfg.hero.titleHtml}</h1>
         <p class="lead">${cfg.hero.lead}</p>
+        <div class="hero-cta">
+          <a class="btn-primary" href="/mitohealth/">★ Browse the Health Ratings</a>
+          <a class="btn-ghost" href="/about/">Why I'm building this →</a>
+        </div>
         <div class="tagpills">
           <span class="pill t1">VDAC1</span><span class="pill t2">mitochondria</span>
-          <span class="pill t3">mtDNA + inflammation</span><span class="pill t4">VBIT-4 / VBIT-12</span>
-          <span class="pill t1">mitophagy</span>
+          <span class="pill t3">mtDNA + inflammation</span><span class="pill t4">mitophagy</span>
         </div>
       </div>
       <div class="hero-art"><img src="/assets/images/mito.svg" alt="Cross-section of a mitochondrion with VDAC1 pores"></div>
     </div></div>
     <main><div class="wrap">
+      <section class="flagship">
+        <a class="flag-card" href="/mitohealth/">
+          <div class="flag-body">
+            <span class="flag-tag">★ the heart of the site</span>
+            <h2>Mitochondrial Health Ratings</h2>
+            <p>${mitohealth.items.length} interventions — foods, drugs, supplements and lifestyle pillars like sleep, exercise, fasting, sauna and light — each graded for <b>evidence</b>, <b>benefit</b> and <b>safety</b>, and linked to the research. The honest, filterable database I wish existed. This is the one to start with.</p>
+            <span class="flag-cta">Explore the ratings →</span>
+          </div>
+          <div class="flag-stat"><b>${mitohealth.items.length}</b><span>interventions<br>graded</span></div>
+        </a>
+      </section>
       <section>
-        <h2><span class="num">01</span>Find your way around</h2>
+        <h2><span class="num">01</span>Everything else, at a glance</h2>
         <p class="section-sub">Everything here in one glance — pick a door. New? The <a href="${primer.url}">5-minute VDAC1 primer</a> is the gentlest start.</p>
         <div class="sitemap-grid">
           ${teasers.map(x=>`<a class="teaser" href="${x.u}">
