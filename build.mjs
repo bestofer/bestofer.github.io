@@ -92,6 +92,9 @@ function loadCollection(dir, type){
   return fs.readdirSync(d).filter(f=>f.endsWith(".md")).map(f=>{
     const { data, body } = readFrontMatter(fs.readFileSync(path.join(d,f),"utf8"));
     const slug = f.replace(/\.md$/,"");
+    // derive word count + reading time from the body (front matter can override)
+    const words = (body.replace(/[#>*_`\[\]()!-]/g," ").trim().match(/\S+/g)||[]).length;
+    const readMins = Math.max(1, Math.round(words/200));
     return {
       type, slug,
       url: `/${dir}/${slug}/`,
@@ -100,9 +103,10 @@ function loadCollection(dir, type){
       summary: data.summary || "",
       image: data.image || (type==="news" ? "vdac1-barrel.svg" : "mito.svg"),
       bodyHtml: renderMarkdown(body),
+      wordCount: words,
       source: data.source || null,
       kind: data.kind || null,
-      readingTime: data.readingTime || null,
+      readingTime: data.readingTime || `${readMins} min read`,
       viewer3d: !!data.viewer3d,
       format: data.format || "brief",
       contentTypeOverride: data.contentType || null,
@@ -262,11 +266,14 @@ function layout({title, desc, canonical, content, active, hasViewer=false, jsonl
 <meta property="og:description" content="${escAttr(desc)}">
 <meta property="og:url" content="${cfg.baseUrl}${canonical}">
 <meta property="og:image" content="${ogImg}">
+<meta property="og:image:alt" content="${escAttr(title)}">
 ${published?`<meta property="article:published_time" content="${published}">\n<meta property="article:author" content="${escAttr(cfg.author)}">`:""}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${escAttr(title)}">
 <meta name="twitter:description" content="${escAttr(desc)}">
 <meta name="twitter:image" content="${ogImg}">
+<meta name="twitter:image:alt" content="${escAttr(title)}">
+${cfg.twitter?`<meta name="twitter:site" content="${escAttr(cfg.twitter)}">`:""}
 <link rel="alternate" type="application/rss+xml" title="${escAttr(cfg.siteName)}" href="/feed.xml">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -317,13 +324,16 @@ function articlePage(e){
   const kicker = isNews
     ? `news · ${e.source?`${esc(e.source.journal)} ${e.source.year}`:""} · ${fmtDate(e.date)}`
     : `${e.kind||"post"} · ${fmtDate(e.date)}${e.readingTime?` · ${e.readingTime}`:""}`;
+  const mins = Math.max(1, Math.round((e.wordCount||0)/200));
   const jsonld = [{
     "@context":"https://schema.org","@type":"BlogPosting",
     "headline":e.title,"datePublished":e.date,"dateModified":e.date,
-    "author":{"@type":"Person","name":cfg.author},
+    "author":{"@type":"Person","name":cfg.author,"url":`${cfg.baseUrl}/about/`},
     "publisher":{"@type":"Organization","name":cfg.siteName,"url":cfg.baseUrl},
     "mainEntityOfPage":`${cfg.baseUrl}${e.url}`,
     "keywords":e.tags.join(", "),
+    "articleSection":e.type==="news"?"Research news":(e.kind||"Post"),
+    "wordCount":e.wordCount, "timeRequired":`PT${mins}M`, "inLanguage":"en",
     "description":e.summary,
     "image":`${cfg.baseUrl}/assets/images/${e.image}`
   },{
@@ -471,7 +481,11 @@ function newsListing(){
         document.getElementById('ftag').value='';apply();});
       apply();
     })();</script>`;
-  return layout({ title:`News & research — ${cfg.siteName}`, desc:"Recent mitochondria and VDAC1 research summarized in plain language and linked to the source — filterable by domain, category, year and tag.", canonical:"/news/", content, active:"/news/", bodyClass:"wide", image:"vdac1-barrel.svg" });
+  const newsLd = { "@context":"https://schema.org","@type":"CollectionPage","name":"Research news","url":`${cfg.baseUrl}/news/`,
+    "description":"Recent mitochondria and VDAC1 research, summarised and linked to the source.",
+    "isPartOf":{"@type":"WebSite","name":cfg.siteName,"url":`${cfg.baseUrl}/`},
+    "mainEntity":{"@type":"ItemList","numberOfItems":entries.length,"itemListElement":entries.map((e,ix)=>({"@type":"ListItem","position":ix+1,"url":`${cfg.baseUrl}${e.url}`,"name":e.title}))} };
+  return layout({ title:`Research news — ${cfg.siteName}`, desc:"Recent mitochondria and VDAC1 research summarized in plain language and linked to the source — filterable by domain, category, year and tag.", canonical:"/news/", content, active:"/news/", bodyClass:"wide", image:"vdac1-barrel.svg", jsonld:newsLd });
 }
 
 function postsListing(){
@@ -567,7 +581,8 @@ function homePage(){
       "potentialAction":{"@type":"SearchAction","target":`${cfg.baseUrl}/news/?tag={search_term_string}`,"query-input":"required name=search_term_string"} },
     { "@context":"https://schema.org","@type":"Person","name":cfg.author,"email":`mailto:${cfg.email}`,
       "affiliation":{"@type":"Organization","name":cfg.company.name,"url":cfg.company.url},
-      "url":`${cfg.baseUrl}/about/` },
+      "url":`${cfg.baseUrl}/about/`,
+      "sameAs":[cfg.linkedin, cfg.company.url].filter(Boolean) },
     { "@context":"https://schema.org","@type":"Blog","name":cfg.siteName,"url":`${cfg.baseUrl}/`,
       "blogPost": entries.slice(0,10).map(e=>({"@type":"BlogPosting","headline":e.title,"url":`${cfg.baseUrl}${e.url}`,"datePublished":e.date})) }
   ];
@@ -702,7 +717,12 @@ function genePage(){
         <ul class="res-list">${src}</ul>
       </section>
     </div></main>`;
-  return layout({ title:`VDAC1 gene, sequence & expression — ${cfg.siteName}`, desc:"The human VDAC1 gene: genomic location, 283-aa protein sequence, and tissue expression (GTEx v8) — where the channel is switched on.", canonical:"/gene/", content, active:"/gene/", image:"vdac1-barrel.svg" });
+  const geneLd = { "@context":"https://schema.org","@type":"Dataset","name":"VDAC1 gene & tissue expression","url":`${cfg.baseUrl}/gene/`,
+    "description":`Human VDAC1 (${g.symbol}) gene: chromosome ${g.chromosome} locus ${g.locus}, ${g.proteinLength}-aa protein (UniProt ${g.uniprotId}), and median tissue expression from GTEx v8.`,
+    "keywords":"VDAC1, gene expression, GTEx, UniProt, mitochondria","inLanguage":"en","isAccessibleForFree":true,
+    "creator":{"@type":"Person","name":cfg.author},
+    "citation":genetics.sources.map(s=>s.url) };
+  return layout({ title:`VDAC1 gene, sequence & expression — ${cfg.siteName}`, desc:"The human VDAC1 gene: genomic location, 283-aa protein sequence, and tissue expression (GTEx v8) — where the channel is switched on.", canonical:"/gene/", content, active:"/gene/", image:"vdac1-barrel.svg", jsonld:geneLd });
 }
 
 function diseasesPage(){
@@ -829,7 +849,9 @@ function companiesPage(){
       document.getElementById('coclear').addEventListener('click',function(){state={stage:null,moa:null,ind:null};
         document.querySelectorAll('#cofilters .fbtn.on').forEach(function(x){x.classList.remove('on');});apply();});
       apply();})();</script>`;
-  return layout({ title:`Companies to follow — ${cfg.siteName}`, desc:"A filterable watchlist of mitochondrial-medicine companies — by stage, mechanism of action and indication.", canonical:"/companies/", content, active:"/companies/", bodyClass:"wide", image:"mito.svg" });
+  const coLd = { "@context":"https://schema.org","@type":"ItemList","name":"Mitochondrial-medicine companies","numberOfItems":C.length,
+    "itemListElement":C.map((c,ix)=>({"@type":"ListItem","position":ix+1,"item":{"@type":"Organization","name":c.name,"url":c.url}})) };
+  return layout({ title:`Mito-medicine companies to follow — ${cfg.siteName}`, desc:"A filterable watchlist of mitochondrial-medicine companies — by stage, mechanism of action and indication.", canonical:"/companies/", content, active:"/companies/", bodyClass:"wide", image:"mito.svg", jsonld:coLd });
 }
 
 function trialsPage(){
@@ -881,7 +903,9 @@ function trialsPage(){
       document.getElementById('trclear').addEventListener('click',function(){state={moa:null,ind:null};
         document.querySelectorAll('#trfilters .fbtn.on').forEach(function(x){x.classList.remove('on');});apply();});
       apply();})();</script>`;
-  return layout({ title:`Clinical trials — ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov — filter by mechanism and indication.", canonical:"/trials/", content, active:"/trials/", bodyClass:"wide", image:"vdac1-barrel.svg" });
+  const trLd = { "@context":"https://schema.org","@type":"ItemList","name":"Mitochondrial-medicine clinical trials","numberOfItems":T.length,
+    "itemListElement":T.map((t,ix)=>({"@type":"ListItem","position":ix+1,"url":`https://clinicaltrials.gov/study/${t.nct}`,"name":t.title})) };
+  return layout({ title:`Mitochondrial clinical trials — ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov — filter by mechanism and indication.", canonical:"/trials/", content, active:"/trials/", bodyClass:"wide", image:"vdac1-barrel.svg", jsonld:trLd });
 }
 
 function mitoHealthPage(){
@@ -961,7 +985,15 @@ function mitoHealthPage(){
         document.querySelectorAll('#mhf .sortbtn').forEach(function(x){x.classList.toggle('on',x.dataset.sort==='ev');});
         document.getElementById('mhmech').value='';document.getElementById('mhsearch').value='';apply();});
       apply();})();</script>`;
-  return layout({ title:`Mitochondrial health ratings — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits that affect mitochondrial health — rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/mitohealth/", bodyClass:"wide", image:"mito.svg" });
+  const mhLd = [
+    { "@context":"https://schema.org","@type":"Dataset","name":"Mitochondrial Health Ratings","url":`${cfg.baseUrl}/mitohealth/`,
+      "description":M.intro.slice(0,320),"keywords":M.categories.join(", "),"inLanguage":"en",
+      "creator":{"@type":"Person","name":cfg.author,"url":`${cfg.baseUrl}/about/`},
+      "variableMeasured":["evidence quality","benefit to mitochondria","safety"],"isAccessibleForFree":true },
+    { "@context":"https://schema.org","@type":"ItemList","name":"Mitochondrial health interventions","numberOfItems":M.items.length,
+      "itemListElement":M.items.map((i,ix)=>({"@type":"ListItem","position":ix+1,"name":i.name})) }
+  ];
+  return layout({ title:`Mitochondrial Health Ratings — ${M.items.length} interventions, graded — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits (sleep, exercise, fasting, sauna and more) that affect mitochondrial health — each rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/mitohealth/", bodyClass:"wide", image:"ratings.svg", jsonld:mhLd });
 }
 
 /* ---------------- feeds ---------------- */
