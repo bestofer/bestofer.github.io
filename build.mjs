@@ -528,8 +528,12 @@ function homePage(){
           <a class="btn-ghost" href="/about/">Why I'm building this →</a>
         </div>
         <div class="tagpills">
-          <span class="pill t1">health ratings</span><span class="pill t2">exercise · sleep · fasting</span>
-          <span class="pill t3">supplements</span><span class="pill t4">VDAC1</span><span class="pill t1">mitophagy</span>
+          <a class="pill t1" href="/mitohealth/">health ratings</a>
+          <a class="pill t2" href="/tags/${slugify("mitochondria")}/">mitochondria</a>
+          <a class="pill t3" href="/tags/${slugify("VDAC1")}/">VDAC1</a>
+          <a class="pill t4" href="/tags/${slugify("mitophagy")}/">mitophagy</a>
+          <a class="pill t1" href="/tags/${slugify("VBIT")}/">VBIT</a>
+          <a class="pill t2" href="/tags/${slugify("neurodegeneration")}/">neurodegeneration</a>
         </div>
       </div>
       <div class="hero-art"><img src="/assets/images/mito.svg" alt="Cross-section of a mitochondrion with VDAC1 pores"></div>
@@ -631,7 +635,7 @@ function aboutPage(){
     <main><div class="wrap"><div class="about-grid">
       <div class="about-body">${renderMarkdown(body)}</div>
       <aside class="about-card">
-        <img src="/assets/images/portrait.svg" alt="${escAttr(cfg.author)}">
+        <img src="/assets/images/${["portrait.jpg","portrait.jpeg","portrait.png","portrait.webp"].find(f=>fs.existsSync(path.join(ASSETS,"images",f)))||"portrait.svg"}" alt="${escAttr(cfg.author)}">
         <div class="info"><b>${cfg.author}</b><br>mitochondria obsessive<br><br>
         ◇ PSEN1 carrier<br>◇ co-founder, <a href="${cfg.company.url}" target="_blank" rel="noopener">${cfg.company.name}</a><br>
         ◇ writes <a href="/">${cfg.siteName}</a><br><br>
@@ -925,12 +929,12 @@ function mitoHealthPage(){
     <div class="mh-links">${(i.links||[]).map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}</div>
   </article>`;
   const chip = (grp,val)=>`<button class="fbtn" data-group="${grp}" data-val="${escAttr(val)}">${esc(val)}</button>`;
-  const content = `<div class="hero mh-hero"><div class="wrap"><div>
+  const content = `<div class="hero mh-hero mh-hero-solo"><div class="wrap"><div>
       <p class="eyebrow">★ the heart of the site · evidence-graded</p>
       <h1>Mitochondrial health ratings</h1>
       <p class="lead">${esc(M.intro)}</p>
       <p class="mh-herostat"><b>${M.items.length}</b> interventions · <b>${M.categories.length}</b> categories · rated for evidence, benefit &amp; safety</p>
-    </div><div class="hero-art"><img src="/assets/images/ratings.svg" alt="Sample rating bars: exercise and creatine rated strong, sauna moderate, cold preliminary, smoking harmful"></div></div></div>
+    </div></div></div>
     <main><div class="wrap">
       <details class="mh-method"><summary>How to read these ratings (and the honest caveats)</summary>
         <p>${esc(M.methodology)}</p>
@@ -993,7 +997,7 @@ function mitoHealthPage(){
     { "@context":"https://schema.org","@type":"ItemList","name":"Mitochondrial health interventions","numberOfItems":M.items.length,
       "itemListElement":M.items.map((i,ix)=>({"@type":"ListItem","position":ix+1,"name":i.name})) }
   ];
-  return layout({ title:`Mitochondrial Health Ratings — ${M.items.length} interventions, graded — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits (sleep, exercise, fasting, sauna and more) that affect mitochondrial health — each rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/mitohealth/", bodyClass:"wide", image:"ratings.svg", jsonld:mhLd });
+  return layout({ title:`Mitochondrial Health Ratings — ${M.items.length} interventions, graded — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits (sleep, exercise, fasting, sauna and more) that affect mitochondrial health — each rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/mitohealth/", bodyClass:"wide", image:"mito.svg", jsonld:mhLd });
 }
 
 /* ---------------- feeds ---------------- */

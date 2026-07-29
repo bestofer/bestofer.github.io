@@ -45,6 +45,8 @@ nav.main a:hover,nav.main a.active{color:var(--paper);background:var(--ink);text
 .tagpills{display:flex;flex-wrap:wrap;gap:9px;}
 .pill{font-family:var(--mono);font-size:0.74rem;text-transform:uppercase;letter-spacing:0.5px;background:var(--paper);border:2px solid var(--line);color:var(--ink);padding:4px 10px;border-radius:999px;}
 .pill.t1{background:#d6f5f0;} .pill.t2{background:#ffe0d6;} .pill.t3{background:#ffeecb;} .pill.t4{background:#f0ebff;}
+a.pill{cursor:pointer;transition:transform .1s,box-shadow .1s;}
+a.pill:hover{text-decoration:none;color:#fff;background:var(--ink);border-color:var(--ink);box-shadow:var(--shadow-sm);transform:translateY(-1px);}
 
 /* sections */
 main{padding:46px 0 80px;}
@@ -176,6 +178,7 @@ article.full blockquote{border-left:6px solid var(--coral);margin:22px 0;padding
 }
 /* ===== mitochondrial health ratings — its own look ===== */
 .mh-hero{background:linear-gradient(120deg,#eef7f5,#f3f0ff);}
+.mh-hero-solo .wrap{grid-template-columns:1fr;}
 .mh-herostat{font-family:var(--mono);font-size:0.86rem;color:var(--ink);margin:14px 0 0;border-top:2px solid var(--line);padding-top:12px;display:inline-block;}
 .mh-herostat b{color:var(--teal);font-size:1.05rem;}
 .mh-method{border:2px solid var(--line);background:var(--paper);margin-bottom:20px;}

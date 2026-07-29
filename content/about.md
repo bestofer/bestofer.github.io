@@ -32,5 +32,5 @@ Three things, mostly: [news](/news/) — recent papers summarized in plain words
 I write casually on purpose. It's a passion project, not a journal submission. If I get something wrong — and I will — please tell me. Half the fun is being corrected by people who know more.
 
 ::: callout
-**Say hi.** I genuinely like hearing from people — researchers, fellow carriers, patients, the merely curious. [ofershina@gmail.com](mailto:ofershina@gmail.com).
+**Say hi.** I genuinely like hearing from people — researchers, fellow carriers, patients, the merely curious. [shinaoffer@gmail.com](mailto:shinaoffer@gmail.com).
 :::
