@@ -950,7 +950,7 @@ function mitoHealthPage(){
   const dial = (label,val,kind)=> `<span class="dial ${cls(kind,val)}"><b>${label}</b>${esc(val)}</span>`;
   const card = (i,ix)=>{
     const cid = `mhc-${ix}`;
-    return `<article class="mh-card dir-${i.direction}" data-cat="${escAttr(i.category)}" data-ev="${escAttr(i.evidence)}" data-dir="${i.direction}" data-mech="${(i.tags||[]).map(slugify).join(" ")}" data-name="${escAttr(i.name.toLowerCase())}" data-evrank="${evRank[i.evidence]||0}">
+    return `<article class="mh-card dir-${i.direction}" data-cat="${escAttr(i.category)}" data-ev="${escAttr(i.evidence)}" data-ben="${escAttr(i.benefit)}" data-dir="${i.direction}" data-mech="${(i.tags||[]).map(slugify).join(" ")}" data-name="${escAttr(i.name.toLowerCase())}" data-evrank="${evRank[i.evidence]||0}">
     <h3 class="mh-h3"><button class="mh-toggle" aria-expanded="false" aria-controls="${cid}">
       ${mhPhoto(i)}
       <span class="mh-body">
@@ -971,7 +971,6 @@ function mitoHealthPage(){
   };
   const chip = (grp,val)=>`<button class="fbtn" data-group="${grp}" data-val="${escAttr(val)}">${esc(val)}</button>`;
   const content = `<div class="hero mh-hero mh-hero-solo"><div class="wrap"><div>
-      <p class="eyebrow">★ the heart of the site · evidence-graded</p>
       <h1>Mitochondrial health ratings</h1>
       <p class="lead">${esc(M.intro)}</p>
       <p class="mh-herostat"><b>${M.items.length}</b> interventions · <b>${M.categories.length}</b> categories · rated for evidence, benefit &amp; safety</p>
@@ -989,9 +988,9 @@ function mitoHealthPage(){
       <div class="sidebar-wrap">
         <aside class="sidebar" id="side-filters"><div class="filters mh-filters" id="mhf">
         <div class="fgroup fgrow"><input type="search" id="mhsearch" placeholder="search interventions… (e.g. sauna, NAD, omega-3)"></div>
+        <div class="fgroup"><span class="flabel">benefit</span>${M.ratingScale.benefit.map(b=>chip("ben",b)).join("")}</div>
         <div class="fgroup"><span class="flabel">category</span>${cats.map(c=>chip("cat",c)).join("")}</div>
         <div class="fgroup"><span class="flabel">evidence</span>${evLevels.map(e=>chip("ev",e)).join("")}</div>
-        <div class="fgroup"><span class="flabel">direction</span>${chip("dir","help")}${chip("dir","mixed")}${chip("dir","harm")}</div>
         <div class="fgroup"><span class="flabel">mechanism</span><select id="mhmech"><option value="">any</option>${mechs.map(m=>`<option value="${slugify(m)}">${esc(m)}</option>`).join("")}</select></div>
         <div class="fgroup"><span class="flabel">sort</span><button class="fbtn sortbtn on" data-sort="ev">strongest evidence</button><button class="fbtn sortbtn" data-sort="az">A–Z</button></div>
         <div class="fgroup"><button class="fbtn clear" id="mhclear">✕ clear</button><span id="mhcount" class="fcount"></span></div>
@@ -1007,11 +1006,11 @@ function mitoHealthPage(){
       </details>
     </div></main>
     <script>(function(){var grid=document.getElementById('mhgrid');var cards=[].slice.call(grid.children);
-      var st={cat:null,ev:null,dir:null,mech:'',q:'',sort:'ev'};
+      var st={cat:null,ev:null,ben:null,mech:'',q:'',sort:'ev'};
       function apply(){var n=0;cards.forEach(function(c){var ok=true;
         if(st.cat&&c.dataset.cat!==st.cat)ok=false;
         if(st.ev&&c.dataset.ev!==st.ev)ok=false;
-        if(st.dir&&c.dataset.dir!==st.dir)ok=false;
+        if(st.ben&&c.dataset.ben!==st.ben)ok=false;
         if(st.mech&&(' '+c.dataset.mech+' ').indexOf(' '+st.mech+' ')<0)ok=false;
         if(st.q&&c.dataset.name.indexOf(st.q)<0)ok=false;
         c.style.display=ok?'':'none';if(ok)n++;});
@@ -1028,7 +1027,7 @@ function mitoHealthPage(){
       document.querySelectorAll('#mhf .sortbtn').forEach(function(b){b.addEventListener('click',function(){st.sort=b.dataset.sort;document.querySelectorAll('#mhf .sortbtn').forEach(function(x){x.classList.toggle('on',x===b);});apply();});});
       document.getElementById('mhmech').addEventListener('change',function(e){st.mech=e.target.value;apply();});
       document.getElementById('mhsearch').addEventListener('input',function(e){st.q=e.target.value.toLowerCase().trim();apply();});
-      document.getElementById('mhclear').addEventListener('click',function(){st={cat:null,ev:null,dir:null,mech:'',q:'',sort:'ev'};
+      document.getElementById('mhclear').addEventListener('click',function(){st={cat:null,ev:null,ben:null,mech:'',q:'',sort:'ev'};
         document.querySelectorAll('#mhf .fbtn.on').forEach(function(x){if(!x.classList.contains('sortbtn'))x.classList.remove('on');});
         document.querySelectorAll('#mhf .sortbtn').forEach(function(x){x.classList.toggle('on',x.dataset.sort==='ev');});
         document.getElementById('mhmech').value='';document.getElementById('mhsearch').value='';apply();});
