@@ -539,7 +539,7 @@ function homePage(){
     { t:"The VDAC1 Gene & Expression", u:"/gene/", m:"sequence + GTEx", i:"⌗", d:"The gene, its 283-amino-acid protein, and where in the body it's switched on." },
     { t:"VDAC1 Disease Body Map", u:"/diseases/", m:`${diseases.regions.length} organs`, i:"◉", d:"Where VDAC1 goes wrong across the body, each organ linked to a key paper." },
     { t:"VDAC1 & Mitochondria Resources", u:"/resources/", m:"curated links", i:"❑", d:"The reviews, databases and labs I keep coming back to." },
-    { t:"About & methodology", u:"/about/", m:"how ratings work", i:"✎", d:"Who curates this guide and the evidence standards behind every rating." }
+    { t:"About me", u:"/about/", m:"who & why", i:"✎", d:"PSEN1 carrier, x-tosis co-founder, and why this whole site exists." }
   ];
   const content = `<div class="hero"><div class="wrap">
       <div>
@@ -665,7 +665,7 @@ function aboutPage(){
         <a href="mailto:${cfg.email}">${cfg.email}</a>${cfg.linkedin?`<br><a href="${cfg.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a>`:""}</div>
       </aside>
     </div></div></main>`;
-  return layout({ title:`About & methodology, ${cfg.siteName}`, desc:"Who curates this guide, how ratings get graded, and the evidence standards behind every entry.", canonical:"/about/", content, active:"/about/", image:"mito.svg" });
+  return layout({ title:`About, ${cfg.siteName}`, desc:`${cfg.author}, PSEN1 carrier, co-founder at ${cfg.company.name}, on why this site exists and how the ratings get graded.`, canonical:"/about/", content, active:"/about/", image:"mito.svg" });
 }
 
 function tagIndexPage(){
@@ -935,27 +935,28 @@ function trialsPage(){
   return layout({ title:`Mitochondrial clinical trials, ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov, filter by mechanism and indication.", canonical:"/trials/", content, active:"/trials/", bodyClass:"wide", image:"vdac1-barrel.svg", jsonld:trLd });
 }
 
-/* per-category icon badges for the mito-health ratings grid */
-const MH_ICON = {
-  "Exercise": { color:"#0e9488", glyph:'<circle cx="15" cy="22" r="4"/><circle cx="29" cy="22" r="4"/><line x1="19" y1="22" x2="25" y2="22"/>' },
-  "Foods & Drink": { color:"#f0603a", glyph:'<path d="M22 14c-6 0-9 5-9 11 0 6 4 10 9 10s9-4 9-10c0-6-3-11-9-11z"/><path d="M22 14c0-3 2-5 4-5" fill="none"/>' },
-  "Supplements": { color:"#6b4df0", glyph:'<rect x="12" y="18" width="20" height="10" rx="5" transform="rotate(-30 22 23)"/><line x1="22" y1="16" x2="22" y2="30" stroke="#6b4df0" stroke-width="2" transform="rotate(-30 22 23)"/>' },
-  "Drugs": { color:"#e5397f", glyph:'<rect x="15" y="12" width="14" height="20" rx="2"/><rect x="17" y="8" width="10" height="6" rx="1"/><line x1="22" y1="18" x2="22" y2="26" stroke="#e5397f" stroke-width="2"/><line x1="18" y1="22" x2="26" y2="22" stroke="#e5397f" stroke-width="2"/>' },
-  "Fasting / TRE": { color:"#f5a524", glyph:'<circle cx="22" cy="23" r="10" fill="none" stroke="#fff" stroke-width="2.5"/><line x1="22" y1="23" x2="22" y2="16" stroke="#fff" stroke-width="2.5"/><line x1="22" y1="23" x2="27" y2="25" stroke="#fff" stroke-width="2.5"/>' },
-  "Ketogenic diet": { color:"#2ff3d0", glyph:'<ellipse cx="22" cy="22" rx="9" ry="12"/><ellipse cx="22" cy="24" rx="3.5" ry="5" fill="#2ff3d0"/>' },
-  "Sleep": { color:"#4a4a58", glyph:'<path d="M27 14a10 10 0 1 0 8 16 10 10 0 0 1-8-16z"/>' },
-  "Stress management": { color:"#0e9488", glyph:'<path d="M11 24c2-6 4 6 6 0s4-6 6 0 4 6 6 0 4-6 4 0" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/>' },
-  "Sunlight & Circadian": { color:"#f5a524", glyph:'<circle cx="22" cy="23" r="6"/><g stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="22" y1="9" x2="22" y2="12"/><line x1="22" y1="34" x2="22" y2="37"/><line x1="9" y1="23" x2="12" y2="23"/><line x1="32" y1="23" x2="35" y2="23"/><line x1="13" y1="14" x2="15" y2="16"/><line x1="29" y1="30" x2="31" y2="32"/><line x1="31" y1="14" x2="29" y2="16"/><line x1="15" y1="30" x2="13" y2="32"/></g>' },
-  "Light therapy": { color:"#f5a524", glyph:'<circle cx="22" cy="19" r="8" fill="none" stroke="#fff" stroke-width="2.3"/><line x1="19" y1="30" x2="25" y2="30" stroke="#fff" stroke-width="2.3"/><line x1="20" y1="34" x2="24" y2="34" stroke="#fff" stroke-width="2.3"/>' },
-  "Heat (Sauna)": { color:"#f0603a", glyph:'<path d="M22 12c-4 6-7 8-7 13a7 7 0 0 0 14 0c0-3-2-4-2-7-2 3-3 3-3 1 0-2 1-3-2-7z"/>' },
-  "Cold exposure": { color:"#57b6ff", glyph:'<g stroke="#fff" stroke-width="2.2" stroke-linecap="round"><line x1="22" y1="11" x2="22" y2="35"/><line x1="12" y1="16" x2="32" y2="30"/><line x1="12" y1="30" x2="32" y2="16"/></g>' },
-  "Social connection": { color:"#e5397f", glyph:'<circle cx="17" cy="20" r="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="27" cy="20" r="5" fill="none" stroke="#fff" stroke-width="2"/><path d="M12 33c0-4 3-7 7-7M32 33c0-4-3-7-7-7" fill="none" stroke="#fff" stroke-width="2"/>' },
-  "Cognitive training": { color:"#6b4df0", glyph:'<path d="M22 12c5 0 8 3 8 7 0 2-1 3-1 5 0 3 2 3 2 6 0 3-3 4-5 4-1 2-3 2-4 2-4 0-7-3-7-7 0-2 1-3 0-5-2-1-3-3-3-5 0-4 4-7 10-7z" fill="none" stroke="#fff" stroke-width="2"/><line x1="22" y1="16" x2="22" y2="30" stroke="#fff" stroke-width="1.6"/>' },
-  "Environmental factors": { color:"#0e9488", glyph:'<path d="M28 13c-9 0-15 6-15 14 0 3 1 5 1 5s2-8 9-10c-4 4-4 8-4 8s9-1 11-9c1-4 1-6-2-8z"/>' }
+/* per-category real photographs for the mito-health ratings grid, sourced from Wikimedia Commons */
+const MH_PHOTO = {
+  "Exercise": { file:"exercise.jpg", credit:"Morning Jog", author:"Wikimedia Commons", license:"CC0", src:"https://commons.wikimedia.org/wiki/File:Morning_Jog.jpg" },
+  "Foods & Drink": { file:"foods.jpg", credit:"Cut Vegetable", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Cut_Vegetable.jpg" },
+  "Supplements": { file:"supplements.jpg", credit:"Vitamin B12 capsule", author:"Wikimedia Commons", license:"CC0", src:"https://commons.wikimedia.org/wiki/File:Vitamin_B12_capsule.jpg" },
+  "Drugs": { file:"drugs.jpg", credit:"Pills and medicines", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Pills_and_medicines_01.jpg" },
+  "Fasting / TRE": { file:"fasting.jpg", credit:"Empty plate with fork", author:"Wikimedia Commons", license:"CC BY 4.0", src:"https://commons.wikimedia.org/wiki/File:Empty_plate_with_fork.jpg" },
+  "Ketogenic diet": { file:"keto.jpg", credit:"Avocado Hass, single and halved", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Avocado_Hass_-_single_and_halved.jpg" },
+  "Sleep": { file:"sleep.jpg", credit:"Empty bed with pillows", author:"Wikimedia Commons", license:"CC BY-SA 3.0", src:"https://commons.wikimedia.org/wiki/File:Door_open;_empty_bed_with_pillow_and_side_pillow_01.jpg" },
+  "Stress management": { file:"stress.jpg", credit:"Meditation Focus Point", author:"Wikimedia Commons", license:"CC0", src:"https://commons.wikimedia.org/wiki/File:Meditation_Focus_Point.jpg" },
+  "Sunlight & Circadian": { file:"circadian.jpg", credit:"Sunrise at Viru bog", author:"Wikimedia Commons", license:"CC BY-SA 3.0", src:"https://commons.wikimedia.org/wiki/File:Sunrise_at_viru_bog.jpg" },
+  "Light therapy": { file:"light.jpg", credit:"Light therapy lamp and sunlight", author:"Wikimedia Commons", license:"Public domain", src:"https://commons.wikimedia.org/wiki/File:Light_therapy_lamp_and_sunlight.jpg" },
+  "Heat (Sauna)": { file:"sauna.jpg", credit:"Sauna stove and bench", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Sauna_keris_ja_lava.jpg" },
+  "Cold exposure": { file:"cold.jpg", credit:"Taking a cold bath", author:"Wikimedia Commons", license:"CC BY-SA 2.0", src:"https://commons.wikimedia.org/wiki/File:Resting_on_thin_ice,_or_taking_a_cold_bath!_-_geograph.org.uk_-_5237892.jpg" },
+  "Social connection": { file:"social.jpg", credit:"Two friends chatting and laughing", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Two_friends_sitting_together,_chatting_and_laughing.jpg" },
+  "Cognitive training": { file:"cognitive.jpg", credit:"Chess game in Kenya", author:"Wikimedia Commons", license:"CC BY-SA 4.0", src:"https://commons.wikimedia.org/wiki/File:Chess_game_in_kenya.jpg" },
+  "Environmental factors": { file:"environment.jpg", credit:"Black Forest National Park path", author:"Wikimedia Commons", license:"CC BY-SA 3.0", src:"https://commons.wikimedia.org/wiki/File:Lothar_Path_-_Black_Forest_National_Park_-_Root_plate_01.jpg" }
 };
-function mhIconSvg(category){
-  const ic = MH_ICON[category] || { color:"#4a4a58", glyph:'<circle cx="22" cy="22" r="8" fill="none" stroke="#fff" stroke-width="2"/>' };
-  return `<svg class="mh-icon" viewBox="0 0 44 44" role="img" aria-label="${escAttr(category)}"><rect width="44" height="44" rx="10" fill="${ic.color}"/><g fill="#fff">${ic.glyph}</g></svg>`;
+function mhPhoto(category){
+  const p = MH_PHOTO[category];
+  if(!p) return `<span class="mh-photo mh-photo-none" aria-hidden="true"></span>`;
+  return `<span class="mh-photo"><img src="/assets/images/mh/${p.file}" alt="" loading="lazy" width="640" height="426"></span>`;
 }
 
 function mitoHealthPage(){
@@ -967,23 +968,22 @@ function mitoHealthPage(){
   const cls = (kind,val)=> `${kind}-${slugify(val)}`;
   const dial = (label,val,kind)=> `<span class="dial ${cls(kind,val)}"><b>${label}</b>${esc(val)}</span>`;
   const card = (i,ix)=>{
-    const teaser = (i.summary.match(/^[^.]+\./)||[i.summary])[0];
-    const rest = i.summary.slice(teaser.length).trim();
     const cid = `mhc-${ix}`;
     return `<article class="mh-card dir-${i.direction}" data-cat="${escAttr(i.category)}" data-ev="${escAttr(i.evidence)}" data-dir="${i.direction}" data-mech="${(i.tags||[]).map(slugify).join(" ")}" data-name="${escAttr(i.name.toLowerCase())}" data-evrank="${evRank[i.evidence]||0}">
-    <h3 class="mh-heading"><button class="mh-toggle" aria-expanded="false" aria-controls="${cid}">
-      ${mhIconSvg(i.category)}
-      <span class="mh-toptext">
-        <span class="mh-top"><span class="mh-cat">${esc(i.category)}</span>${i.direction==="harm"?`<span class="mh-harm">harms mito</span>`:i.direction==="mixed"?`<span class="mh-mixed">double-edged</span>`:""}</span>
-        <span class="mh-name">${esc(i.name)}</span>
+    <h3 class="mh-h3"><button class="mh-toggle" aria-expanded="false" aria-controls="${cid}">
+      ${mhPhoto(i.category)}
+      <span class="mh-body">
+        <span class="mh-heading">
+          <span class="mh-top"><span class="mh-cat">${esc(i.category)}</span>${i.direction==="harm"?`<span class="mh-harm">harms mito</span>`:i.direction==="mixed"?`<span class="mh-mixed">double-edged</span>`:""}</span>
+          <span class="mh-name">${esc(i.name)}</span>
+        </span>
+        <span class="dials">${dial("Evidence",i.evidence,"ev")}${dial("Benefit",i.benefit,"ben")}${dial("Safety",i.safety,"saf")}</span>
+        <span class="mh-hint"><span class="mh-hint-txt">Tap to read the evidence</span><span class="mh-caret" aria-hidden="true">+</span></span>
       </span>
-      <span class="mh-caret" aria-hidden="true">+</span>
     </button></h3>
-    <div class="dials">${dial("Evidence",i.evidence,"ev")}${dial("Benefit",i.benefit,"ben")}${dial("Safety",i.safety,"saf")}</div>
-    <p class="mh-teaser">${esc(teaser)}</p>
     <div class="mh-more" id="${cid}">
       <div class="mh-mech">${esc(i.mech)}</div>
-      ${rest?`<p>${esc(rest)}</p>`:""}
+      <p>${esc(i.summary)}</p>
       <div class="mh-links">${(i.links||[]).map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}</div>
     </div>
   </article>`;
@@ -1021,6 +1021,9 @@ function mitoHealthPage(){
         </div>
       </div>
       <p class="mh-foot">This is a synthesis for orientation, not medical advice. Evidence for many mitochondrial-specific effects is indirect; ratings reflect the best available human data plus mechanism. Found a strong study I'm missing? <a href="mailto:${cfg.email}">tell me</a>.</p>
+      <details class="mh-credits"><summary>Photo credits</summary>
+        <ul>${Object.entries(MH_PHOTO).map(([cat,p])=>`<li>${esc(cat)}: <a href="${p.src}" target="_blank" rel="noopener">${esc(p.credit)}</a>, ${esc(p.author)}, ${esc(p.license)}</li>`).join("")}</ul>
+      </details>
     </div></main>
     <script>(function(){var grid=document.getElementById('mhgrid');var cards=[].slice.call(grid.children);
       var st={cat:null,ev:null,dir:null,mech:'',q:'',sort:'ev'};
