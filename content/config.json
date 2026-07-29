@@ -6,6 +6,12 @@
   "company": { "name": "x-tosis", "url": "https://x-tosis.com", "descriptor": "VDAC1-focused neurodegeneration biotech, Gainesville FL" },
   "linkedin": "https://www.linkedin.com/in/offer-shina-a96706150/",
   "baseUrl": "https://ilovemitochondria.com",
+  "customDomain": "ilovemitochondria.com",
+  "analytics": {
+    "ga4": "",
+    "cfBeacon": "",
+    "googleSiteVerification": ""
+  },
   "description": "A personal blog by Offer Shina about mitochondria and VDAC1 — the science, the news, and why a PSEN1 carrier can't stop reading about it.",
   "nav": [
     { "label": "Home", "url": "/" },

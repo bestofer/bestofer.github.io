@@ -243,6 +243,28 @@ box.addEventListener('click',function(e){if(e.target===box)hide();});
 b.addEventListener('click',function(){var open=n.classList.toggle('open');b.setAttribute('aria-expanded',open?'true':'false');});})();</script>`;
 }
 
+/* ---------------- analytics ----------------
+   Config-driven. Empty/missing values emit nothing, so local builds stay clean.
+   content/config.json → "analytics": { "ga4": "G-XXXXXXX", "cfBeacon": "<token>" } */
+function analyticsHead(){
+  const a = cfg.analytics || {};
+  let out = "";
+  if(a.ga4){
+    out += `\n<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>` +
+      `\n<script async src="https://www.googletagmanager.com/gtag/js?id=${escAttr(a.ga4)}"></script>` +
+      `\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}` +
+      `gtag('js',new Date());gtag('config','${escAttr(a.ga4)}',{anonymize_ip:true});</script>`;
+  }
+  if(a.cfBeacon){
+    out += `\n<script defer src="https://static.cloudflareinsights.com/beacon.min.js" ` +
+      `data-cf-beacon='{"token":"${escAttr(a.cfBeacon)}"}'></script>`;
+  }
+  if(a.googleSiteVerification){
+    out += `\n<meta name="google-site-verification" content="${escAttr(a.googleSiteVerification)}">`;
+  }
+  return out;
+}
+
 function layout({title, desc, canonical, content, active, hasViewer=false, jsonld=null, image, ogType="website", published=null, bodyClass=""}){
   const ogImg = `${cfg.baseUrl}/assets/images/${image||"mito.svg"}`;
   const ld = (Array.isArray(jsonld) ? jsonld : (jsonld?[jsonld]:[]))
@@ -281,6 +303,7 @@ ${cfg.twitter?`<meta name="twitter:site" content="${escAttr(cfg.twitter)}">`:""}
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
 ${ld}
+${analyticsHead()}
 </head>
 <body${bodyClass?` class="${bodyClass}"`:""}>
 ${header(active)}
@@ -1087,6 +1110,7 @@ writeFile("sitemap.xml", sitemap());
 writeFile("feed.xml", rss());
 writeFile("robots.txt", robots);
 writeFile(".nojekyll", "");   // tell GitHub Pages not to run Jekyll
+if(cfg.customDomain) writeFile("CNAME", cfg.customDomain + "\n");  // GitHub Pages custom domain
 writeFile("404.html", notFoundPage());
 
 const pages = 11 + entries.length + tagMap.size;
