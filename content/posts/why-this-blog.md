@@ -6,31 +6,25 @@
   "kind": "personal",
   "readingTime": "4 min read",
   "image": "mito.svg",
-  "summary": "The origin story of this blog — a genetic result, the amyloid-vs-energy argument in Alzheimer's, and the hunch that mitochondria are doing more of the driving than we give them credit for."
+  "summary": "The origin story of this blog, a genetic result, the amyloid-vs-energy argument in Alzheimer's, and the hunch that mitochondria are doing more of the driving than we give them credit for."
 }
 ---
-Every blog like this has an origin story. Mine starts with a genetic test result and a decision about what to do with it.
+A genetic test result is what started this. Here's the reasoning that followed it, and why it ends at one specific mitochondrial protein.
 
 ## The result
-I'm a **PSEN1 carrier**. PSEN1 is one of the genes associated with early-onset familial Alzheimer's disease. Learning that about yourself does something strange to your relationship with time — and, if you're wired the way I am, it makes you want to *understand*. Not just "what happens," but "why, mechanically, and where in that chain is there anything to grab onto?"
+**PSEN1** is one of the genes associated with early-onset familial Alzheimer's disease. Carrying it does something strange to your relationship with time, and it raises an obvious question: not just "what happens," but "why, mechanically, and where in that chain is there anything to grab onto?" That question is what turned into this project.
 
-I could have looked away. I chose to read instead. Reading turned into a project, and the project turned into this blog.
-
-## The thing that kept bugging me
-The dominant story of Alzheimer's for decades has been about **amyloid** — the plaques. Important story. But the more I read, the more I kept tripping over a quieter one: the **energy** story. Neurons are ferociously demanding cells. They run on mitochondria. And in Alzheimer's brains, mitochondrial dysfunction shows up early and often.
+## The thing worth questioning
+The dominant story of Alzheimer's for decades has been about **amyloid**, the plaques. It's an important story. But a quieter one keeps getting overshadowed: the **energy** story. Neurons are ferociously demanding cells. They run on mitochondria. In Alzheimer's brains, mitochondrial dysfunction shows up early and often.
 
 > You can't run the most energy-hungry cells in the body on failing power plants and expect nothing to go wrong.
 
-PSEN1 itself turns out to touch mitochondrial biology and calcium handling, not just amyloid. The neat wall between "the amyloid disease" and "the energy disease" started to look a lot more porous the deeper I went.
+PSEN1 itself touches mitochondrial biology and calcium handling, not just amyloid processing. The neat wall between "the amyloid disease" and "the energy disease" turns out to be a lot more porous than the standard narrative suggests.
 
-## How I landed on VDAC1
-Once you're following the energy thread, you keep arriving at the mitochondrial outer membrane — and at its busiest doorway, **VDAC1**. It sits exactly where metabolism, calcium and cell-death decisions intersect. When mitochondria are stressed, VDAC1 is part of how they leak, how they trigger death, and how they set off inflammation by releasing mtDNA.
+## How the trail leads to VDAC1
+Follow the energy thread and you keep arriving at the mitochondrial outer membrane, at its busiest doorway: **VDAC1**. It sits exactly where metabolism, calcium and cell-death decisions intersect. When mitochondria are stressed, VDAC1 is part of how they leak, how they trigger death, and how they set off inflammation by releasing mtDNA.
 
-For someone worried about a disease where neurons are stressed, leaking, dying and inflaming — VDAC1 is standing right at the scene of the crime in each of those. I didn't set out to care about a specific pore. I followed the mechanism and it kept pointing here. Then came the hook that made it more than academic: the [VBIT compounds](/posts/vbit-4-and-vbit-12/).
+In a disease where neurons are stressed, leaking, dying and inflaming, VDAC1 is standing at the scene of the crime in each of those steps. What makes it more than an academic curiosity is that the mechanism is now druggable: see the [VBIT compounds](/posts/vbit-4-and-vbit-12/).
 
-## What I want this blog to be
-Not a journal. Not a hype machine. Just an honest, curious, plain-spoken notebook from someone with a personal reason to get this right and no incentive to oversell it. If you're a fellow carrier or patient, I hope this makes the science feel less like a locked room. If you're a researcher, I hope you'll correct me when I'm wrong. If you're just curious — welcome.
-
-::: callout
-I don't know how my own story ends. But I'd rather spend the meantime understanding the machinery than fearing it — and if writing it down helps one other person feel less lost in the literature, that's more than enough reason to keep going. **— Offer**
-:::
+## What this site is for
+Not a hype machine, and not a substitute for talking to a doctor. A plain-spoken, evidence-graded map of what's known about mitochondrial health and VDAC1, built for anyone trying to make sense of the science, whether that's a fellow carrier, a patient, a researcher, or someone just curious how their cells actually work.

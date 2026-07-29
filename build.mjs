@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* ilovemitochondria.com — zero-dependency static site generator.
+/* ilovemitochondria.com, zero-dependency static site generator.
    Single source of truth = /content. Everything else is derived:
    per-entry pages, tag taxonomy, related links, listings, sitemap, RSS. */
 
@@ -31,8 +31,8 @@ function readFrontMatter(raw){
 /* ---------------- mini markdown ---------------- */
 const VIEWER_MARKUP = `
 <div class="viewer-wrap">
-  <div class="viewer-bar"><span>&gt; rcsb://2JK4 — human VDAC1</span><span id="vstatus">loading…</span></div>
-  <div id="vdac-3d"><div class="viewer-fallback">Loading the 3D viewer… nothing showing up? You're likely offline — the structure streams from the RCSB Protein Data Bank.</div></div>
+  <div class="viewer-bar"><span>&gt; rcsb://2JK4, human VDAC1</span><span id="vstatus">loading…</span></div>
+  <div id="vdac-3d"><div class="viewer-fallback">Loading the 3D viewer… nothing showing up? You're likely offline, the structure streams from the RCSB Protein Data Bank.</div></div>
 </div>`;
 
 function inline(t){
@@ -130,7 +130,7 @@ for(const e of entries){
   e.year = e.date.slice(0,4);
   // content-type tag: blog vs new research vs other (front-matter can override)
   e.contentType = e.contentTypeOverride || (e.type==="news" ? "new research"
-    : (["explainer","personal","drug-watch"].includes(e.kind) ? "blog" : "other"));
+    : (["explainer","personal","drug-watch"].includes(e.kind) ? "commentary" : "other"));
 }
 
 // tag registry
@@ -178,7 +178,7 @@ function footer(){
   return `<footer class="site-footer"><div class="wrap">
     <div class="fnav">${f}</div>
     <div>by ${cfg.author} · <a href="mailto:${cfg.email}">${cfg.email}</a>${cfg.linkedin?` · <a href="${cfg.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`:""} · co-founder @ <a href="${cfg.company.url}" target="_blank" rel="noopener">${cfg.company.name}</a></div>
-    <div class="small">${cfg.siteName} is a personal project — an evidence-graded guide to mitochondrial health, written in the open. Nothing here is medical advice. News and rating summaries are my own paraphrases of the cited research; each item links to its source.</div>
+    <div class="small">${cfg.siteName} is a personal project, an evidence-graded guide to mitochondrial health, written in the open. Nothing here is medical advice. News and rating summaries are my own paraphrases of the cited research; each item links to its source.</div>
   </div></footer>`;
 }
 function viewerScript(){
@@ -203,7 +203,7 @@ function buildSearchIndex(){
   rec.push({ t:"VDAC1 gene, sequence & expression", u:"/gene/", k:"science", kw:"vdac1 gene sequence expression gtex uniprot tissue chromosome" });
   rec.push({ t:"Disease body map", u:"/diseases/", k:"science", kw:("disease body map organs "+diseases.regions.map(d=>d.disease+" "+d.label).join(" ")).toLowerCase() });
   rec.push({ t:"Resource shelf", u:"/resources/", k:"science", kw:"resources reviews databases papers labs uniprot pdb alphafold" });
-  rec.push({ t:"About — Offer Shina", u:"/about/", k:"page", kw:"about offer shina psen1 carrier x-tosis co-founder" });
+  rec.push({ t:"About, Offer Shina", u:"/about/", k:"page", kw:"about offer shina psen1 carrier x-tosis co-founder" });
   return rec;
 }
 const SEARCH_INDEX = buildSearchIndex();
@@ -329,10 +329,10 @@ function moreAbout(entry){
   const relHtml = rel.length ? `<div class="related-grid">${rel.map(r=>`
     <div class="related-item"><span class="k">${r.type==="news"?"news":(r.kind||"post")}</span>
     <a href="${r.url}">${esc(r.title)}</a></div>`).join("")}</div>` :
-    `<p class="section-sub">No related posts yet — this one's a bit of a lone wolf.</p>`;
+    `<p class="section-sub">No related posts yet, this one's a bit of a lone wolf.</p>`;
   return `<section class="moreabout">
     <h2>More about this</h2>
-    <p class="section-sub">Topics in this piece — follow a tag to see everything filed under it:</p>
+    <p class="section-sub">Topics in this piece, follow a tag to see everything filed under it:</p>
     ${tagChips(entry.tags)}
     <h2 style="font-size:1.1rem;margin-top:26px;">Related reading</h2>
     ${relHtml}
@@ -377,7 +377,7 @@ function articlePage(e){
     ${moreAbout(e)}
     <a class="backlink" href="${sectionUrl}">← back to ${section.toLowerCase()}</a>
   </article></div></main>`;
-  return layout({ title:`${e.title} — ${cfg.siteName}`, desc:e.summary, canonical:e.url,
+  return layout({ title:`${e.title}, ${cfg.siteName}`, desc:e.summary, canonical:e.url,
     content, active:sectionUrl, hasViewer:e.viewer3d, jsonld, image:e.image,
     ogType:"article", published:e.date });
 }
@@ -434,7 +434,7 @@ function newsListing(){
   // filterable grid over EVERYTHING (news + posts)
   const all = entries.slice().sort((a,b)=>b.date.localeCompare(a.date));
   const domains = ["VDAC1","Mitochondria"];
-  const types = ["new research","blog","other"].filter(t=>all.some(e=>e.contentType===t));
+  const types = ["new research","commentary","other"].filter(t=>all.some(e=>e.contentType===t));
   const cats = [...new Set(all.map(e=>e.category))];
   const years = [...new Set(all.map(e=>e.year))].sort().reverse();
   const tags = [...tagMap.values()].sort((a,b)=>b.entries.length-a.entries.length);
@@ -449,13 +449,13 @@ function newsListing(){
   const content = `<div class="hero"><div class="wrap"><div>
       <p class="eyebrow">what I've been reading</p>
       <h1>Research news</h1>
-      <p class="lead">I read a lot of mitochondria and VDAC1 papers so you don't have to. The ones worth knowing about — summarised in my own words, always linked to the source. Below the highlights, filter the whole archive by topic, category, year or tag.</p>
+      <p class="lead">New mitochondria and VDAC1 research, summarised in plain language and always linked to the source. Below the highlights, filter the whole archive by topic, category, year or tag.</p>
     </div><div class="hero-art"><img src="/assets/images/vdac1-barrel.svg" alt="VDAC1 channel"></div></div></div>
     <main><div class="wrap">
       <section>${featured}</section>
       <hr class="rule">
       <h2><span class="num">·</span>The full archive</h2>
-      <p class="section-sub">Every post and news piece — split by domain (VDAC1 vs mitochondria), category, year and tag.</p>
+      <p class="section-sub">Every post and news piece, split by domain (VDAC1 vs mitochondria), category, year and tag.</p>
       <button class="filter-toggle" aria-label="Toggle filters">⚙ Filters</button>
       <div class="sidebar-wrap">
         <aside class="sidebar" id="side-filters"><div class="filters">
@@ -471,7 +471,7 @@ function newsListing(){
         </div></aside>
         <div class="content">
           <div class="exp-grid" id="expgrid">${items}</div>
-          <p id="fempty" class="section-sub" style="display:none;">Nothing matches those filters — loosen one.</p>
+          <p id="fempty" class="section-sub" style="display:none;">Nothing matches those filters, loosen one.</p>
         </div>
       </div>
     </div></main>
@@ -508,7 +508,7 @@ function newsListing(){
     "description":"Recent mitochondria and VDAC1 research, summarised and linked to the source.",
     "isPartOf":{"@type":"WebSite","name":cfg.siteName,"url":`${cfg.baseUrl}/`},
     "mainEntity":{"@type":"ItemList","numberOfItems":entries.length,"itemListElement":entries.map((e,ix)=>({"@type":"ListItem","position":ix+1,"url":`${cfg.baseUrl}${e.url}`,"name":e.title}))} };
-  return layout({ title:`Research news — ${cfg.siteName}`, desc:"Recent mitochondria and VDAC1 research summarized in plain language and linked to the source — filterable by domain, category, year and tag.", canonical:"/news/", content, active:"/news/", bodyClass:"wide", image:"vdac1-barrel.svg", jsonld:newsLd });
+  return layout({ title:`Research news, ${cfg.siteName}`, desc:"Recent mitochondria and VDAC1 research summarized in plain language and linked to the source, filterable by domain, category, year and tag.", canonical:"/news/", content, active:"/news/", bodyClass:"wide", image:"vdac1-barrel.svg", jsonld:newsLd });
 }
 
 function postsListing(){
@@ -522,10 +522,10 @@ function postsListing(){
   const content = `<div class="hero"><div class="wrap"><div>
       <p class="eyebrow">the longer reads</p>
       <h1>Posts &amp; explainers</h1>
-      <p class="lead">The pieces I sit down and actually write — primers, drug watches, and the occasional personal note. For the paper-by-paper feed, see <a href="/news/">news</a>.</p>
+      <p class="lead">Long-form explainers on VDAC1 and mitochondrial biology: primers, drug watches, and research deep-dives. For the paper-by-paper feed, see <a href="/news/">news</a>.</p>
     </div><div class="hero-art"><img src="/assets/images/mito.svg" alt="Mitochondrion"></div></div></div>
     <main><div class="wrap"><section>${cards}</section></div></main>`;
-  return layout({ title:`Posts — ${cfg.siteName}`, desc:"Long-form explainers and notes on mitochondria and VDAC1.", canonical:"/posts/", content, active:"/posts/", image:"mito.svg" });
+  return layout({ title:`Posts, ${cfg.siteName}`, desc:"Long-form explainers and notes on mitochondria and VDAC1.", canonical:"/posts/", content, active:"/posts/", image:"mito.svg" });
 }
 
 function homePage(){
@@ -537,9 +537,9 @@ function homePage(){
     { t:"Mito-Medicine Companies", u:"/companies/", m:`${companies.companies.length} companies`, i:"◈", d:"A filterable watchlist of who's actually building mitochondrial medicine." },
     { t:"Clinical Trials", u:"/trials/", m:`${trials.trials.length} trials`, i:"⚕", d:"Mito-drug trials linked straight to their ClinicalTrials.gov records." },
     { t:"The VDAC1 Gene & Expression", u:"/gene/", m:"sequence + GTEx", i:"⌗", d:"The gene, its 283-amino-acid protein, and where in the body it's switched on." },
-    { t:"VDAC1 Disease Body Map", u:"/diseases/", m:`${diseases.regions.length} organs`, i:"◉", d:"Where VDAC1 goes wrong across the body — each organ linked to a key paper." },
+    { t:"VDAC1 Disease Body Map", u:"/diseases/", m:`${diseases.regions.length} organs`, i:"◉", d:"Where VDAC1 goes wrong across the body, each organ linked to a key paper." },
     { t:"VDAC1 & Mitochondria Resources", u:"/resources/", m:"curated links", i:"❑", d:"The reviews, databases and labs I keep coming back to." },
-    { t:"About — the mission", u:"/about/", m:"who & why", i:"✎", d:"PSEN1 carrier, x-tosis co-founder, full-time mitochondria nerd." }
+    { t:"About & methodology", u:"/about/", m:"how ratings work", i:"✎", d:"Who curates this guide and the evidence standards behind every rating." }
   ];
   const content = `<div class="hero"><div class="wrap">
       <div>
@@ -567,7 +567,7 @@ function homePage(){
           <div class="flag-body">
             <span class="flag-tag">★ the heart of the site</span>
             <h2>Mitochondrial Health Ratings</h2>
-            <p>${mitohealth.items.length} interventions — foods, drugs, supplements and lifestyle pillars like sleep, exercise, fasting, sauna and light — each graded for <b>evidence</b>, <b>benefit</b> and <b>safety</b>, and linked to the research. The honest, filterable database I wish existed. This is the one to start with.</p>
+            <p>${mitohealth.items.length} interventions, foods, drugs, supplements and lifestyle pillars like sleep, exercise, fasting, sauna and light, each graded for <b>evidence</b>, <b>benefit</b> and <b>safety</b>, and linked to the research. The honest, filterable database I wish existed. This is the one to start with.</p>
             <span class="flag-cta">Explore the ratings →</span>
           </div>
           <div class="flag-stat"><b>${mitohealth.items.length}</b><span>interventions<br>graded</span></div>
@@ -575,7 +575,7 @@ function homePage(){
       </section>
       <section>
         <h2><span class="num">01</span>Everything else, at a glance</h2>
-        <p class="section-sub">Everything here in one glance — pick a door. New? The <a href="${primer.url}">5-minute VDAC1 primer</a> is the gentlest start.</p>
+        <p class="section-sub">Everything here in one glance, pick a door. New? The <a href="${primer.url}">5-minute VDAC1 primer</a> is the gentlest start.</p>
         <div class="sitemap-grid">
           ${teasers.map(x=>`<a class="teaser" href="${x.u}">
             <span class="teaser-ico">${x.i}</span>
@@ -598,7 +598,7 @@ function homePage(){
       </section>
       <section id="vdac1-3d">
         <h2><span class="num">03</span>VDAC1 in 3D</h2>
-        <p class="section-sub">The actual crystal structure of human VDAC1 (PDB <b>2JK4</b>) — grab it and spin. Nineteen β-strands rolled into a barrel, N-terminal helix tucked inside. <em>(Needs internet to load the atoms.)</em></p>
+        <p class="section-sub">The actual crystal structure of human VDAC1 (PDB <b>2JK4</b>), grab it and spin. Nineteen β-strands rolled into a barrel, N-terminal helix tucked inside. <em>(Needs internet to load the atoms.)</em></p>
         ${VIEWER_MARKUP}
       </section>
     </div></main>`;
@@ -613,7 +613,7 @@ function homePage(){
     { "@context":"https://schema.org","@type":"Blog","name":cfg.siteName,"url":`${cfg.baseUrl}/`,
       "blogPost": entries.slice(0,10).map(e=>({"@type":"BlogPosting","headline":e.title,"url":`${cfg.baseUrl}${e.url}`,"datePublished":e.date})) }
   ];
-  return layout({ title:`${cfg.siteName} — Offer Shina on VDAC1 & mitochondria`, desc:cfg.description, canonical:"/", content, active:"/", hasViewer:true, image:"mito.svg", jsonld:homeLd });
+  return layout({ title:`${cfg.siteName}: Mitochondrial Health Ratings & VDAC1 Research`, desc:cfg.description, canonical:"/", content, active:"/", hasViewer:true, image:"mito.svg", jsonld:homeLd });
 }
 
 function resourcesPage(){
@@ -625,7 +625,7 @@ function resourcesPage(){
   const content = `<div class="hero"><div class="wrap"><div>
       <p class="eyebrow">the good stuff, in one place</p>
       <h1>The resource shelf</h1>
-      <p class="lead">If I could hand a newcomer one page to get oriented on mitochondria and VDAC1, this is it. Living list — I add keepers as I find them.</p>
+      <p class="lead">The reviews, structures, databases and labs worth knowing to get oriented on mitochondria and VDAC1 fast. Updated as new resources turn up.</p>
     </div><div class="hero-art"><img src="/assets/images/mito.svg" alt="Mitochondrion"></div></div></div>
     <main><div class="wrap">
       <section>
@@ -643,9 +643,9 @@ function resourcesPage(){
         </div>
       </section>
       ${groups}
-      <p class="section-sub" style="margin-top:30px;">Got a resource I'm missing? I'd love it — <a href="mailto:${cfg.email}">${cfg.email}</a>.</p>
+      <p class="section-sub" style="margin-top:30px;">Got a resource I'm missing? I'd love it, <a href="mailto:${cfg.email}">${cfg.email}</a>.</p>
     </div></main>`;
-  return layout({ title:`Resources — ${cfg.siteName}`, desc:"A curated shelf of the best mitochondria and VDAC1 resources: reviews, databases, structures, animations and labs.", canonical:"/resources/", content, active:"/resources/", image:"mito.svg" });
+  return layout({ title:`Resources, ${cfg.siteName}`, desc:"A curated shelf of the best mitochondria and VDAC1 resources: reviews, databases, structures, animations and labs.", canonical:"/resources/", content, active:"/resources/", image:"mito.svg" });
 }
 
 function aboutPage(){
@@ -665,7 +665,7 @@ function aboutPage(){
         <a href="mailto:${cfg.email}">${cfg.email}</a>${cfg.linkedin?`<br><a href="${cfg.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a>`:""}</div>
       </aside>
     </div></div></main>`;
-  return layout({ title:`About — ${cfg.siteName}`, desc:`${cfg.author} — PSEN1 carrier, co-founder at ${cfg.company.name}, and the person behind ${cfg.siteName}.`, canonical:"/about/", content, active:"/about/", image:"mito.svg" });
+  return layout({ title:`About & methodology, ${cfg.siteName}`, desc:"Who curates this guide, how ratings get graded, and the evidence standards behind every entry.", canonical:"/about/", content, active:"/about/", image:"mito.svg" });
 }
 
 function tagIndexPage(){
@@ -676,7 +676,7 @@ function tagIndexPage(){
       <p class="lead">Every post and news piece is tagged. Pick a thread and pull.</p>
     </div><div class="hero-art"><img src="/assets/images/vdac1-barrel.svg" alt="VDAC1"></div></div></div>
     <main><div class="wrap"><div class="tagcloud">${cloud}</div></div></main>`;
-  return layout({ title:`Tags — ${cfg.siteName}`, desc:"Browse every topic covered on the blog.", canonical:"/tags/", content, active:"/tags/", image:"vdac1-barrel.svg" });
+  return layout({ title:`Tags, ${cfg.siteName}`, desc:"Browse every topic covered in the ratings, research news and explainers.", canonical:"/tags/", content, active:"/tags/", image:"vdac1-barrel.svg" });
 }
 
 function tagPage(t){
@@ -692,7 +692,7 @@ function tagPage(t){
     <main><div class="wrap"><ul class="taglist">${items}</ul>
       <p style="margin-top:26px;"><a class="backlink" href="/tags/">← all tags</a></p>
     </div></main>`;
-  return layout({ title:`#${t.name} — ${cfg.siteName}`, desc:`Everything on the blog tagged ${t.name}.`, canonical:`/tags/${t.slug}/`, content, active:"/tags/", image:"mito.svg" });
+  return layout({ title:`#${t.name}, ${cfg.siteName}`, desc:`Everything on the site tagged ${t.name}.`, canonical:`/tags/${t.slug}/`, content, active:"/tags/", image:"mito.svg" });
 }
 
 function genePage(){
@@ -725,7 +725,7 @@ function genePage(){
   const content = `<div class="hero"><div class="wrap"><div>
       <p class="eyebrow">the gene itself · sequenced &amp; mapped</p>
       <h1>VDAC1: the gene, the sequence, where it's switched on</h1>
-      <p class="lead">Pulled from public sources — the human <strong>VDAC1</strong> gene, its 283-amino-acid protein sequence, and where in the body it's most active. Notice the pattern: it's everywhere, but loudest in the tissues that burn the most energy.</p>
+      <p class="lead">Pulled from public sources, the human <strong>VDAC1</strong> gene, its 283-amino-acid protein sequence, and where in the body it's most active. Notice the pattern: it's everywhere, but loudest in the tissues that burn the most energy.</p>
     </div><div class="hero-art"><img src="/assets/images/vdac1-barrel.svg" alt="VDAC1 channel"></div></div></div>
     <main><div class="wrap">
       <section><h2><span class="num">01</span>The gene, in numbers</h2>
@@ -740,7 +740,7 @@ function genePage(){
         <div class="seqblock">${seqHtml}</div>
       </section>
       <section><h2><span class="num">04</span>Sources</h2>
-        <p class="section-sub">Fetched ${esc(genetics.fetched)} from public databases — go live for the latest:</p>
+        <p class="section-sub">Fetched ${esc(genetics.fetched)} from public databases, go live for the latest:</p>
         <ul class="res-list">${src}</ul>
       </section>
     </div></main>`;
@@ -749,7 +749,7 @@ function genePage(){
     "keywords":"VDAC1, gene expression, GTEx, UniProt, mitochondria","inLanguage":"en","isAccessibleForFree":true,
     "creator":{"@type":"Person","name":cfg.author},
     "citation":genetics.sources.map(s=>s.url) };
-  return layout({ title:`VDAC1 gene, sequence & expression — ${cfg.siteName}`, desc:"The human VDAC1 gene: genomic location, 283-aa protein sequence, and tissue expression (GTEx v8) — where the channel is switched on.", canonical:"/gene/", content, active:"/gene/", image:"vdac1-barrel.svg", jsonld:geneLd });
+  return layout({ title:`VDAC1 gene, sequence & expression, ${cfg.siteName}`, desc:"The human VDAC1 gene: genomic location, 283-aa protein sequence, and tissue expression (GTEx v8), where the channel is switched on.", canonical:"/gene/", content, active:"/gene/", image:"vdac1-barrel.svg", jsonld:geneLd });
 }
 
 function diseasesPage(){
@@ -804,7 +804,7 @@ function diseasesPage(){
         <p class="section-sub">${esc(diseases.listSub||"")}</p>
         <ul class="dxlist">${cards}</ul>
       </section>
-      <p class="section-sub" style="margin-top:20px;">Body map built from the papers I've been reading — if you sent a specific 3D anatomical asset you want used here, drop it in and I'll wire it up.</p>
+      <p class="section-sub" style="margin-top:20px;">Each organ links to the specific paper that documents the VDAC1 connection. The map grows as new research is published.</p>
     </div></main>
     <script>window.__DX__=${data};(function(){var d=window.__DX__;var panel=document.getElementById('dxpanel');
     function show(id){var x=d[id];if(!x)return;document.getElementById('dxp-title').textContent=x.disease;
@@ -820,7 +820,7 @@ function diseasesPage(){
       el.addEventListener('click',function(e){show(el.dataset.id);});
       el.addEventListener('focus',function(){show(el.dataset.id);});
     });})();</script>`;
-  return layout({ title:`VDAC1 disease body map — ${cfg.siteName}`, desc:"An interactive body map of the diseases VDAC1 is implicated in, each linked to the most relevant paper.", canonical:"/diseases/", content, active:"/diseases/", image:"vdac1-anim.svg" });
+  return layout({ title:`VDAC1 disease body map, ${cfg.siteName}`, desc:"An interactive body map of the diseases VDAC1 is implicated in, each linked to the most relevant paper.", canonical:"/diseases/", content, active:"/diseases/", image:"vdac1-anim.svg" });
 }
 
 function companiesPage(){
@@ -830,7 +830,7 @@ function companiesPage(){
   const inds = [...new Set(C.flatMap(c=>c.indications))].sort();
   const btn = (grp,val,label)=>`<button class="fbtn" data-group="${grp}" data-val="${escAttr(val)}">${esc(label)}</button>`;
   const card = c=>`<article class="co-card${c.highlight?" co-highlight":""}" data-stage="${escAttr(c.stage)}" data-moa="${c.moa.map(slugify).join(" ")}" data-ind="${c.indications.map(slugify).join(" ")}">
-    ${c.highlight?`<span class="co-flag">my company — see disclaimer</span>`:""}
+    ${c.highlight?`<span class="co-flag">my company, see disclaimer</span>`:""}
     <div class="co-head"><h3><a href="${c.url}" target="_blank" rel="noopener">${esc(c.name)} ↗</a></h3><span class="co-stage">${esc(c.stage)}</span></div>
     ${c.rating?`<div class="co-rating">${"⭐".repeat(c.rating)}${c.ratingNote?` <span class="co-ratingnote">${esc(c.ratingNote)}</span>`:""}</div>`:""}
     <p>${esc(c.blurb)}</p>
@@ -855,7 +855,7 @@ function companiesPage(){
         </div></aside>
         <div class="content">
           <div class="co-grid" id="cogrid">${C.map(card).join("")}</div>
-          <p id="coempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
+          <p id="coempty" class="section-sub" style="display:none;">Nothing matches, loosen a filter.</p>
         </div>
       </div>
     </div></main>
@@ -878,7 +878,7 @@ function companiesPage(){
       apply();})();</script>`;
   const coLd = { "@context":"https://schema.org","@type":"ItemList","name":"Mitochondrial-medicine companies","numberOfItems":C.length,
     "itemListElement":C.map((c,ix)=>({"@type":"ListItem","position":ix+1,"item":{"@type":"Organization","name":c.name,"url":c.url}})) };
-  return layout({ title:`Mito-medicine companies to follow — ${cfg.siteName}`, desc:"A filterable watchlist of mitochondrial-medicine companies — by stage, mechanism of action and indication.", canonical:"/companies/", content, active:"/companies/", bodyClass:"wide", image:"mito.svg", jsonld:coLd });
+  return layout({ title:`Mito-medicine companies to follow, ${cfg.siteName}`, desc:"A filterable watchlist of mitochondrial-medicine companies, by stage, mechanism of action and indication.", canonical:"/companies/", content, active:"/companies/", bodyClass:"wide", image:"mito.svg", jsonld:coLd });
 }
 
 function trialsPage(){
@@ -909,7 +909,7 @@ function trialsPage(){
         </div></aside>
         <div class="content">
           <div class="co-grid" id="trgrid">${T.map(card).join("")}</div>
-          <p id="trempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
+          <p id="trempty" class="section-sub" style="display:none;">Nothing matches, loosen a filter.</p>
         </div>
       </div>
     </div></main>
@@ -932,7 +932,30 @@ function trialsPage(){
       apply();})();</script>`;
   const trLd = { "@context":"https://schema.org","@type":"ItemList","name":"Mitochondrial-medicine clinical trials","numberOfItems":T.length,
     "itemListElement":T.map((t,ix)=>({"@type":"ListItem","position":ix+1,"url":`https://clinicaltrials.gov/study/${t.nct}`,"name":t.title})) };
-  return layout({ title:`Mitochondrial clinical trials — ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov — filter by mechanism and indication.", canonical:"/trials/", content, active:"/trials/", bodyClass:"wide", image:"vdac1-barrel.svg", jsonld:trLd });
+  return layout({ title:`Mitochondrial clinical trials, ${cfg.siteName}`, desc:"Mitochondrial-medicine clinical trials linked straight to ClinicalTrials.gov, filter by mechanism and indication.", canonical:"/trials/", content, active:"/trials/", bodyClass:"wide", image:"vdac1-barrel.svg", jsonld:trLd });
+}
+
+/* per-category icon badges for the mito-health ratings grid */
+const MH_ICON = {
+  "Exercise": { color:"#0e9488", glyph:'<circle cx="15" cy="22" r="4"/><circle cx="29" cy="22" r="4"/><line x1="19" y1="22" x2="25" y2="22"/>' },
+  "Foods & Drink": { color:"#f0603a", glyph:'<path d="M22 14c-6 0-9 5-9 11 0 6 4 10 9 10s9-4 9-10c0-6-3-11-9-11z"/><path d="M22 14c0-3 2-5 4-5" fill="none"/>' },
+  "Supplements": { color:"#6b4df0", glyph:'<rect x="12" y="18" width="20" height="10" rx="5" transform="rotate(-30 22 23)"/><line x1="22" y1="16" x2="22" y2="30" stroke="#6b4df0" stroke-width="2" transform="rotate(-30 22 23)"/>' },
+  "Drugs": { color:"#e5397f", glyph:'<rect x="15" y="12" width="14" height="20" rx="2"/><rect x="17" y="8" width="10" height="6" rx="1"/><line x1="22" y1="18" x2="22" y2="26" stroke="#e5397f" stroke-width="2"/><line x1="18" y1="22" x2="26" y2="22" stroke="#e5397f" stroke-width="2"/>' },
+  "Fasting / TRE": { color:"#f5a524", glyph:'<circle cx="22" cy="23" r="10" fill="none" stroke="#fff" stroke-width="2.5"/><line x1="22" y1="23" x2="22" y2="16" stroke="#fff" stroke-width="2.5"/><line x1="22" y1="23" x2="27" y2="25" stroke="#fff" stroke-width="2.5"/>' },
+  "Ketogenic diet": { color:"#2ff3d0", glyph:'<ellipse cx="22" cy="22" rx="9" ry="12"/><ellipse cx="22" cy="24" rx="3.5" ry="5" fill="#2ff3d0"/>' },
+  "Sleep": { color:"#4a4a58", glyph:'<path d="M27 14a10 10 0 1 0 8 16 10 10 0 0 1-8-16z"/>' },
+  "Stress management": { color:"#0e9488", glyph:'<path d="M11 24c2-6 4 6 6 0s4-6 6 0 4 6 6 0 4-6 4 0" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/>' },
+  "Sunlight & Circadian": { color:"#f5a524", glyph:'<circle cx="22" cy="23" r="6"/><g stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="22" y1="9" x2="22" y2="12"/><line x1="22" y1="34" x2="22" y2="37"/><line x1="9" y1="23" x2="12" y2="23"/><line x1="32" y1="23" x2="35" y2="23"/><line x1="13" y1="14" x2="15" y2="16"/><line x1="29" y1="30" x2="31" y2="32"/><line x1="31" y1="14" x2="29" y2="16"/><line x1="15" y1="30" x2="13" y2="32"/></g>' },
+  "Light therapy": { color:"#f5a524", glyph:'<circle cx="22" cy="19" r="8" fill="none" stroke="#fff" stroke-width="2.3"/><line x1="19" y1="30" x2="25" y2="30" stroke="#fff" stroke-width="2.3"/><line x1="20" y1="34" x2="24" y2="34" stroke="#fff" stroke-width="2.3"/>' },
+  "Heat (Sauna)": { color:"#f0603a", glyph:'<path d="M22 12c-4 6-7 8-7 13a7 7 0 0 0 14 0c0-3-2-4-2-7-2 3-3 3-3 1 0-2 1-3-2-7z"/>' },
+  "Cold exposure": { color:"#57b6ff", glyph:'<g stroke="#fff" stroke-width="2.2" stroke-linecap="round"><line x1="22" y1="11" x2="22" y2="35"/><line x1="12" y1="16" x2="32" y2="30"/><line x1="12" y1="30" x2="32" y2="16"/></g>' },
+  "Social connection": { color:"#e5397f", glyph:'<circle cx="17" cy="20" r="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="27" cy="20" r="5" fill="none" stroke="#fff" stroke-width="2"/><path d="M12 33c0-4 3-7 7-7M32 33c0-4-3-7-7-7" fill="none" stroke="#fff" stroke-width="2"/>' },
+  "Cognitive training": { color:"#6b4df0", glyph:'<path d="M22 12c5 0 8 3 8 7 0 2-1 3-1 5 0 3 2 3 2 6 0 3-3 4-5 4-1 2-3 2-4 2-4 0-7-3-7-7 0-2 1-3 0-5-2-1-3-3-3-5 0-4 4-7 10-7z" fill="none" stroke="#fff" stroke-width="2"/><line x1="22" y1="16" x2="22" y2="30" stroke="#fff" stroke-width="1.6"/>' },
+  "Environmental factors": { color:"#0e9488", glyph:'<path d="M28 13c-9 0-15 6-15 14 0 3 1 5 1 5s2-8 9-10c-4 4-4 8-4 8s9-1 11-9c1-4 1-6-2-8z"/>' }
+};
+function mhIconSvg(category){
+  const ic = MH_ICON[category] || { color:"#4a4a58", glyph:'<circle cx="22" cy="22" r="8" fill="none" stroke="#fff" stroke-width="2"/>' };
+  return `<svg class="mh-icon" viewBox="0 0 44 44" role="img" aria-label="${escAttr(category)}"><rect width="44" height="44" rx="10" fill="${ic.color}"/><g fill="#fff">${ic.glyph}</g></svg>`;
 }
 
 function mitoHealthPage(){
@@ -943,14 +966,28 @@ function mitoHealthPage(){
   const mechs = [...new Set(M.items.flatMap(i=>i.tags||[]))].sort();
   const cls = (kind,val)=> `${kind}-${slugify(val)}`;
   const dial = (label,val,kind)=> `<span class="dial ${cls(kind,val)}"><b>${label}</b>${esc(val)}</span>`;
-  const card = i=>`<article class="mh-card dir-${i.direction}" data-cat="${escAttr(i.category)}" data-ev="${escAttr(i.evidence)}" data-dir="${i.direction}" data-mech="${(i.tags||[]).map(slugify).join(" ")}" data-name="${escAttr(i.name.toLowerCase())}" data-evrank="${evRank[i.evidence]||0}">
-    <div class="mh-top"><span class="mh-cat">${esc(i.category)}</span>${i.direction==="harm"?`<span class="mh-harm">harms mito</span>`:i.direction==="mixed"?`<span class="mh-mixed">double-edged</span>`:""}</div>
-    <h3>${esc(i.name)}</h3>
-    <div class="mh-mech">${esc(i.mech)}</div>
+  const card = (i,ix)=>{
+    const teaser = (i.summary.match(/^[^.]+\./)||[i.summary])[0];
+    const rest = i.summary.slice(teaser.length).trim();
+    const cid = `mhc-${ix}`;
+    return `<article class="mh-card dir-${i.direction}" data-cat="${escAttr(i.category)}" data-ev="${escAttr(i.evidence)}" data-dir="${i.direction}" data-mech="${(i.tags||[]).map(slugify).join(" ")}" data-name="${escAttr(i.name.toLowerCase())}" data-evrank="${evRank[i.evidence]||0}">
+    <h3 class="mh-heading"><button class="mh-toggle" aria-expanded="false" aria-controls="${cid}">
+      ${mhIconSvg(i.category)}
+      <span class="mh-toptext">
+        <span class="mh-top"><span class="mh-cat">${esc(i.category)}</span>${i.direction==="harm"?`<span class="mh-harm">harms mito</span>`:i.direction==="mixed"?`<span class="mh-mixed">double-edged</span>`:""}</span>
+        <span class="mh-name">${esc(i.name)}</span>
+      </span>
+      <span class="mh-caret" aria-hidden="true">+</span>
+    </button></h3>
     <div class="dials">${dial("Evidence",i.evidence,"ev")}${dial("Benefit",i.benefit,"ben")}${dial("Safety",i.safety,"saf")}</div>
-    <p>${esc(i.summary)}</p>
-    <div class="mh-links">${(i.links||[]).map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}</div>
+    <p class="mh-teaser">${esc(teaser)}</p>
+    <div class="mh-more" id="${cid}">
+      <div class="mh-mech">${esc(i.mech)}</div>
+      ${rest?`<p>${esc(rest)}</p>`:""}
+      <div class="mh-links">${(i.links||[]).map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join("")}</div>
+    </div>
   </article>`;
+  };
   const chip = (grp,val)=>`<button class="fbtn" data-group="${grp}" data-val="${escAttr(val)}">${esc(val)}</button>`;
   const content = `<div class="hero mh-hero mh-hero-solo"><div class="wrap"><div>
       <p class="eyebrow">★ the heart of the site · evidence-graded</p>
@@ -980,7 +1017,7 @@ function mitoHealthPage(){
       </div></aside>
         <div class="content">
           <div class="mh-grid" id="mhgrid">${M.items.map(card).join("")}</div>
-          <p id="mhempty" class="section-sub" style="display:none;">Nothing matches — loosen a filter.</p>
+          <p id="mhempty" class="section-sub" style="display:none;">Nothing matches, loosen a filter.</p>
         </div>
       </div>
       <p class="mh-foot">This is a synthesis for orientation, not medical advice. Evidence for many mitochondrial-specific effects is indirect; ratings reflect the best available human data plus mechanism. Found a strong study I'm missing? <a href="mailto:${cfg.email}">tell me</a>.</p>
@@ -1011,7 +1048,12 @@ function mitoHealthPage(){
         document.querySelectorAll('#mhf .fbtn.on').forEach(function(x){if(!x.classList.contains('sortbtn'))x.classList.remove('on');});
         document.querySelectorAll('#mhf .sortbtn').forEach(function(x){x.classList.toggle('on',x.dataset.sort==='ev');});
         document.getElementById('mhmech').value='';document.getElementById('mhsearch').value='';apply();});
-      apply();})();</script>`;
+      apply();
+      document.querySelectorAll('.mh-toggle').forEach(function(b){b.addEventListener('click',function(){
+        var card=b.closest('.mh-card');var open=card.classList.toggle('is-open');
+        b.setAttribute('aria-expanded',open?'true':'false');
+      });});
+      })();</script>`;
   const mhLd = [
     { "@context":"https://schema.org","@type":"Dataset","name":"Mitochondrial Health Ratings","url":`${cfg.baseUrl}/mitohealth/`,
       "description":M.intro.slice(0,320),"keywords":M.categories.join(", "),"inLanguage":"en",
@@ -1020,7 +1062,7 @@ function mitoHealthPage(){
     { "@context":"https://schema.org","@type":"ItemList","name":"Mitochondrial health interventions","numberOfItems":M.items.length,
       "itemListElement":M.items.map((i,ix)=>({"@type":"ListItem","position":ix+1,"name":i.name})) }
   ];
-  return layout({ title:`Mitochondrial Health Ratings — ${M.items.length} interventions, graded — ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits (sleep, exercise, fasting, sauna and more) that affect mitochondrial health — each rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/mitohealth/", bodyClass:"wide", image:"mito.svg", jsonld:mhLd });
+  return layout({ title:`Mitochondrial Health Ratings, ${M.items.length} interventions, graded, ${cfg.siteName}`, desc:"An evidence-graded database of foods, drugs, supplements and lifestyle habits (sleep, exercise, fasting, sauna and more) that affect mitochondrial health, each rated for evidence, benefit and safety.", canonical:"/mitohealth/", content, active:"/mitohealth/", bodyClass:"wide", image:"mito.svg", jsonld:mhLd });
 }
 
 /* ---------------- feeds ---------------- */
@@ -1052,7 +1094,7 @@ function notFoundPage(){
     <p><a class="readmore" href="/">← home</a> &nbsp; <a class="readmore" href="/news/">news</a> &nbsp; <a class="readmore" href="/diseases/">body map</a> &nbsp; <a class="readmore" href="/gene/">gene</a></p>
     <div style="max-width:280px;margin:30px auto 0;"><img src="/assets/images/vdac1-anim.svg" alt="" style="width:100%;"></div>
   </div></main>`;
-  return layout({ title:`Not found — ${cfg.siteName}`, desc:"Page not found.", canonical:"/404.html", content, active:"/" });
+  return layout({ title:`Not found, ${cfg.siteName}`, desc:"Page not found.", canonical:"/404.html", content, active:"/" });
 }
 function rss(){
   const items = entries.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(e=>`  <item>
@@ -1082,18 +1124,18 @@ function writePage(url, html){
 }
 function writeFile(name, content){ fs.writeFileSync(path.join(OUT,name), content); }
 
-// Clean dist. On Windows a preview/AV handle can briefly lock it — degrade
+// Clean dist. On Windows a preview/AV handle can briefly lock it, degrade
 // gracefully (empty what we can, then overwrite) instead of hard-failing.
 try {
   fs.rmSync(OUT, { recursive:true, force:true, maxRetries:8, retryDelay:150 });
 } catch {
   try { for(const f of fs.readdirSync(OUT)) fs.rmSync(path.join(OUT,f), { recursive:true, force:true, maxRetries:4, retryDelay:150 }); }
-  catch { console.warn("! could not fully clean dist/ (locked?) — overwriting in place"); }
+  catch { console.warn("! could not fully clean dist/ (locked?), overwriting in place"); }
 }
 fs.mkdirSync(OUT, { recursive:true });
 fs.cpSync(ASSETS, path.join(OUT,"assets"), { recursive:true });
 
-writeFile("index.html", homePage());          // "/" — writeFile at root not writePage
+writeFile("index.html", homePage());          // "/", writeFile at root not writePage
 writePage("/news/", newsListing());
 writePage("/posts/", postsListing());
 writePage("/diseases/", diseasesPage());

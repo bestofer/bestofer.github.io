@@ -1,6 +1,6 @@
 {
-  "intro": "Selected clinical trials of mitochondrial-medicine drugs — each links straight to its ClinicalTrials.gov record. Filter by mechanism or indication. Sourced from ClinicalTrials.gov; statuses change, so click through for the live picture.",
-  "disclaimer": "Not medical advice and not a complete list. Trial statuses and details change — the ClinicalTrials.gov record is the source of truth. Talk to a clinician about trials relevant to you.",
+  "intro": "Selected clinical trials of mitochondrial-medicine drugs, each links straight to its ClinicalTrials.gov record. Filter by mechanism or indication. Sourced from ClinicalTrials.gov; statuses change, so click through for the live picture.",
+  "disclaimer": "Not medical advice and not a complete list. Trial statuses and details change, the ClinicalTrials.gov record is the source of truth. Talk to a clinician about trials relevant to you.",
   "trials": [
     {
       "nct": "NCT06373731",
@@ -64,7 +64,7 @@
     },
     {
       "nct": "NCT06474104",
-      "title": "Minovia mitochondrial augmentation — biomarker collection",
+      "title": "Minovia mitochondrial augmentation, biomarker collection",
       "drug": "Mitochondrial augmentation therapy (MAT)",
       "sponsor": "Minovia Therapeutics",
       "phase": "Observational",

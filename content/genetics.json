@@ -13,7 +13,7 @@
     "structurePdb": "2JK4"
   },
   "sequence": "MAVPPTYADLGKSARDVFTKGYGFGLIKLDLKTKSENGLEFTSSGSANTETTKVTGSLETKYRWTEYGLTFTEKWNTDNTLGTEITVEDQLARGLKLTFDSSFSPNTGKKNAKIKTGYKREHINLGCDMDFDIAGPSIRGALVLGYEGWLAGYQMNFETAKSRVTQSNFAVGYKTDEFQLHTNVNDGTEFGGSIYQKVNKKLETAVNLAWTAGNSNTRFGIAAKYQIDPDACFSAKVNNSSLIGLGYTQTLKPGIKLTLSALLDGKNVNAGGHKLGLGLEFQA",
-  "expressionNote": "VDAC1 is a housekeeping gene expressed in essentially every tissue — but it is dialled up highest in the most energy-hungry ones (skeletal muscle, heart, brain), which is exactly why those tissues are so exposed when VDAC1 misbehaves.",
+  "expressionNote": "VDAC1 is a housekeeping gene expressed in essentially every tissue, but it is dialled up highest in the most energy-hungry ones (skeletal muscle, heart, brain), which is exactly why those tissues are so exposed when VDAC1 misbehaves.",
   "expression": [
     { "tissue": "Skeletal muscle", "tpm": 390.9 },
     { "tissue": "Heart (left ventricle)", "tpm": 199.3 },
@@ -33,8 +33,8 @@
     { "tissue": "Whole blood", "tpm": 21.9 }
   ],
   "sources": [
-    { "label": "GTEx v8 — median gene expression (TPM) across 54 tissues", "url": "https://gtexportal.org/home/gene/VDAC1" },
-    { "label": "UniProt P21796 — canonical protein sequence (283 aa)", "url": "https://www.uniprot.org/uniprotkb/P21796/entry" },
+    { "label": "GTEx v8, median gene expression (TPM) across 54 tissues", "url": "https://gtexportal.org/home/gene/VDAC1" },
+    { "label": "UniProt P21796, canonical protein sequence (283 aa)", "url": "https://www.uniprot.org/uniprotkb/P21796/entry" },
     { "label": "Ensembl ENSG00000213585", "url": "https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000213585" },
     { "label": "NCBI Gene 7416", "url": "https://www.ncbi.nlm.nih.gov/gene/7416" }
   ],

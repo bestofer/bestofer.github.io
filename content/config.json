@@ -12,7 +12,7 @@
     "cfBeacon": "",
     "googleSiteVerification": ""
   },
-  "description": "A personal blog by Offer Shina about mitochondria and VDAC1 — the science, the news, and why a PSEN1 carrier can't stop reading about it.",
+  "description": "An evidence-graded guide to mitochondrial health: foods, drugs, supplements and lifestyle habits rated for evidence, benefit and safety, plus VDAC1 research explained in plain language and the latest studies as they publish.",
   "nav": [
     { "label": "Home", "url": "/" },
     { "label": "Mito-Health Ratings", "url": "/mitohealth/", "feature": true },
@@ -29,8 +29,8 @@
     { "label": "About", "url": "/about/" }
   ],
   "hero": {
-    "eyebrow": "a personal mission — shared in the open",
-    "titleHtml": "What actually helps your <span class=\"u\">mitochondria</span>? I'm building the most useful answer I can.",
-    "lead": "I'm Offer. Understanding mitochondrial health isn't an academic hobby for me — it's a <strong>need</strong>. So I read the science obsessively and share what I learn here, graded honestly, to help others navigate it too. The goal is simple and a little audacious: build the <strong>largest, most helpful, evidence-rated guide to mitochondrial health</strong> anywhere — starting with the ratings below."
+    "eyebrow": "evidence-graded, updated regularly, free to browse",
+    "titleHtml": "What actually helps your <span class=\"u\">mitochondria</span>? Rated by the evidence, not the hype.",
+    "lead": "87+ foods, drugs, supplements and lifestyle habits, sleep, exercise, fasting, sauna, cold exposure and more, each rated for <strong>evidence</strong>, <strong>benefit</strong> and <strong>safety</strong>. Plus VDAC1 research explained in plain language, and new studies added as they publish. Built by reading the primary literature so you don't have to."
   }
 }

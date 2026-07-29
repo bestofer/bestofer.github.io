@@ -1,19 +1,19 @@
 {
   "groups": [
     {
-      "label": "start here — VDAC1",
+      "label": "start here, VDAC1",
       "title": "Reviews to build a foundation",
       "links": [
-        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Shoshan-Barmatz+VDAC1+review", "title": "Shoshan-Barmatz — VDAC1 in apoptosis & disease", "desc": "Varda Shoshan-Barmatz wrote the canonical review series on VDAC1 as a hub for metabolism, calcium and cell death. Any of them is a great foundation." },
+        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Shoshan-Barmatz+VDAC1+review", "title": "Shoshan-Barmatz, VDAC1 in apoptosis & disease", "desc": "Varda Shoshan-Barmatz wrote the canonical review series on VDAC1 as a hub for metabolism, calcium and cell death. Any of them is a great foundation." },
         { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=VDAC1+oligomerization+apoptosis", "title": "VDAC1 oligomerization & the apoptosis pore", "desc": "The mechanistic heart of the disease story: how VDAC1 grouping up forms a big pore that leaks mitochondrial contents." },
-        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=VDAC1+neurodegeneration+Alzheimer", "title": "VDAC1 in neurodegeneration & Alzheimer's", "desc": "Where my head lives — VDAC1's links to amyloid, tau and mitochondrial dysfunction in the brain." }
+        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=VDAC1+neurodegeneration+Alzheimer", "title": "VDAC1 in neurodegeneration & Alzheimer's", "desc": "Where my head lives, VDAC1's links to amyloid, tau and mitochondrial dysfunction in the brain." }
       ]
     },
     {
       "label": "landmark papers",
       "title": "Worth reading in full",
       "links": [
-        { "url": "https://doi.org/10.1126/science.aav4011", "title": "★ Kim et al., Science 2019 — VDAC oligomers, mtDNA release & lupus (the one)", "desc": "If you read a single VDAC1 paper, read this one. Kim, Shoshan-Barmatz and colleagues showed VDAC1 oligomers form the outer-membrane pore that releases mtDNA fragments and drives the interferon response — and that VBIT-4 blocks it and eases lupus in mice. It's the anchor of my whole VBIT reading list. (Science 366:1531–1536; PMID 31857488.)" },
+        { "url": "https://doi.org/10.1126/science.aav4011", "title": "★ Kim et al., Science 2019, VDAC oligomers, mtDNA release & lupus (the one)", "desc": "If you read a single VDAC1 paper, read this one. Kim, Shoshan-Barmatz and colleagues showed VDAC1 oligomers form the outer-membrane pore that releases mtDNA fragments and drives the interferon response, and that VBIT-4 blocks it and eases lupus in mice. It's the anchor of my whole VBIT reading list. (Science 366:1531–1536; PMID 31857488.)" },
         { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=VBIT-4+VDAC1", "title": "VBIT-4 across disease models", "desc": "Follow-on work testing VDAC1-oligomerization inhibitors in metabolic, kidney, heart and brain models. See how far the idea reaches." },
         { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=mitochondrial+DNA+cGAS+STING+inflammation", "title": "mtDNA → cGAS–STING → inflammation", "desc": "The immune side: why mitochondrial DNA in the wrong place acts like a danger signal. Context for why a leaky pore matters." }
       ]
@@ -22,33 +22,33 @@
       "label": "databases & the molecule itself",
       "title": "Look VDAC1 up",
       "links": [
-        { "url": "https://www.uniprot.org/uniprotkb/P21796/entry", "title": "UniProt — VDAC1 (P21796)", "desc": "The reference sheet: sequence, structure, function, interactions." },
-        { "url": "https://www.rcsb.org/structure/2JK4", "title": "RCSB PDB — 2JK4 (human VDAC1 structure)", "desc": "The crystal structure my 3D viewer loads. Download it, open it in any viewer, poke around." },
-        { "url": "https://alphafold.ebi.ac.uk/entry/P21796", "title": "AlphaFold — VDAC1 model", "desc": "Predicted 3D structure of the β-barrel. Fun to spin while thinking about the pore." },
-        { "url": "https://www.proteinatlas.org/ENSG00000213585-VDAC1", "title": "Human Protein Atlas — VDAC1", "desc": "Where VDAC1 is expressed across tissues and cancers, with the imaging to prove it." },
-        { "url": "https://www.genecards.org/cgi-bin/carddisp.pl?gene=VDAC1", "title": "GeneCards — VDAC1", "desc": "A one-stop aggregator that links out to just about everything else." }
+        { "url": "https://www.uniprot.org/uniprotkb/P21796/entry", "title": "UniProt, VDAC1 (P21796)", "desc": "The reference sheet: sequence, structure, function, interactions." },
+        { "url": "https://www.rcsb.org/structure/2JK4", "title": "RCSB PDB, 2JK4 (human VDAC1 structure)", "desc": "The crystal structure my 3D viewer loads. Download it, open it in any viewer, poke around." },
+        { "url": "https://alphafold.ebi.ac.uk/entry/P21796", "title": "AlphaFold, VDAC1 model", "desc": "Predicted 3D structure of the β-barrel. Fun to spin while thinking about the pore." },
+        { "url": "https://www.proteinatlas.org/ENSG00000213585-VDAC1", "title": "Human Protein Atlas, VDAC1", "desc": "Where VDAC1 is expressed across tissues and cancers, with the imaging to prove it." },
+        { "url": "https://www.genecards.org/cgi-bin/carddisp.pl?gene=VDAC1", "title": "GeneCards, VDAC1", "desc": "A one-stop aggregator that links out to just about everything else." }
       ]
     },
     {
       "label": "mitochondria, broadly",
       "title": "The bigger picture",
       "links": [
-        { "url": "https://www.broadinstitute.org/mitochondria", "title": "Broad Institute — Mitochondria & MitoCarta", "desc": "MitoCarta is the reference inventory of mitochondrial proteins. The Mootha lab's work is a masterclass in mito biology." },
+        { "url": "https://www.broadinstitute.org/mitochondria", "title": "Broad Institute, Mitochondria & MitoCarta", "desc": "MitoCarta is the reference inventory of mitochondrial proteins. The Mootha lab's work is a masterclass in mito biology." },
         { "url": "https://www.bioblast.at/index.php/MitoPedia", "title": "MitoPedia (Oroboros / Bioblast)", "desc": "A community encyclopedia of mitochondrial physiology and bioenergetics. Great for definitions done right." },
-        { "url": "https://www.mitomap.org/", "title": "MITOMAP", "desc": "The human mitochondrial genome database — mtDNA mutations, variants and disease links." },
-        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=mitophagy+PINK1+Parkin", "title": "Mitophagy — PINK1/Parkin quality control", "desc": "How cells clear damaged mitochondria before they cause trouble. The upstream story to a lot of what happens at VDAC1." }
+        { "url": "https://www.mitomap.org/", "title": "MITOMAP", "desc": "The human mitochondrial genome database, mtDNA mutations, variants and disease links." },
+        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=mitophagy+PINK1+Parkin", "title": "Mitophagy, PINK1/Parkin quality control", "desc": "How cells clear damaged mitochondria before they cause trouble. The upstream story to a lot of what happens at VDAC1." }
       ]
     },
     {
       "label": "repositories, data & community",
       "title": "Mitochondria beyond VDAC1",
       "links": [
-        { "url": "https://mseqdr.org", "title": "MSeqDR — Mitochondrial Disease Sequence Data Resource", "desc": "A community genomics portal built specifically for mitochondrial disease — variants, phenotypes and tools in one place." },
-        { "url": "https://www.broadinstitute.org/mitocarta/mitocarta30-inventory-mammalian-mitochondrial-proteins-and-pathways", "title": "MitoCarta 3.0 — the mitochondrial protein inventory", "desc": "The reference list of ~1,140 genes with strong evidence of mitochondrial localization, with sub-organelle and pathway annotations." },
-        { "url": "https://www.ebi.ac.uk/gxa/home", "title": "EBI Expression Atlas", "desc": "Gene expression across tissues, cell types and conditions — a second opinion to GTEx for 'where is this switched on?'" },
-        { "url": "https://gtexportal.org/home/gene/VDAC1", "title": "GTEx — VDAC1 expression across 54 tissues", "desc": "The exact source behind my /gene/ page's expression chart. Go here for the full, live tissue breakdown." },
-        { "url": "https://reactome.org", "title": "Reactome — pathways (mitophagy, apoptosis)", "desc": "Beautifully drawn, curated pathway maps. Great for seeing where VDAC1 and mitophagy sit in the bigger network." },
-        { "url": "https://www.mitosoc.org", "title": "Mitochondrial Medicine Society", "desc": "The clinical/research society — guidelines, meetings and the people who treat mitochondrial disease." },
+        { "url": "https://mseqdr.org", "title": "MSeqDR, Mitochondrial Disease Sequence Data Resource", "desc": "A community genomics portal built specifically for mitochondrial disease, variants, phenotypes and tools in one place." },
+        { "url": "https://www.broadinstitute.org/mitocarta/mitocarta30-inventory-mammalian-mitochondrial-proteins-and-pathways", "title": "MitoCarta 3.0, the mitochondrial protein inventory", "desc": "The reference list of ~1,140 genes with strong evidence of mitochondrial localization, with sub-organelle and pathway annotations." },
+        { "url": "https://www.ebi.ac.uk/gxa/home", "title": "EBI Expression Atlas", "desc": "Gene expression across tissues, cell types and conditions, a second opinion to GTEx for 'where is this switched on?'" },
+        { "url": "https://gtexportal.org/home/gene/VDAC1", "title": "GTEx, VDAC1 expression across 54 tissues", "desc": "The exact source behind my /gene/ page's expression chart. Go here for the full, live tissue breakdown." },
+        { "url": "https://reactome.org", "title": "Reactome, pathways (mitophagy, apoptosis)", "desc": "Beautifully drawn, curated pathway maps. Great for seeing where VDAC1 and mitophagy sit in the bigger network." },
+        { "url": "https://www.mitosoc.org", "title": "Mitochondrial Medicine Society", "desc": "The clinical/research society, guidelines, meetings and the people who treat mitochondrial disease." },
         { "url": "https://www.umdf.org", "title": "United Mitochondrial Disease Foundation (UMDF)", "desc": "Patient- and family-facing: mitochondrial-health resources, support and research funding. The human side of the field." }
       ]
     },
@@ -56,9 +56,9 @@
       "label": "keeping up",
       "title": "Follow the field yourself",
       "links": [
-        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=VDAC1&sort=date", "title": "PubMed — newest VDAC1 papers", "desc": "My homepage, basically. Sorted newest-first." },
-        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=mitochondria+mitophagy&sort=date", "title": "PubMed — newest mitophagy / mitochondria papers", "desc": "The wider beat, beyond VDAC1." },
-        { "url": "https://www.biorxiv.org/search/mitochondria", "title": "bioRxiv — mitochondria preprints", "desc": "The not-yet-peer-reviewed edge. Grain of salt included." }
+        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=VDAC1&sort=date", "title": "PubMed, newest VDAC1 papers", "desc": "My homepage, basically. Sorted newest-first." },
+        { "url": "https://pubmed.ncbi.nlm.nih.gov/?term=mitochondria+mitophagy&sort=date", "title": "PubMed, newest mitophagy / mitochondria papers", "desc": "The wider beat, beyond VDAC1." },
+        { "url": "https://www.biorxiv.org/search/mitochondria", "title": "bioRxiv, mitochondria preprints", "desc": "The not-yet-peer-reviewed edge. Grain of salt included." }
       ]
     }
   ]

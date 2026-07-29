@@ -1,16 +1,16 @@
 {
-  "intro": "One channel, damage almost everywhere. VDAC1 sits where energy, calcium and cell-death decisions meet — so when it misfires, different organs pay the price. Tap a glowing spot for the disease link and the paper I'd start with.",
+  "intro": "One channel, damage almost everywhere. VDAC1 sits where energy, calcium and cell-death decisions meet, so when it misfires, different organs pay the price. Tap a glowing spot for the disease link and the paper I'd start with.",
   "panelHint": "Tap or hover a glowing spot",
   "panelTitle": "Pick an organ",
   "panelBlurb": "Each hotspot ties VDAC1 to a specific disease, with the one paper worth your time.",
   "listTitle": "Every link, spelled out",
-  "listSub": "Prefer a list? Same map — organ, the VDAC1 connection, and the paper to read.",
+  "listSub": "Prefer a list? Same map, organ, the VDAC1 connection, and the paper to read.",
   "regions": [
     {
       "id": "brain", "label": "Brain", "x": 150, "y": 52, "r": 26,
       "disease": "Neurodegeneration & Alzheimer's",
       "blurb": "Neurons burn the most energy, so they feel VDAC1 failure first. The channel links to amyloid and tau, and to the PSEN1 calcium pathways behind familial Alzheimer's.",
-      "paperLabel": "VDAC1 in Alzheimer's — PubMed",
+      "paperLabel": "VDAC1 in Alzheimer's, PubMed",
       "paperUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=VDAC1+Alzheimer+mitochondria",
       "internal": "/posts/why-this-blog/",
       "tags": ["VDAC1", "neurodegeneration"]
@@ -18,7 +18,7 @@
     {
       "id": "eye", "label": "Eye", "x": 178, "y": 66, "r": 14,
       "disease": "Uveal melanoma",
-      "blurb": "In the commonest adult eye cancer, VDAC1 turned up as a genome-stability gene — switch it off and tumour cells die, but their DNA unravels.",
+      "blurb": "In the commonest adult eye cancer, VDAC1 turned up as a genome-stability gene, switch it off and tumour cells die, but their DNA unravels.",
       "paperLabel": "Gao & Wei, Exp Eye Res 2026",
       "paperUrl": "https://doi.org/10.1016/j.exer.2026.111087",
       "internal": "/news/vdac1-uveal-melanoma/",
@@ -53,8 +53,8 @@
     {
       "id": "liver", "label": "Liver", "x": 178, "y": 250, "r": 18,
       "disease": "Fatty liver & metabolic disease",
-      "blurb": "The same mtDNA-leak-then-inflammation loop shows up in fatty liver disease — and VBIT-4 has been tried against it in models.",
-      "paperLabel": "VBIT-4 in metabolic disease — PubMed",
+      "blurb": "The same mtDNA-leak-then-inflammation loop shows up in fatty liver disease, and VBIT-4 has been tried against it in models.",
+      "paperLabel": "VBIT-4 in metabolic disease, PubMed",
       "paperUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=VBIT-4+VDAC1+metabolic+liver",
       "tags": ["VDAC1", "mtDNA"]
     },
