@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" role="img" aria-label="Evidence-graded rating bars">
+  <defs>
+    <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef7f5"/><stop offset="1" stop-color="#f3f0ff"/>
+    </linearGradient>
+  </defs>
+  <!-- card -->
+  <rect x="26" y="24" width="308" height="252" rx="4" fill="#fff" stroke="#17171e" stroke-width="3"/>
+  <rect x="26" y="24" width="308" height="40" fill="#17171e"/>
+  <circle cx="46" cy="44" r="6" fill="#2ff3d0"/>
+  <text x="62" y="49" font-family="'Space Mono',monospace" font-size="13" fill="#fff">mito-health ratings</text>
+
+  <!-- rows: label + graded bar + score dot -->
+  <g font-family="'Space Mono',monospace" font-size="11" fill="#17171e">
+    <!-- row 1: strong -->
+    <text x="42" y="98">Exercise</text>
+    <rect x="120" y="88" width="170" height="14" fill="#faf6ee" stroke="#17171e" stroke-width="2"/>
+    <rect x="120" y="88" width="158" height="14" fill="#0e9488"/>
+    <circle cx="304" cy="95" r="9" fill="#c9f2d8" stroke="#17171e" stroke-width="2"/>
+
+    <!-- row 2 -->
+    <text x="42" y="132">Creatine</text>
+    <rect x="120" y="122" width="170" height="14" fill="#faf6ee" stroke="#17171e" stroke-width="2"/>
+    <rect x="120" y="122" width="150" height="14" fill="#0e9488"/>
+    <circle cx="304" cy="129" r="9" fill="#c9f2d8" stroke="#17171e" stroke-width="2"/>
+
+    <!-- row 3 moderate -->
+    <text x="42" y="166">Sauna</text>
+    <rect x="120" y="156" width="170" height="14" fill="#faf6ee" stroke="#17171e" stroke-width="2"/>
+    <rect x="120" y="156" width="112" height="14" fill="#2ff3d0"/>
+    <circle cx="304" cy="163" r="9" fill="#d6f5f0" stroke="#17171e" stroke-width="2"/>
+
+    <!-- row 4 preliminary -->
+    <text x="42" y="200">Cold</text>
+    <rect x="120" y="190" width="170" height="14" fill="#faf6ee" stroke="#17171e" stroke-width="2"/>
+    <rect x="120" y="190" width="74" height="14" fill="#f5a524"/>
+    <circle cx="304" cy="197" r="9" fill="#fdeecb" stroke="#17171e" stroke-width="2"/>
+
+    <!-- row 5 harm -->
+    <text x="42" y="234">Smoking</text>
+    <rect x="120" y="224" width="170" height="14" fill="#faf6ee" stroke="#17171e" stroke-width="2"/>
+    <rect x="120" y="224" width="160" height="14" fill="#f0603a"/>
+    <circle cx="304" cy="231" r="9" fill="#ffd9d2" stroke="#17171e" stroke-width="2"/>
+  </g>
+  <text x="42" y="262" font-family="'Space Mono',monospace" font-size="9" fill="#8b90c4">evidence · benefit · safety</text>
+</svg>

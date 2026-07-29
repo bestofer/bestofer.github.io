@@ -1,7 +1,7 @@
 ---
 {
   "title": "About me",
-  "eyebrow": "hello, I'm the guy behind the blog",
+  "eyebrow": "who's behind this — and why it exists",
   "lead": "I'm Offer Shina. Not a career academic — someone with a personal stake in this science who fell all the way down the mitochondrial rabbit hole and started writing from the bottom of it."
 }
 ---

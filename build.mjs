@@ -174,7 +174,7 @@ function footer(){
   return `<footer class="site-footer"><div class="wrap">
     <div class="fnav">${f}</div>
     <div>by ${cfg.author} · <a href="mailto:${cfg.email}">${cfg.email}</a>${cfg.linkedin?` · <a href="${cfg.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`:""} · co-founder @ <a href="${cfg.company.url}" target="_blank" rel="noopener">${cfg.company.name}</a></div>
-    <div class="small">${cfg.siteName} is a personal blog. Nothing here is medical advice — just one curious person's notes. News summaries are my own paraphrases of the cited papers; article details sourced via PubMed, each item links to its DOI.</div>
+    <div class="small">${cfg.siteName} is a personal project — an evidence-graded guide to mitochondrial health, written in the open. Nothing here is medical advice. News and rating summaries are my own paraphrases of the cited research; each item links to its source.</div>
   </div></footer>`;
 }
 function viewerScript(){
@@ -207,7 +207,7 @@ const SEARCH_INDEX = buildSearchIndex();
 function siteScript(){
   return `<div class="ssearch" id="site-search" hidden>
   <div class="ssearch-box" role="dialog" aria-label="Site search">
-    <input id="ss-input" type="search" autocomplete="off" placeholder="Search interventions, companies, trials, posts, tags…">
+    <input id="ss-input" type="search" autocomplete="off" aria-label="Search the site" placeholder="Search interventions, companies, trials, posts, tags…">
     <div class="ss-results" id="ss-results"></div>
     <div class="ss-hint"><span class="kbd">↑↓</span> move · <span class="kbd">↵</span> open · <span class="kbd">esc</span> close</div>
   </div></div>
@@ -359,7 +359,7 @@ function newsListItem(e){
       <h3><a href="${e.url}">${esc(e.title)}</a></h3>
       <p>${esc(e.summary)}</p>
       <a class="readmore" href="${e.url}">the full story →</a>${srcLine}
-    </div><div class="art"><img src="/assets/images/${e.image}" alt="illustration" loading="lazy"></div></div>`;
+    </div><div class="art"><img src="/assets/images/${e.image}" alt="" loading="lazy"></div></div>`;
   }
   if(e.format==="brief"){
     const acc = e.accent==="pink"?" pink":e.accent==="violet"?" violet":"";
@@ -415,8 +415,8 @@ function newsListing(){
 
   const content = `<div class="hero"><div class="wrap"><div>
       <p class="eyebrow">what I've been reading</p>
-      <h1>News &amp; new papers</h1>
-      <p class="lead">I read a lot of mitochondria papers so you don't have to. Recent ones worth knowing about — summarized in my own words, always linked to the source. Below the highlights, filter the whole archive by domain, category, year or tag.</p>
+      <h1>Research news</h1>
+      <p class="lead">I read a lot of mitochondria and VDAC1 papers so you don't have to. The ones worth knowing about — summarised in my own words, always linked to the source. Below the highlights, filter the whole archive by topic, category, year or tag.</p>
     </div><div class="hero-art"><img src="/assets/images/vdac1-barrel.svg" alt="VDAC1 channel"></div></div></div>
     <main><div class="wrap">
       <section>${featured}</section>
@@ -514,8 +514,8 @@ function homePage(){
           <a class="btn-ghost" href="/about/">Why I'm building this →</a>
         </div>
         <div class="tagpills">
-          <span class="pill t1">VDAC1</span><span class="pill t2">mitochondria</span>
-          <span class="pill t3">mtDNA + inflammation</span><span class="pill t4">mitophagy</span>
+          <span class="pill t1">health ratings</span><span class="pill t2">exercise · sleep · fasting</span>
+          <span class="pill t3">supplements</span><span class="pill t4">VDAC1</span><span class="pill t1">mitophagy</span>
         </div>
       </div>
       <div class="hero-art"><img src="/assets/images/mito.svg" alt="Cross-section of a mitochondrion with VDAC1 pores"></div>
@@ -776,76 +776,6 @@ function diseasesPage(){
   return layout({ title:`VDAC1 disease body map — ${cfg.siteName}`, desc:"An interactive body map of the diseases VDAC1 is implicated in, each linked to the most relevant paper.", canonical:"/diseases/", content, active:"/diseases/", image:"vdac1-anim.svg" });
 }
 
-function explorePage(){
-  const all = entries.slice().sort((a,b)=>b.date.localeCompare(a.date));
-  const domains = ["VDAC1","Mitochondria"];
-  const cats = [...new Set(all.map(e=>e.category))];
-  const years = [...new Set(all.map(e=>e.year))].sort().reverse();
-  const tags = [...tagMap.values()].sort((a,b)=>b.entries.length-a.entries.length);
-  const items = all.map(e=>`<article class="exp-card" data-domain="${e.domain}" data-cat="${e.category}" data-year="${e.year}" data-tags="${e.tags.map(slugify).join(" ")}" data-date="${e.date}" data-title="${escAttr(e.title.toLowerCase())}">
-    <div class="exp-meta"><span class="exp-domain ${e.domain==="VDAC1"?"d1":"d2"}">${e.domain}</span><span>${e.category}</span><span>${fmtDate(e.date)}</span></div>
-    <h3><a href="${e.url}">${esc(e.title)}</a></h3>
-    <p>${esc(e.summary)}</p>
-    ${tagChips(e.tags)}
-  </article>`).join("");
-  const btn = (grp,val,label)=>`<button class="fbtn" data-group="${grp}" data-val="${escAttr(val)}">${esc(label)}</button>`;
-  const content = `<div class="hero"><div class="wrap"><div>
-      <p class="eyebrow">slice it however you like</p>
-      <h1>Explore everything</h1>
-      <p class="lead">Every post and news piece in one filterable pile. Split by domain (VDAC1 vs mitochondria), by category, by year, or by tag — and sort by date.</p>
-    </div><div class="hero-art"><img src="/assets/images/vdac1-barrel.svg" alt="VDAC1"></div></div></div>
-    <main><div class="wrap">
-      <div class="filters">
-        <div class="fgroup"><span class="flabel">domain</span>${domains.map(d=>btn("domain",d,d)).join("")}</div>
-        <div class="fgroup"><span class="flabel">category</span>${cats.map(c=>btn("cat",c,c)).join("")}</div>
-        <div class="fgroup"><span class="flabel">year</span>${years.map(y=>btn("year",y,y)).join("")}</div>
-        <div class="fgroup"><span class="flabel">tag</span>
-          <select id="ftag"><option value="">all tags</option>${tags.map(t=>`<option value="${t.slug}">${esc(t.name)} (${t.entries.length})</option>`).join("")}</select>
-        </div>
-        <div class="fgroup"><span class="flabel">sort</span>
-          <button class="fbtn sortbtn on" data-sort="new">newest</button><button class="fbtn sortbtn" data-sort="old">oldest</button>
-        </div>
-        <div class="fgroup"><button class="fbtn clear" id="fclear">✕ clear all</button><span id="fcount" class="fcount"></span></div>
-      </div>
-      <div class="exp-grid" id="expgrid">${items}</div>
-      <p id="fempty" class="section-sub" style="display:none;">Nothing matches those filters — loosen one.</p>
-    </div></main>
-    <script>(function(){
-      var grid=document.getElementById('expgrid');
-      var cards=[].slice.call(grid.children);
-      var state={domain:null,cat:null,year:null,tag:'',sort:'new'};
-      function apply(){
-        var n=0;
-        cards.forEach(function(c){
-          var ok=true;
-          if(state.domain && c.dataset.domain!==state.domain) ok=false;
-          if(state.cat && c.dataset.cat!==state.cat) ok=false;
-          if(state.year && c.dataset.year!==state.year) ok=false;
-          if(state.tag && (' '+c.dataset.tags+' ').indexOf(' '+state.tag+' ')<0) ok=false;
-          c.style.display=ok?'':'none'; if(ok)n++;
-        });
-        document.getElementById('fcount').textContent=n+' / '+cards.length;
-        document.getElementById('fempty').style.display=n?'none':'';
-        var vis=cards.filter(function(c){return c.style.display!=='none';});
-        vis.sort(function(a,b){return state.sort==='new'?b.dataset.date.localeCompare(a.dataset.date):a.dataset.date.localeCompare(b.dataset.date);});
-        vis.forEach(function(c){grid.appendChild(c);});
-      }
-      document.querySelectorAll('.fbtn[data-group]').forEach(function(b){
-        b.addEventListener('click',function(){
-          var g=b.dataset.group, v=b.dataset.val, key=g==='cat'?'cat':g;
-          if(state[key]===v){state[key]=null;b.classList.remove('on');}
-          else{state[key]=v;document.querySelectorAll('.fbtn[data-group="'+g+'"]').forEach(function(x){x.classList.toggle('on',x===b);});}
-          apply();
-        });
-      });
-      document.querySelectorAll('.sortbtn').forEach(function(b){b.addEventListener('click',function(){state.sort=b.dataset.sort;document.querySelectorAll('.sortbtn').forEach(function(x){x.classList.toggle('on',x===b);});apply();});});
-      document.getElementById('ftag').addEventListener('change',function(e){state.tag=e.target.value;apply();});
-      document.getElementById('fclear').addEventListener('click',function(){state={domain:null,cat:null,year:null,tag:'',sort:'new'};document.querySelectorAll('.fbtn.on').forEach(function(x){if(!x.classList.contains('sortbtn'))x.classList.remove('on');});document.querySelector('.sortbtn[data-sort=new]').classList.add('on');document.querySelectorAll('.sortbtn').forEach(function(x){x.classList.toggle('on',x.dataset.sort==='new');});document.getElementById('ftag').value='';apply();});
-      apply();
-    })();</script>`;
-  return layout({ title:`Explore — ${cfg.siteName}`, desc:"Filter every post and news piece by domain (VDAC1 / mitochondria), category, year and tag.", canonical:"/explore/", content, active:"/explore/", image:"vdac1-barrel.svg" });
-}
-
 function companiesPage(){
   const C = companies.companies;
   const stages = [...new Set(C.map(c=>c.stage))];
@@ -972,10 +902,11 @@ function mitoHealthPage(){
   </article>`;
   const chip = (grp,val)=>`<button class="fbtn" data-group="${grp}" data-val="${escAttr(val)}">${esc(val)}</button>`;
   const content = `<div class="hero mh-hero"><div class="wrap"><div>
-      <p class="eyebrow">the database · evidence-graded</p>
+      <p class="eyebrow">★ the heart of the site · evidence-graded</p>
       <h1>Mitochondrial health ratings</h1>
       <p class="lead">${esc(M.intro)}</p>
-    </div><div class="hero-art"><img src="/assets/images/mito.svg" alt="Mitochondrion"></div></div></div>
+      <p class="mh-herostat"><b>${M.items.length}</b> interventions · <b>${M.categories.length}</b> categories · rated for evidence, benefit &amp; safety</p>
+    </div><div class="hero-art"><img src="/assets/images/ratings.svg" alt="Sample rating bars: exercise and creatine rated strong, sauna moderate, cold preliminary, smoking harmful"></div></div></div>
     <main><div class="wrap">
       <details class="mh-method"><summary>How to read these ratings (and the honest caveats)</summary>
         <p>${esc(M.methodology)}</p>
